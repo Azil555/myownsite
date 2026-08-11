@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysTech 67 — Образовательная платформа по физике</title>
+    <meta name="description" content="Интерактивная образовательная платформа по физике: теория по классам, формулы и подготовка к олимпиадам.">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Шапка сайта (Header) -->
+    <header class="site-header" id="mainHeader">
+        <div class="header-container">
+            <!-- Логотип -->
+            <a href="#" class="logo" id="logoLink">
+                <span class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="logo-text"><span>Phys</span>Tech 67</span>
+            </a>
+
+            <!-- Навигационное меню (Десктоп) -->
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link active">Главная</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link">Услуги</a></li>
+                    <li class="nav-item"><a href="#features" class="nav-link">О платформе</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <!-- Блок CTA (Кнопка действия) -->
+            <div class="header-actions">
+                <a href="physics_page/" class="btn btn-cta" id="ctaBtn">Начать обучение</a>
+                
+                <!-- Кнопка мобильного меню (Бургер) -->
+                <button class="burger-menu" id="burgerToggle" aria-label="Открыть меню">
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                    <span class="burger-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Мобильное меню (Выпадающий оверлей) -->
+    <div class="mobile-overlay" id="mobileOverlay">
+        <nav class="mobile-nav">
+            <ul class="mobile-list">
+                <li class="mobile-item"><a href="#home" class="mobile-link active">Главная</a></li>
+                <li class="mobile-item"><a href="#services" class="mobile-link">Услуги</a></li>
+                <li class="mobile-item"><a href="#features" class="mobile-link">О платформе</a></li>
+                <li class="mobile-item"><a href="#contact" class="mobile-link">Контакты</a></li>
+            </ul>
+            <a href="physics_page/" class="btn btn-mobile-cta">Начать обучение</a>
+        </nav>
+    </div>
+
+    <!-- Основной контент страницы для демонстрации меню -->
+    <main>
+        <!-- Секция Hero -->
+        <section id="home" class="hero-section">
+            <div class="hero-bg-glow"></div>
+            <div class="hero-content">
+                <h1>Если не знать магию, то все кажется физикой</h1>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-primary">Посмотреть услуги</a>
+                    <a href="#features" class="btn btn-secondary">Особенности</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция Услуг -->
+        <section id="services" class="services-section">
+            <div class="section-header">
+                <h2>На нашем сайте вы научитесь</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" id="practice-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </div>
+                    <h3>Изучать физику на практике</h3>
+                    <p>Не просто запоминайте формулы — экспериментируйте, исследуйте и наблюдайте, как физические законы работают в реальном мире.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Понимать сложные темы</h3>
+                    <p>Сложные концепции становятся понятнее благодаря наглядным объяснениям, интерактивным тестам и пошаговым примерам.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                    <h3>Решать задачи увереннее</h3>
+                    <p>Практикуйтесь на задачах разного уровня сложности, анализируйте свои ошибки и постепенно развивайте настоящее физическое мышление.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция Фичи (Особенности) -->
+        <section id="features" class="features-section">
+            <div class="section-header">
+                <h2>О платформе</h2>
+                <p>Почему наша платформа выделяется среди стандартных шаблонов</p>
+            </div>
+            <div class="features-list">
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <div class="feature-desc">
+                        <h4>Интерактивное обучение</h4>
+                        <p>Вы не просто читаете сухой текст, а глубоко погружаетесь в физические процессы через наглядные конспекты, карточки формул и мгновенную проверку знаний.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <div class="feature-desc">
+                        <h4>Емкая теория</h4>
+                        <p>Конспекты содержат только самую важную информацию, структурированные формулы и разборы примеров без лишней «воды».</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-bullet"></div>
+                    <div class="feature-desc">
+                        <h4>Гибкая практика</h4>
+                        <p>База задач разделена на три уровня — от простой школьной базы до сложных олимпиадных вызовов для прокачки логики.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал (Footer) -->
+    <footer id="contact" class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="logo-text"><span>Phys</span>Tech 67</span>
+                </a>
+            </div>
+            <div class="footer-links">
+                <h4>Навигация</h4>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#features">О платформе</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Связаться</h4>
+                <p>Email: phystech55@gmail.com</p>
+                <p>Телефон: +77475131690</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PhysTech 67. Все права защищены. Разработано в Секторе 67.</p>
+        </div>
+    </footer>
+
+    <!-- Модальное окно Регистрации и Выбора уровня -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModalBtn" aria-label="Закрыть">&times;</button>
+            
+            <!-- Индикатор шагов -->
+            <div class="step-indicator">
+                <div class="step-item active" id="step1Indicator">
+                    <span class="step-num">1</span>
+                    <span class="step-label">Регистрация</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" id="step2Indicator">
+                    <span class="step-num">2</span>
+                    <span class="step-label">Уровень обучения</span>
+                </div>
+            </div>
+
+            <!-- Шаг 1: Регистрация -->
+            <div class="modal-step active" id="step1">
+                <div class="modal-header">
+                    <h2>Создание аккаунта</h2>
+                    <p>Заполните профиль, чтобы сохранить ваш прогресс и статистику</p>
+                </div>
+                <form id="regFormStep1" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="regName">Ваше имя</label>
+                        <input type="text" id="regName" placeholder="Например, Александр" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Электронная почта</label>
+                        <input type="email" id="regEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regGrade">Класс обучения</label>
+                        <select id="regGrade">
+                            <option value="7">7 класс</option>
+                            <option value="8">8 класс</option>
+                            <option value="9">9 класс</option>
+                            <option value="10" selected>10 класс</option>
+                            <option value="11">11 класс</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-primary btn-block" id="toStep2Btn">
+                            Далее: Выбрать уровень &rarr;
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Шаг 2: Выбор уровня -->
+            <div class="modal-step" id="step2">
+                <div class="modal-header">
+                    <h2>Уровень подготовки</h2>
+                    <p>Какой формат обучения вам подходит больше всего?</p>
+                </div>
+                <form id="regFormStep2" onsubmit="return false;">
+                    <div class="level-cards-grid">
+                        <label class="level-card active">
+                            <input type="radio" name="learningLevel" value="basic" checked>
+                            <div class="level-card-content">
+                                <div class="level-icon">🎓</div>
+                                <div class="level-info">
+                                    <div class="level-title">Базовые школьные знания</div>
+                                    <div class="level-desc">Уверенное освоение школьной программы, объяснение базовых законов физики и разбор стандартных задач.</div>
+                                    <span class="level-badge basic">Базовый трек</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="level-card">
+                            <input type="radio" name="learningLevel" value="olympiad">
+                            <div class="level-card-content">
+                                <div class="level-icon">🏆</div>
+                                <div class="level-info">
+                                    <div class="level-title">Углубленный / Олимпиадный уровень</div>
+                                    <div class="level-desc">Нестандартное физическое мышление, решение задач повышенной сложности, подготовка к олимпиадам и Физтех.</div>
+                                    <span class="level-badge olympiad">Олимпиадный трек</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="modal-actions split">
+                        <button type="button" class="btn btn-secondary" id="backToStep1Btn">&larr; Назад</button>
+                        <button type="button" class="btn btn-primary" id="finishRegBtn">Начать обучение 🚀</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

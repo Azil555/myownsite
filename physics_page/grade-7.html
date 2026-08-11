@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysTech - Панель Обучения</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Контейнер личного кабинета -->
+    <div class="dashboard-container">
+
+        <!-- Боковая панель навигации (Sidebar) -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="../" class="logo">
+                    <span class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="logo-text"><span>Phys</span>Tech</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul id="sidebarNavList">
+                    <!-- Заполняется динамически через JS в зависимости от уровня пользователя -->
+                </ul>
+            </nav>
+
+
+            <div class="sidebar-footer">
+                <a href="../" class="back-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12" />
+                        <polyline points="12 19 5 12 12 5" />
+                    </svg>
+                    <span>На главную</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Мобильное меню в виде верхней панели -->
+        <header class="mobile-dashboard-header">
+            <span class="logo-text"><span>Phys</span>Tech</span>
+            <button class="mob-menu-toggle" id="mobMenuToggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
+        </header>
+
+        <!-- Основная область контента -->
+        <main class="main-content">
+            <section id="grade-7" class="tab-content active">
+                <div class="section-title">
+                    <h2>Курс 7 класса: Первичные понятия и статика</h2>
+                    <p>Полный тематический курс механики 7 класса</p>
+                </div>
+
+                <!-- Развернутая панель управления в виде отдельных блоков основных тем -->
+                <div class="main-topics-control-grid">
+                    <div class="main-topic-card" data-topic-filter="7-kin">
+                        <span class="card-topic-num">Раздел 1</span>
+                        <div class="card-topic-title">🚀 Введение в кинематику (без ускорения)</div>
+                        <span class="card-topic-count">12 подтем</span>
+                    </div>
+                    <div class="main-topic-card" data-topic-filter="7-dens">
+                        <span class="card-topic-num">Раздел 2</span>
+                        <div class="card-topic-title">⚖️ Плотность и масса</div>
+                        <span class="card-topic-count">6 подтем</span>
+                    </div>
+                    <div class="main-topic-card" data-topic-filter="7-forces">
+                        <span class="card-topic-num">Раздел 3</span>
+                        <div class="card-topic-title">⚓ Базовые силы в природе</div>
+                        <span class="card-topic-count">18 подтем</span>
+                    </div>
+                    <div class="main-topic-card" data-topic-filter="7-press">
+                        <span class="card-topic-num">Раздел 4</span>
+                        <div class="card-topic-title">💧 Давление и гидростатика</div>
+                        <span class="card-topic-count">15 подтем</span>
+                    </div>
+                    <div class="main-topic-card" data-topic-filter="7-work">
+                        <span class="card-topic-num">Раздел 5</span>
+                        <div class="card-topic-title">🛠️ Простые механизмы, работа и энергия</div>
+                        <span class="card-topic-count">15 подтем</span>
+                    </div>
+                </div>
+
+                <!-- Подтемы в виде отдельных самостоятельных блоков -->
+                <div class="subtopics-list">
+
+                    <div class="subtopic-card lesson-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Урок</span>
+                        </div>
+                        <h3 class="subtopic-title">Механическое движение: определение</h3>
+                    </div>
+                    <div class="subtopic-card lesson-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Урок</span>
+                        </div>
+                        <h3 class="subtopic-title">Тело отсчета</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Система отсчёта</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Траектория</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Путь</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Перемещение: разница между пройденным расстоянием и вектором перемещения</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Равномерное прямолинейное движение</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Понятие скорости</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Перевод единиц измерения (км/ч в м/с)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Неравномерное движение</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Средняя скорость</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-kin">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Мгновенная скорость</h3>
+
+                    </div>
+
+                    <div class="subtopic-card" data-topic-group="7-dens">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Инерция</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-dens">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Инертность тел</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-dens">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Масса как мера инертности</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-dens">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Плотность вещества</h3>
+                    </div>
+
+                    <div class="subtopic-card" data-topic-group="7-dens">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Масса тела и ее измерение</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-dens">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Расчет объема по массе и плотности</h3>
+
+                    </div>
+
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила: понятие и модуль</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила как векторная величина (точка приложения, направление)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила тяжести</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Прямо пропорциональная связь силы тяжести с массой</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Гравитационная постоянная g</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Вес тела</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Невесомость</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Разница между силой тяжести и весом</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила упругости</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Деформация (растяжение, сжатие)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Закон Гука</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила трения покоя</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила трения скольжения</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сила трения качения</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Зависимость силы трения от нормального давления</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Зависимость силы трения от качества поверхностей</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сложение сил</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-forces">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Равнодействующая сил, направленных по одной прямой</h3>
+
+                    </div>
+
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Давление твердых тел</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Способы увеличения давления</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Способы уменьшения давления</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Давление в жидкостях и газах</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Закон Паскаля (передача давления во все стороны)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Гидростатическое давление</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сообщающиеся сосуды</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Гидравлический пресс</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Атмосферное давление</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Опыт Торричелли</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Барометр-анероид</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Закон Архимеда</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Выталкивающая сила</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Условия плавания тел</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-press">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Сравнение плотностей при плавании тел</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Механическая работа</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Условия выполнения работы</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Мощность: скорость выполнения работы</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Момент силы</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Плечо силы</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Правило равновесия рычага</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Неподвижный блок (изменение направления)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Подвижный блок (выигрыш в силе в 2 раза)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Наклонная плоскость</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">«Золотое правило механики»</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Коэффициент полезного действия (КПД) механизмов</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Кинетическая энергия (энергия движения)</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Потенциальная энергия поднятого тела</h3>
+
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Потенциальная энергия деформированной пружины</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="7-work">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">7 класс</span>
+                            <span class="tag-topic">Теория</span>
+                        </div>
+                        <h3 class="subtopic-title">Переход энергии из одного вида в другой</h3>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Модальное окно Регистрации и Выбора уровня -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModalBtn" aria-label="Закрыть">&times;</button>
+            <!-- Индикатор шагов -->
+            <div class="step-indicator">
+                <div class="step-item active" id="step1Indicator">
+                    <span class="step-num">1</span>
+                    <span class="step-label">Регистрация</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" id="step2Indicator">
+                    <span class="step-num">2</span>
+                    <span class="step-label">Уровень обучения</span>
+                </div>
+            </div>
+            <!-- Шаг 1: Регистрация -->
+            <div class="modal-step active" id="step1">
+                <div class="modal-header">
+                    <h2>Профиль пользователя</h2>
+                    <p>Заполните данные для сохранения вашего учебного прогресса</p>
+                </div>
+                <form id="regFormStep1" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="regName">Ваше имя</label>
+                        <input type="text" id="regName" placeholder="Например, Александр" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Электронная почта</label>
+                        <input type="email" id="regEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regGrade">Класс обучения</label>
+                        <select id="regGrade">
+                            <option value="7">7 класс</option>
+                            <option value="8">8 класс</option>
+                            <option value="9">9 класс</option>
+                            <option value="10" selected>10 класс</option>
+                            <option value="11">11 класс</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-primary btn-block" id="toStep2Btn">
+                            Далее: Выбрать уровень &rarr;
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- Шаг 2: Выбор уровня -->
+            <div class="modal-step" id="step2">
+                <div class="modal-header">
+                    <h2>Уровень подготовки</h2>
+                    <p>Какой формат обучения вам подходит больше всего?</p>
+                </div>
+                <form id="regFormStep2" onsubmit="return false;">
+                    <div class="level-cards-grid">
+                        <label class="level-card active">
+                            <input type="radio" name="learningLevel" value="basic" checked>
+                            <div class="level-card-content">
+                                <div class="level-icon">🎓</div>
+                                <div class="level-info">
+                                    <div class="level-title">Базовые школьные знания</div>
+                                    <div class="level-desc">Уверенное освоение школьной программы, объяснение базовых
+                                        законов физики и разбор стандартных задач.</div>
+                                    <span class="level-badge basic">Базовый трек</span>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="level-card">
+                            <input type="radio" name="learningLevel" value="olympiad">
+                            <div class="level-card-content">
+                                <div class="level-icon">🏆</div>
+                                <div class="level-info">
+                                    <div class="level-title">Углубленный / Олимпиадный уровень</div>
+                                    <div class="level-desc">Нестандартное физическое мышление, решение задач повышенной
+                                        сложности, подготовка к олимпиадам и Физтех.</div>
+                                    <span class="level-badge olympiad">Олимпиадный трек</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="modal-actions split">
+                        <button type="button" class="btn btn-secondary" id="backToStep1Btn">&larr; Назад</button>
+                        <button type="button" class="btn btn-primary" id="finishRegBtn">Сохранить и продолжить
+                            🚀</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Подключаем LaTeX рендерер MathJax для формул -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../physicsani/mechanics.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhysTech - Панель Обучения</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Контейнер личного кабинета -->
+    <div class="dashboard-container">
+        
+        <!-- Боковая панель навигации (Sidebar) -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <a href="../" class="logo">
+                    <span class="logo-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="logo-text"><span>Phys</span>Tech</span>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul id="sidebarNavList">
+                    <!-- Заполняется динамически через JS в зависимости от уровня пользователя -->
+                </ul>
+            </nav>
+
+
+            <div class="sidebar-footer">
+                <a href="../" class="back-link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    <span>На главную</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Мобильное меню в виде верхней панели -->
+        <header class="mobile-dashboard-header">
+            <span class="logo-text"><span>Phys</span>Tech</span>
+            <button class="mob-menu-toggle" id="mobMenuToggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </header>
+
+        <!-- Основная область контента -->
+        <main class="main-content">
+            <section id="topic-quantum" class="tab-content active">
+                <div class="section-title">
+                    <h2>⚛️ Квантовая физика & Оптика (Олимпиадный уровень)</h2>
+                    <p>Основные подтемы олимпиадной квантовой физики</p>
+                </div>
+
+                <div class="main-topics-control-grid">
+                    <div class="main-topic-card" data-topic-filter="oly-quant-1">
+                        <span class="card-topic-num">Раздел 1</span>
+                        <div class="card-topic-title">🌈 Волновая оптика</div>
+                        <span class="card-topic-count">2 подтем</span>
+                    </div>
+                    <div class="main-topic-card" data-topic-filter="oly-quant-2">
+                        <span class="card-topic-num">Раздел 2</span>
+                        <div class="card-topic-title">☀️ Фотоэффект и Фотоны</div>
+                        <span class="card-topic-count">2 подтем</span>
+                    </div>
+                    <div class="main-topic-card" data-topic-filter="oly-quant-3">
+                        <span class="card-topic-num">Раздел 3</span>
+                        <div class="card-topic-title">⚛️ Атом Бора и Частицы</div>
+                        <span class="card-topic-count">2 подтем</span>
+                    </div>
+                </div>
+
+                <div class="subtopics-list">
+                    <div class="subtopic-card" data-topic-group="oly-quant-1">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">Олимпиадный трек</span>
+                            <span class="tag-topic">Кванты & Оптика</span>
+                        </div>
+                        <h3 class="subtopic-title">🔹 Волновая оптика и интерференционные схемы</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="oly-quant-1">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">Олимпиадный трек</span>
+                            <span class="tag-topic">Кванты & Оптика</span>
+                        </div>
+                        <h3 class="subtopic-title">🔹 Дифракция</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="oly-quant-2">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">Олимпиадный трек</span>
+                            <span class="tag-topic">Кванты & Оптика</span>
+                        </div>
+                        <h3 class="subtopic-title">🔹 Квантовые состояния</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="oly-quant-2">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">Олимпиадный трек</span>
+                            <span class="tag-topic">Кванты & Оптика</span>
+                        </div>
+                        <h3 class="subtopic-title">🔹 Фотоэффект и давление света</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="oly-quant-3">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">Олимпиадный трек</span>
+                            <span class="tag-topic">Кванты & Оптика</span>
+                        </div>
+                        <h3 class="subtopic-title">🔹 Спектры атома Бора</h3>
+                    </div>
+                    <div class="subtopic-card" data-topic-group="oly-quant-3">
+                        <div class="block-tag-row">
+                            <span class="tag-grade">Олимпиадный трек</span>
+                            <span class="tag-topic">Кванты & Оптика</span>
+                        </div>
+                        <h3 class="subtopic-title">🔹 Физика элементарных частиц</h3>
+                    </div>
+</div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Модальное окно Регистрации и Выбора уровня -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModalBtn" aria-label="Закрыть">&times;</button>
+            
+            <!-- Индикатор шагов -->
+            <div class="step-indicator">
+                <div class="step-item active" id="step1Indicator">
+                    <span class="step-num">1</span>
+                    <span class="step-label">Регистрация</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item" id="step2Indicator">
+                    <span class="step-num">2</span>
+                    <span class="step-label">Уровень обучения</span>
+                </div>
+            </div>
+
+            <!-- Шаг 1: Регистрация -->
+            <div class="modal-step active" id="step1">
+                <div class="modal-header">
+                    <h2>Профиль пользователя</h2>
+                    <p>Заполните данные для сохранения вашего учебного прогресса</p>
+                </div>
+                <form id="regFormStep1" onsubmit="return false;">
+                    <div class="form-group">
+                        <label for="regName">Ваше имя</label>
+                        <input type="text" id="regName" placeholder="Например, Александр" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regEmail">Электронная почта</label>
+                        <input type="email" id="regEmail" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="regGrade">Класс обучения</label>
+                        <select id="regGrade">
+                            <option value="7">7 класс</option>
+                            <option value="8">8 класс</option>
+                            <option value="9">9 класс</option>
+                            <option value="10" selected>10 класс</option>
+                            <option value="11">11 класс</option>
+                        </select>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-primary btn-block" id="toStep2Btn">
+                            Далее: Выбрать уровень &rarr;
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Шаг 2: Выбор уровня -->
+            <div class="modal-step" id="step2">
+                <div class="modal-header">
+                    <h2>Уровень подготовки</h2>
+                    <p>Какой формат обучения вам подходит больше всего?</p>
+                </div>
+                <form id="regFormStep2" onsubmit="return false;">
+                    <div class="level-cards-grid">
+                        <label class="level-card active">
+                            <input type="radio" name="learningLevel" value="basic" checked>
+                            <div class="level-card-content">
+                                <div class="level-icon">🎓</div>
+                                <div class="level-info">
+                                    <div class="level-title">Базовые школьные знания</div>
+                                    <div class="level-desc">Уверенное освоение школьной программы, объяснение базовых законов физики и разбор стандартных задач.</div>
+                                    <span class="level-badge basic">Базовый трек</span>
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="level-card">
+                            <input type="radio" name="learningLevel" value="olympiad">
+                            <div class="level-card-content">
+                                <div class="level-icon">🏆</div>
+                                <div class="level-info">
+                                    <div class="level-title">Углубленный / Олимпиадный уровень</div>
+                                    <div class="level-desc">Нестандартное физическое мышление, решение задач повышенной сложности, подготовка к олимпиадам и Физтех.</div>
+                                    <span class="level-badge olympiad">Олимпиадный трек</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="modal-actions split">
+                        <button type="button" class="btn btn-secondary" id="backToStep1Btn">&larr; Назад</button>
+                        <button type="button" class="btn btn-primary" id="finishRegBtn">Сохранить и продолжить 🚀</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключаем LaTeX рендерер MathJax для формул -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../physicsani/mechanics.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

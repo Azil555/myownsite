@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тема</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <script src="topics/animations.js"></script>
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .topic-page-shell {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem 3rem;
+        }
+
+        .topic-card {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.16) 0%, rgba(0, 242, 254, 0.08) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #8a2be2;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .topic-title {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .topic-content p {
+            margin: 0;
+        }
+
+        .topic-content strong {
+            color: #7dd3fc;
+        }
+
+        .topic-content .content-block,
+        .topic-content>div:not(.content-block) {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topic-page-shell">
+        <div class="topic-card">
+            <a class="back-link" href="javascript:history.back()">← Назад</a>
+            <h1 class="topic-title" id="topicTitle">Тема</h1>
+            <div class="topic-content" id="topicContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // База данных текстов для первых тем по их точному названию
+        const topicsDatabase = {
+            "Механическое движение: определение": `
+                <div class="content-block">
+                    <h3>Что такое механическое движение?</h3>
+                    <p><strong>Механическое движение</strong> — это изменение положения тела в пространстве относительно других тел с течением времени. Если тело со временем меняет свое местоположение (например, летит мяч, едет машина или бежит человек), значит, оно совершает механическое движение.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Главное правило: относительность</h3>
+                    <p>В физике движение всегда рассматривается по отношению к чему-либо. Одно и то же тело может быть неподвижным для одного наблюдателя и движущимся для другого.</p>
+                    <p><em>Пример:</em> Пассажир спокойно сидит на кресле внутри едущего поезда. Относительно вагона он находится в <strong>покое</strong>. Но если посмотреть на него из окна платформы, этот же пассажир будет <strong>двигаться</strong> вместе с поездом.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Интерактивная модель</h3>
+                    <p>Подвигайте ползунок, чтобы увидеть движение:</p>
+                    <canvas id="motionCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <label for="timeSlider" style="color: #7dd3fc;">Время (t): <span id="timeValue">0</span> с</label>
+                        <input type="range" id="timeSlider" min="0" max="100" value="0" style="flex: 1; accent-color: #8a2be2; cursor: pointer;">
+                    </div>
+                </div>`,
+
+            "Тело отсчета": `
+                <div class="content-block">
+                    <h3>Что такое тело отсчета?</h3>
+                    <p>Чтобы описать любое механическое движение, в первую очередь нужно выбрать объект, относительно которого мы будем наблюдать за изменением положения других тел. Этот выбранный предмет и называется <strong>телом отсчета</strong>.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Почему это так важно?</h3>
+                    <p>Без указания тела отсчета невозможно определить, движется тело или нет, ведь в природе не существует абсолютного покоя.</p>
+                    <p><em>Пример:</em> Вы сидите за столом в кабинете. Относительно стула и стен комнаты вы находитесь в <strong>покое</strong> (тело отсчета — комната). Но если выбрать телом отсчета Солнце, то вы вместе со всей планетой летите в пространстве с огромной скоростью!</p>
+                </div>
+                <div class="content-block">
+                    <h3>Интерактив: выберите свое начало координат</h3>
+                    <p>Кликните в <strong>любое место</strong> на холсте ниже, чтобы установить там нулевую отметку (начало отсчета). Вы увидите, как изменится координата движущегося объекта:</p>
+                    
+                    <canvas id="customOriginCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; display: block;"></canvas>
+                    
+                    <p id="coordInfo" style="font-size: 0.95rem; color: #7dd3fc; margin-top: 5px;"></p>
+                </div>
+            `,
+
+            "Система отсчета": `
+                <div class="content-block">
+                    <h3>Что входит в систему отсчета?</h3>
+                    <p>Чтобы полностью и однозначно описать движение тела в пространстве, одной точки отсчета мало. Необходима целая <strong>система отсчета</strong>, которая состоит из трёх взаимосвязанных элементов:</p>
+                    <p style="margin-top: 8px;">1. <strong>Тело отсчета</strong> — объект, относительно которого рассматривается движение.</p>
+                    <p>2. <strong>Система координат</strong> (одна ось $OX$, две $OX, OY$ или три) — связана с телом отсчета и позволяет точно измерять положение тела с помощью чисел.</p>
+                    <p>3. <strong>Прибор для отсчета времени</strong> (часы) — фиксирует, в какой именно момент времени тело находилось в той или иной точке.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Интерактивная модель: Координатная ось и время</h3>
+                    <p>Наглядная модель движения тела на оси координат с отсчетом времени ($t$). Передвигайте ползунок, чтобы увидеть, как меняется положение тела в разные моменты времени:</p>
+                    
+                    <canvas id="referenceSystemCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+                    
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <label for="sysTimeSlider" style="color: #7dd3fc;">Время ($t$): <span id="sysTimeValue">0</span> с</label>
+                        <input type="range" id="sysTimeSlider" min="0" max="100" value="0" style="flex: 1; accent-color: #8a2be2; cursor: pointer;">
+                    </div>
+                </div>
+            `,
+            "Траектория": `
+                <div class="content-block">
+                    <h3>Что такое траектория?</h3>
+                    <p>Когда тело совершает механическое движение, оно переходит из одной точки пространства в другую. Линия, по которой движется тело при своем перемещении, называется <strong>траекторией</strong>.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Виды траекторий</h3>
+                    <p>В зависимости от формы линии траектория бывает двух видов:</p>
+                    <p style="margin-top: 8px;">1. <strong>Прямолинейная</strong> — если тело движется по прямой линии (например, падение капли дождя без ветра).</p>
+                    <p>2. <strong>Криволинейная</strong> — если линия представляет собой кривую (например, поворот машины, полет мяча по дуге или движение точек карусели).</p>
+                </div>
+                <div class="content-block">
+                    <h3>Интерактивная модель: Сравнение траекторий</h3>
+                    <p>Нажмите на кнопки ниже, чтобы переключить режим и увидеть разницу между прямолинейным и криволинейным движением:</p>
+                    
+                    <canvas id="trajectoryCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+                    
+                    <p id="trajStatus" style="font-size: 0.9rem; color: #7dd3fc; margin-bottom: 10px; min-height: 24px;"></p>
+
+                    <div style="display: flex; gap: 10px;">
+                        <button id="btnStraight" style="background: #8a2be2; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Прямолинейная</button>
+                        <button id="btnCurved" style="background: rgba(255,255,255,0.1); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600;">Криволинейная</button>
+                    </div>
+                </div>
+            `,
+            "Путь": `
+                <div class="content-block">
+                    <h3>Что такое путь?</h3>
+                    <p>Длина траектории, по которой движется тело в течение некоторого промежутка времени, называется <strong>путем</strong>.</p>
+                    <p style="margin-top: 8px;">Путь обозначается латинской буквой <strong>S</strong>. Главная единица измерения пути в Международной системе единиц (СИ) — <strong>метр (м)</strong>. Также часто используются километры (км), сантиметры (см) и миллиметры (мм).</p>
+                </div>
+                <div class="content-block">
+                    <h3>Особенности пути</h3>
+                    <p>1. Путь — это скалярная величина (он имеет только числовое значение и не имеет направления).</p>
+                    <p>2. Путь всегда больше нуля (или равен нулю, если тело покоится) и при движении может только увеличиваться.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Интерактивная модель: Измерение пройденного пути</h3>
+                    <p>Передвигайте ползунок, чтобы объект двигался по траектории, и наблюдайте, как увеличивается длина пройденного им пути (S):</p>
+                    
+                    <canvas id="pathCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+                    
+                    <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                        <label for="pathSlider" style="color: #7dd3fc;">Путь (S): <span id="pathValue">0</span> м</label>
+                        <input type="range" id="pathSlider" min="0" max="100" value="0" style="flex: 1; accent-color: #8a2be2; cursor: pointer;">
+                    </div>
+                </div>
+            `,
+            "Перемещение: разница между пройденным расстоянием и вектором перемещения": `
+                <div class="content-block">
+                    <h3>Что такое перемещение?</h3>
+                    <p><strong>Перемещение</strong> — это векторная величина, представляющая собой отрезок прямой линии, соединяющий начальное положение тела с его конечным положением.</p>
+                    <p style="margin-top: 8px;">Перемещение обозначается буквой <strong>$\vec{s}$</strong> (или $\vec{r}$). В отличие от пути, который учитывает всю извилистую траекторию, перемещение зависит <em>только</em> от начальной и конечной точки.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Главные отличия: путь и перемещение</h3>
+                    <p>1. <strong>Путь ($s$)</strong> — скаляр (только число), равен длине траектории. Всегда увеличивается при движении.</p>
+                    <p>2. <strong>Перемещение ($\vec{s}$)</strong> — вектор (имеет направление и модуль). Может быть как больше пути, так и меньше его (или даже равным нулю, если тело вернулось обратно).</p>
+                </div>
+                <div class="content-block">
+                    <h3>Интерактивная модель: Путь против Перемещения</h3>
+                    <p>Передвигайте ползунок, чтобы увидеть, как тело едет по извилистой траектории (накапливая <strong>путь</strong>), в то время как вектор <strong>перемещения</strong> всегда напрямую соединяет старт и финиш:</p>
+                    
+                    <canvas id="displacementCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+                    
+                    <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; color: #7dd3fc; font-size: 0.95rem;">
+                        <span id="pathVsDispText">Путь: 0 м | Перемещение: 0 м</span>
+                    </div>
+                    <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
+                        <label for="dispSlider" style="color: #a78bfa; font-weight: 600;">Время / Прогресс:</label>
+                        <input type="range" id="dispSlider" min="0" max="100" value="0" style="flex: 1; accent-color: #8a2be2; cursor: pointer;">
+                    </div>
+                </div>
+            `,
+            "Равномерное прямолинейное движение": `
+        <div class="content-block">
+            <h3>Что такое равномерное прямолинейное движение?</h3>
+            <p><strong>Механическое движение</strong> называется <em>равномерным прямолинейным</em>, если за любые равные промежутки времени тело совершает одинаковые перемещения.</p>
+            <p style="margin-top: 8px;">Это определение распадается на два важнейших признака:</p>
+            <p>1. <strong>Прямолинейное</strong> — траектория движения тела является прямой линией (например, падение капли при полном отсутствии ветра или движение поезда на строго прямом участке рельсов).</p>
+            <p>2. <strong>Равномерное</strong> — модуль скорости тела остается постоянным со временем ($v = \text{const}$). Тело не разгоняется и не тормозит.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главные формулы и расчеты</h3>
+            <p>Поскольку скорость при таком движении не меняется, путь ($S$), пройденный телом за время ($t$), рассчитывается по формуле:</p>
+            <p style="text-align: center; font-size: 1.3rem; color: #7dd3fc; margin: 12px 0;"><strong>$S = v \cdot t$</strong></p>
+            <p>Из этой же формулы легко выразить другие физические величины:</p>
+            <p style="margin-top: 6px;">• <strong>Скорость ($v$):</strong> $v = \frac{S}{t}$ (измеряется в метрах в секунду, м/с).</p>
+            <p>• <strong>Время ($t$):</strong> $t = \frac{S}{v}$ (измеряется в секундах, с).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Графики равномерного движения</h3>
+            <p>В физике поведение тел очень удобно описывать с помощью графиков:</p>
+            <p style="margin-top: 6px;">1. <strong>График скорости ($v$ от $t$):</strong> Представляет собой прямую линию, параллельную оси времени, так как скорость со временем не меняется.</p>
+            <p>2. <strong>График пути ($S$ от $t$):</strong> Это прямая линия, выходящая из начала координат. Чем круче наклон этой прямой, тем больше скорость тела.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Едет машинка</h3>
+            <p>Нажми кнопку <strong>«Старт»</strong> и посмотри, как объект движется с постоянной скоростью. Скорость можно менять с помощью ползунка:</p>
+            
+            <canvas id="uniformMotionCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <label for="uniSlider" style="color: #7dd3fc; min-width: 110px;">Скорость (v): <span id="uniValue">2</span></label>
+                    <input type="range" id="uniSlider" min="1" max="6" step="0.5" value="2" style="flex: 1; accent-color: #8a2be2; cursor: pointer;">
+                </div>
+                
+                <button id="uniStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Старт движения</button>
+            </div>
+        </div>
+    `,
+            "Понятие скорости": `
+        <div class="content-block">
+            <h3>Что такое скорость?</h3>
+            <p><strong>Скорость</strong> — это векторная физическая величина, которая показывает, какой путь тело проходит за единицу времени.</p>
+            <p style="margin-top: 8px;">Иными словами, скорость характеризует <em>быстроту</em> движения тела. Чем больше скорость, тем большее расстояние объект преодолевает за одну и ту же секунду (или час).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула и единицы измерения</h3>
+            <p>Чтобы найти модуль скорости (V), нужно пройденный путь (S) разделить на время (t), за которое этот путь был пройден:</p>
+            <p style="text-align: center; font-size: 1.3rem; color: #7dd3fc; margin: 12px 0;"><strong>v = S / t</strong></p>
+            <p style="margin-top: 8px;">В Международной системе единиц (СИ) основными единицами измерения скорости являются:</p>
+            <p>• <strong>метры в секунду (м/с)</strong></p>
+            <p>На практике также часто используют внесистемные единицы — <strong>километры в час (км/ч)</strong>.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Физический смысл скорости</h3>
+            <p>• Если скорость автомобиля равна 60 км/ч, это значит, что за каждый час своего движения он смещается на 60 километров.</p>
+            <p>• Если скорость бегуна 5 м/с, это значит, что каждую секунду он преодолевает расстояние в 5 метров.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение скоростей</h3>
+            <p>Нажмите <strong>«Старт»</strong>, чтобы запустить два объекта с разной скоростью и наглядно увидеть, как скорость влияет на пройденное за время расстояние:</p>
+            
+            <canvas id="speedCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; align-items: center; gap: 15px;">
+                <button id="speedStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Старт гонки</button>
+                <span id="speedTimerText" style="color: #7dd3fc; font-size: 0.95rem;">Время: 0.0 с</span>
+            </div>
+        </div>
+    `,
+            "Перевод единиц измерения (км/ч в м/с)": `
+        <div class="content-block">
+            <h3>Зачем переводить единицы скорости?</h3>
+            <p>В физике при решении задач чаще всего используют основную единицу СИ — <strong>метры в секунду (м/с)</strong>. Однако в жизни мы привыкли измерять скорость транспорта в <strong>километрах в час (км/ч)</strong>.</p>
+            <p style="margin-top: 8px;">Чтобы задача сошлась и ответ был верным, нужно уметь быстро переводить одни единицы в другие.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главное правило: как переводить км/ч в м/с?</h3>
+            <p>В одном километре <strong>1000 метров</strong>, а в одном часе <strong>3600 секунд</strong> (60 минут по 60 секунд). Если перевести одно в другое, получается следующее соотношение:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>1 км/ч = 1000 м / 3600 с = 1 / 3,6 м/с</strong></p>
+            
+            <p style="margin-top: 10px;">Отсюда вытекает простое и удобное правило:</p>
+            <p>• Чтобы перевести скорость из <strong>км/ч в м/с</strong>, нужно число разделить на <strong>3,6</strong>.</p>
+            <p>• Чтобы перевести обратно из <strong>м/с в км/ч</strong>, нужно число умножить на <strong>3,6</strong>.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Примеры перевода</h3>
+            <p><strong>Пример 1 (км/ч в м/с):</strong></p>
+            <p>Скорость автомобиля 72 км/ч. Переведем её в м/с:</p>
+            <p style="color: #7dd3fc; margin: 4px 0;">$72 \div 3,6 = 20 \text{ м/с}$</p>
+            
+            <p style="margin-top: 10px;"><strong>Пример 2 (м/с в км/ч):</strong></p>
+            <p>Скорость бегуна 5 м/с. Переведем её в км/ч:</p>
+            <p style="color: #7dd3fc; margin: 4px 0;">$5 \times 3,6 = 18 \text{ км/ч}$</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Шпаргалка для частых значений</h3>
+            <p>• <strong>36 км/ч</strong> = 10 м/с</p>
+            <p>• <strong>54 км/ч</strong> = 15 м/с</p>
+            <p>• <strong>72 км/ч</strong> = 20 м/с</p>
+            <p>• <strong>90 км/ч</strong> = 25 м/с</p>
+            <p>• <strong>108 км/ч</strong> = 30 м/с</p>
+        </div>
+    `,
+            "Неравномерное движение": `
+        <div class="content-block">
+            <h3>Что такое неравномерное движение?</h3>
+            <p>Большинство тел в природе движутся <strong>неравномерно</strong>. Это значит, что за одинаковые промежутки времени тело проходит разные расстояния.</p>
+            <p style="margin-top: 8px;">Например, автомобиль при выезде со светофора разгоняется, на трассе едет быстро, а перед пешеходным переходом тормозит. Его скорость постоянно меняется.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главные особенности</h3>
+            <p>1. При неравномерном движении скорость тела не остается постоянной.</p>
+            <p>2. Чтобы описать такое движение, используют понятия <strong>средней скорости</strong> и <strong>мгновенной скорости</strong>.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Езда с разгонами и торможением</h3>
+            <p>Нажми <strong>«Старт движения»</strong> и понаблюдай, как машинка меняет свою скорость по ходу поездки:</p>
+            
+            <canvas id="nonUniformCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="nonUniStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Старт движения</button>
+                <span id="nonUniStatus" style="color: #7dd3fc; font-size: 0.95rem;">Нажмите старт...</span>
+            </div>
+        </div>
+    `,
+            "Средняя скорость": `
+        <div class="content-block">
+            <h3>Что такое средняя скорость?</h3>
+            <p>При неравномерном движении скорость тела постоянно меняется: оно может ехать быстро, медленно или вообще останавливаться. Чтобы охарактеризовать такое движение целиком, используют понятие <strong>средней скорости</strong>.</p>
+            <p style="margin-top: 8px;">Средняя скорость показывает, с какой постоянной скоростью тело должно было бы двигаться, чтобы пройти весь путь за то же самое время.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главная формула</h3>
+            <p>Чтобы найти среднюю скорость, нужно <strong>весь пройденный путь</strong> разделить на <strong>все время</strong>, затраченное на этот путь:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>Средняя скорость = Весь путь / Всё время</strong></p>
+            <p>Или в виде формулы:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>v(средняя) = S(всего) / t(всего)</strong></p>
+        </div>
+
+
+        <div class="content-block">
+            <h3>Пример расчета</h3>
+            <p>Автомобиль первые 120 км проехал за 2 часа, а следующие 180 км — за 3 часа. Найдем его среднюю скорость:</p>
+            <p>1. Весь путь: 120 км + 180 км = 300 км</p>
+            <p>2. Всё время: 2 часа + 3 часа = 5 часов</p>
+            <p>3. Средняя скорость: 300 км / 5 ч = 60 км/ч</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Поездка из двух участков</h3>
+            <p>Нажми <strong>«Запустить поездку»</strong> и посмотри, как автомобиль преодолевает оба участка пути с разной скоростью, после чего рассчитывается общая средняя скорость:</p>
+            
+            <canvas id="avgSpeedCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="avgSpeedStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Запустить поездку</button>
+                <span id="avgSpeedStatus" style="color: #7dd3fc; font-size: 0.95rem;">Нажмите запуск...</span>
+            </div>
+        </div>
+    `,
+            "Мгновенная скорость": `
+        <div class="content-block">
+            <h3>Что такое мгновенная скорость?</h3>
+            <p>Когда автомобиль едет по дороге, его скорость постоянно меняется: то он разгоняется, то останавливается на светофоре. Если посмотреть на приборную панель машины, мы увидим скорость в данный конкретный момент времени.</p>
+            <p style="margin-top: 8px;"><strong>Мгновенная скорость</strong> — это скорость тела в данный момент времени или в данной точке траектории.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как мы сталкиваемся с ней в жизни?</h3>
+            <p>• <strong>Спидометр автомобиля</strong> всегда показывает именно мгновенную скорость (например, 60 км/ч прямо сейчас).</p>
+            <p>• <strong>Показания радаров ГАИ</strong> фиксируют мгновенную скорость машины в момент проезда камеры.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Спидометр</h3>
+            <p>Нажми <strong>«Старт»</strong> и понаблюдай, как меняется мгновенная скорость автомобиля во время поездки:</p>
+            
+            <canvas id="instantSpeedCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="instantStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Старт поездки</button>
+                <span id="instantStatus" style="color: #7dd3fc; font-size: 0.95rem;">Скорость: 0 км/ч</span>
+            </div>
+        </div>
+    `,
+            "Инерция": `
+        <div class="content-block">
+            <h3>Что такое инерция?</h3>
+            <p>Вы наверняка замечали, что когда автобус или машина резко тормозит, пассажиров сильно качает вперед. А когда транспорт резко трогается с места, нас отклоняет назад. Это происходит из-за физического явления, которое называется <strong>инерцией</strong>.</p>
+            <p style="margin-top: 8px;"><strong>Инерция</strong> — это явление сохранения скорости тела при отсутствии или компенсации внешних воздействий.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главный закон инерции</h3>
+            <p>Если на тело не действуют другие тела (или их действия скомпенсированы), то тело находится в состоянии <strong>покоя</strong> или движется <strong>равномерно и прямолинейно</strong>.</p>
+            <p style="margin-top: 8px;">Телу «лень» менять свое состояние: если оно покоилось — оно хочет дальше стоять на месте; если оно уже двигалось — оно хочет продолжать движение с той же скоростью.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Примеры из жизни</h3>
+            <p>• Если вы выбьете палкой коврик, пыль по инерции останется на месте, пока коврик сместится.</p>
+            <p>• Спотыкаясь о камень, человек падает вперед, потому что тело продолжало движение, а ноги резко остановились.</p>
+            <p>• Автомобиль не может остановиться мгновенно: даже при заблокированных колесах он продолжает скользить по дороге из-за инерции (тормозной путь).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Резкое торможение</h3>
+            <p>Нажми <strong>«Резкий тормоз»</strong> и посмотри, как пассажир (или груз) по инерции продолжает движение вперед при остановке тележки:</p>
+            
+            <canvas id="inertiaCanvas" width="600" height="160" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="inertiaStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Запустить тележку</button>
+                <span id="inertiaStatus" style="color: #7dd3fc; font-size: 0.95rem;">Тележка едет с постоянной скоростью...</span>
+            </div>
+        </div>
+    `,
+            "Инертность тел": `
+        <div class="content-block">
+            <h3>Что такое инертность?</h3>
+            <p>Вы, наверное, обращали внимание, что сдвинуть с места тяжелый шкаф гораздо труднее, чем легкий стул. А остановить мчащийся велосипед намного проще, чем огромный грузовик. Свойство тел по-разному реагировать на попытки изменить их скорость называется <strong>инертностью</strong>.</p>
+            <p style="margin-top: 8px;"><strong>Инертность</strong> — это свойство тела препятствовать изменению своей скорости при действии на него других тел. Обратите внимание: инертность — это само свойство, а <strong>инерция</strong> — это физическое явление (сохранение скорости).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>От чего зависит инертность?</h3>
+            <p>Главная характеристика инертности — это <strong>масса</strong> тела.</p>
+            <p>• Чем <strong>больше масса</strong> тела (например, у грузовика), тем оно более инертное. Его труднее разогнать и трудно остановить.</p>
+            <p>• Чем <strong>меньше масса</strong> тела (например, у мяча), тем оно менее инертное. Его легко сдвинуть с места или остановить.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение инертности легкого и тяжелого тела</h3>
+            <p>Нажми <strong>«Толкнуть тела»</strong> и посмотри, как одинаковая сила по-разному действует на легкий и тяжелый объект:</p>
+            
+            <canvas id="inertiaBodyCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="inertiaBodyStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Толкнуть тела</button>
+                <span id="inertiaBodyStatus" style="color: #7dd3fc; font-size: 0.95rem;">Нажмите кнопку для толчка...</span>
+            </div>
+        </div>
+    `,
+            "Масса как мера инертности": `
+        <div class="content-block">
+            <h3>Что такое масса с точки зрения физики?</h3>
+            <p>Мы привыкли думать, что масса — это просто вес предмета или то, сколько он весит на весах. Но в физике у массы есть более глубокий смысл: <strong>масса — это мера инертности тела</strong>.</p>
+            <p style="margin-top: 8px;">Это значит, что масса количественно показывает, насколько сильно тело сопротивляется попыткам изменить его скорость (разогнать его или остановить).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как это работает на практике?</h3>
+            <p>• Если тело обладает <strong>маленькой массой</strong> (например, теннисный мяч), его инертность мала. Его очень легко сдвинуть с места или поймать на лету.</p>
+            <p>• Если тело обладает <strong>большой массой</strong> (например, чугунное ядро), его инертность огромна. Сдвинуть его с места или остановить чрезвычайно трудно, хотя сила притяжения (вес) здесь может быть и ни при чем — даже в невесомости ворочать массивные предметы тяжело!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение масс при толчке</h3>
+            <p>Нажми <strong>«Приложить силу»</strong> и посмотри, как тела с разной массой (и разной инертностью) реагируют на одинаковый удар:</p>
+            
+            <canvas id="massMeasureCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="massMeasureStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Приложить силу</button>
+                <span id="massMeasureStatus" style="color: #7dd3fc; font-size: 0.95rem;">Готово к эксперименту...</span>
+            </div>
+        </div>
+    `,
+            "Плотность вещества": `
+        <div class="content-block">
+            <h3>Что такое плотность вещества?</h3>
+            <p>Почему деревянный брусок плавает на воде, а железный гвоздь сразу тонет? Всё дело в <strong>плотности</strong>. Хотя объём у них может быть одинаковым, масса окажется совершенно разной.</p>
+            <p style="margin-top: 8px;"><strong>Плотность</strong> — это физическая величина, которая показывает, какая масса содержится в единице объёма вещества.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главная формула</h3>
+            <p>Чтобы найти плотность вещества, нужно массу тела разделить на его объём:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>Плотность = Масса / Объём</strong></p>
+            <p>Или в виде буквенной формулы (где ро — это плотность, m — масса, V — объём):</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>р = m / V</strong></p>
+            <p style="margin-top: 8px;">Обычно плотность измеряется в килограммах на кубический метр (кг / м3) или в граммах на кубический сантиметр (г / см3).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение плотности разных тел</h3>
+            <p>Нажми <strong>«Сравнить кубики»</strong> и посмотри, как тела одинакового размера (объёма) из разных материалов имеют разную массу из-за плотности:</p>
+            
+            <canvas id="densityCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="densityStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Сравнить кубики</button>
+                <span id="densityStatus" style="color: #7dd3fc; font-size: 0.95rem;">Кубики одинакового объема, но разной массы...</span>
+            </div>
+        </div>
+    `,
+
+        };
+        const params = new URLSearchParams(window.location.search);
+        const title = params.get('title') || 'Тема';
+
+        const titleEl = document.getElementById('topicTitle');
+        const topicContent = document.getElementById('topicContent');
+
+        if (titleEl) titleEl.textContent = title;
+        document.title = title;
+
+        if (topicsDatabase[title]) {
+            topicContent.innerHTML = topicsDatabase[title];
+
+            if (title === "Механическое движение: определение") {
+                if (typeof initMotionAnimation === 'function') {
+                    initMotionAnimation('motionCanvas', 'timeSlider', 'timeValue');
+                }
+            }
+
+            if (title === "Тело отсчета") {
+                if (typeof initCustomOriginAnimation === 'function') {
+                    initCustomOriginAnimation('customOriginCanvas', 'coordInfo');
+                }
+            }
+
+            if (title === "Система отсчета") {
+                if (typeof initReferenceSystemAnimation === 'function') {
+                    initReferenceSystemAnimation('referenceSystemCanvas', 'sysTimeSlider', 'sysTimeValue');
+                }
+            }
+            if (title === "Траектория") {
+                if (typeof initTrajectoryAnimation === 'function') {
+                    initTrajectoryAnimation('trajectoryCanvas', 'btnStraight', 'btnCurved', 'trajStatus');
+                }
+            }
+            if (title === "Путь") {
+                if (typeof initPathAnimation === 'function') {
+                    initPathAnimation('pathCanvas', 'pathSlider', 'pathValue');
+                }
+            }
+            if (title.includes("Перемещение")) {
+                if (typeof initDisplacementAnimation === 'function') {
+                    initDisplacementAnimation('displacementCanvas', 'dispSlider', 'pathVsDispText');
+                }
+            }
+            if (title === "Равномерное прямолинейное движение") {
+                if (typeof initUniformMotionAnimation === 'function') {
+                    initUniformMotionAnimation('uniformMotionCanvas', 'uniSlider', 'uniValue', 'uniStartBtn');
+                }
+            }
+            if (title === "Понятие скорости") {
+                if (typeof initSpeedAnimation === 'function') {
+                    initSpeedAnimation('speedCanvas', 'speedStartBtn', 'speedTimerText');
+                }
+            }
+            if (title === "Неравномерное движение") {
+                if (typeof initNonUniformMotionAnimation === 'function') {
+                    initNonUniformMotionAnimation('nonUniformCanvas', 'nonUniStartBtn', 'nonUniStatus');
+                }
+            }
+            if (title === "Средняя скорость") {
+                if (typeof initAverageSpeedAnimation === 'function') {
+                    initAverageSpeedAnimation('avgSpeedCanvas', 'avgSpeedStartBtn', 'avgSpeedStatus');
+                }
+            }
+            if (title === "Мгновенная скорость") {
+                if (typeof initInstantSpeedAnimation === 'function') {
+                    initInstantSpeedAnimation('instantSpeedCanvas', 'instantStartBtn', 'instantStatus');
+                }
+            }
+            if (title === "Инерция") {
+                if (typeof initInertiaAnimation === 'function') {
+                    initInertiaAnimation('inertiaCanvas', 'inertiaStartBtn', 'inertiaStatus');
+                }
+            }
+            if (title === "Инертность тел") {
+                if (typeof initInertiaBodyAnimation === 'function') {
+                    initInertiaBodyAnimation('inertiaBodyCanvas', 'inertiaBodyStartBtn', 'inertiaBodyStatus');
+                }
+            }
+            if (title === "Масса как мера инертности") {
+                if (typeof initMassMeasureAnimation === 'function') {
+                    initMassMeasureAnimation('massMeasureCanvas', 'massMeasureStartBtn', 'massMeasureStatus');
+                }
+            }
+            if (title === "Плотность вещества") {
+                if (typeof initDensityAnimation === 'function') {
+                    initDensityAnimation('densityCanvas', 'densityStartBtn', 'densityStatus');
+                }
+            }
+        } else {
+            topicContent.innerHTML = `
+                <div class="content-block">
+                    <p>Материал по теме <strong>"${title}"</strong> скоро появится в системе.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
