@@ -532,6 +532,1228 @@
             </div>
         </div>
     `,
+            "Масса тела и ее измерение": `
+        <div class="content-block">
+            <h3>Что такое масса тела?</h3>
+            <p>С понятием массы мы сталкиваемся каждый день. Мы говорим, что один предмет тяжелый, а другой легкий. В физике под массой понимают важную характеристику любого тела.</p>
+            <p style="margin-top: 8px;"><strong>Масса</strong> — это физическая величина, которая является мерой инертности тела, а также определяет его гравитационные свойства (способность притягиваться к другим телам).</p>
+            <p style="margin-top: 8px;">Главная единица измерения массы в международной системе (СИ) — это <strong>килограмм (кг)</strong>. Также используются другие единицы: граммы (г), миллиграммы (мг), тонны (т).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Способы измерения массы</h3>
+            <p>Измерить массу тела можно несколькими основными способами:</p>
+            <p>• <strong>Взвешивание (на весах)</strong> — самый частый и привычный способ. С помощью рычажных или электронных весов мы сравниваем массу тела с эталоном или известной массой гирь.</p>
+            <p>• <strong>Сравнение скоростей при взаимодействии</strong> — если два тела разной массы сталкиваются или действуют друг на друга (например, с помощью пружинки), то тело с меньшей массой приобретет большую скорость, а с большей — меньшую. По изменению их скоростей можно точно определить отношение их масс.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Измерение массы на весах</h3>
+            <p>Нажми <strong>«Взвесить тело»</strong> и посмотри, как рычажные весы помогают определить массу неизвестного предмета с помощью гирь:</p>
+            
+            <canvas id="massMeasureShopCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="massMeasureShopStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Взвесить тело</button>
+                <span id="massMeasureShopStatus" style="color: #7dd3fc; font-size: 0.95rem;">На весах лежит неизвестный груз...</span>
+            </div>
+        </div>
+    `,
+            "Расчет объема по массе и плотности": `
+        <div class="content-block">
+            <h3>Как связаны объем, масса и плотность?</h3>
+            <p>Иногда нам нужно узнать, какой объем занимает тело, если мы знаем его массу и из какого вещества оно состоит (то есть знаем его плотность). Например, сколько места займет 1 тонна (1000 кг) золота? Для этого используется формула, выведенная из основного определения плотности.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главная формула</h3>
+            <p>Чтобы найти объем тела, нужно его <strong>массу</strong> разделить на <strong>плотность</strong>:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>Объем = Масса / Плотность</strong></p>
+            <p>Или в виде буквенной формулы (V — объем, m — масса, р — плотность):</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>V = m / р</strong></p>
+            <p style="margin-top: 8px;">⚠️ <strong>Важно:</strong> Все единицы измерения должны быть согласованы. Если масса в килограммах (кг), а плотность в кг/м3, то объем получится в кубических метрах (м3).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Пример расчета</h3>
+            <p>Найдем объем кирпича, масса которого составляет 4 кг, а плотность кирпича — 1600 кг/м3.</p>
+            <p>Дано:<br>
+            m = 4 кг<br>
+            р = 1600 кг/м3</p>
+            <p>Решение:<br>
+            V = m / р = 4 кг / 1600 кг/м3 = 0.0025 м3</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение объемов одинаковой массы</h3>
+            <p>Нажми <strong>«Рассчитать объемы»</strong> и посмотри, какой разный объем занимают 5 кг легкого пенопласта и 5 кг тяжелого железа (при одинаковой массе объем отличается в сотни раз!):</p>
+            
+            <canvas id="calcVolumeCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="calcVolumeStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Рассчитать объемы</button>
+                <span id="calcVolumeStatus" style="color: #7dd3fc; font-size: 0.95rem;">Масса обоих тел: 5 кг. Ожидание расчета...</span>
+            </div>
+        </div>
+    `,
+            "Сила: понятие и модуль": `
+        <div class="content-block">
+            <h3>Что такое сила в физике?</h3>
+            <p>В повседневной жизни мы используем слово «сила» часто и в разных смыслах (сила воли, сильный ветер). В физике у этого понятия строгое определение.</p>
+            <p style="margin-top: 8px;"><strong>Сила</strong> — это физическая величина, которая является мерой <strong>взаимодействия</strong> тел. Сила — это причина, по которой тела начинают двигаться, останавливаются, меняют направление движения или деформируются (изменяют свою форму).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Характеристики силы</h3>
+            <p>Сила — это векторная величина. Чтобы полностью описать силу, нужно знать три вещи:</p>
+            <p>1. <strong>Точку приложения</strong> — место, где сила действует на тело.<br>
+            2. <strong>Направление</strong> — куда именно действует сила (например, строго вниз, вправо под углом).<br>
+            3. <strong>Модуль (значение)</strong> — числовое значение силы, показывающее, насколько сильным является воздействие.</p>
+            <p style="margin-top: 8px;">Сила измеряется в <strong>ньютонах (Н)</strong>.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Модуль силы</h3>
+            <p><strong>Модуль силы</strong> — это количественная мера действия силы, её «величина» или «значение». Это просто число с указанием единиц измерения. Например, 10 Н, 50 Н, 0.5 Н.</p>
+            <p style="margin-top: 8px;">Модуль силы показывает, насколько сильно тело будет ускорено или деформировано. Чем больше модуль силы, тем сильнее воздействие.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Разный модуль силы</h3>
+            <p>Нажми <strong>«Толкнуть тележку»</strong> и посмотри, как разный модуль силы (10 Н и 50 Н) влияет на ускорение тела при одинаковой точке приложения и направлении:</p>
+            
+            <canvas id="forceCanvas" width="600" height="180" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="forceStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Толкнуть тележку (F=10Н)</button>
+                <span id="forceStatus" style="color: #7dd3fc; font-size: 0.95rem;">Тележка готова к толчку...</span>
+            </div>
+        </div>
+    `,
+            "Сила как векторная величина (точка приложения, направление)": `
+        <div class="content-block">
+            <h3>Сила — это вектор</h3>
+            <p>В физике сила — это не просто число. Нельзя сказать, что на тело действует сила в 10 ньютонов, и этого достаточно. Чтобы понять, как именно будет двигаться тело, нужно знать <strong>куда</strong> и <strong>в какую точку</strong> эта сила приложена.</p>
+            <p style="margin-top: 8px;">Поэтому сила является <strong>векторной величиной</strong>. Вектор — это отрезок, у которого есть длина и направление.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Три главных признака силы</h3>
+            <p>Чтобы полностью описать любую силу, необходимо указать три её характеристики:</p>
+            <p>1. <strong>Модуль (численное значение)</strong> — насколько велика сила (например, 50 Н). В графическом изображении это длина вектора (стрелки).</p>
+            <p>2. <strong>Направление</strong> — куда именно действует сила (вверх, вниз, влево, вправо, под углом). В изображении это то, куда указывает острие стрелки.</p>
+            <p>3. <strong>Точка приложения</strong> — место на теле, к которому приложена сила. Вектор всегда начинается из этой точки.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Влияние точки приложения</h3>
+            <p>Нажми <strong>«Потянуть вниз»</strong> или <strong>«Потянуть вверх»</strong>, и посмотри, как одна и та же сила с одинаковым модулем заставляет предмет вращаться по-разному в зависимости от точки приложения:</p>
+            
+            <canvas id="vectorForceCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="vectorForceDownBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Потянуть вниз за нижний край</button>
+                <button id="vectorForceUpBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Потянуть вверх за верхний край</button>
+                <span id="vectorForceStatus" style="color: #7dd3fc; font-size: 0.95rem;">Брус готов к взаимодействию. Нажмите кнопку для приложения силы.</span>
+            </div>
+        </div>
+    `,
+            "Сила тяжести": `
+        <div class="content-block">
+            <h3>Что такое сила тяжести?</h3>
+            <p>Почему все брошенные вверх предметы обязательно падают на Землю? Почему капли дождя летят вниз, а вода в реке течет к океану? Все тела во Вселенной притягиваются друг к другу. Сила, с которой Земля притягивает к себе все тела, называется <strong>силой тяжести</strong>.</p>
+            <p style="margin-top: 8px;">Сила тяжести всегда направлена строго <strong>к центру Земли</strong> (то есть перпендикулярно поверхности земли вниз).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как рассчитать силу тяжести?</h3>
+            <p>Сила тяжести прямо пропорциональна массе тела. Чтобы вычислить её, нужно массу тела умножить на коэффициент ускорения свободного падения:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>Сила тяжести = Масса × Ускорение свободного падения</strong></p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>тяж</sub> = m · g</strong></p>
+            <p style="margin-top: 8px;">Что означают буквы:<br>
+            • F<sub>тяж</sub> — сила тяжести (измеряется в ньютонах, Н).<br>
+            • m— масса тела (измеряется в килограммах, кг).<br>
+            • g — ускорение свободного падения у поверхности Земли, которое примерно равно 9.8 Н/кг (в школьных задачах часто округляют до 10 Н/кг).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Падение тел под действием силы тяжести</h3>
+            <p>Нажми <strong>«Отпустить грузы»</strong> и посмотри, как сила тяжести заставляет тела падать вниз (при этом тело большей массы притягивается с большей силой):</p>
+            
+            <canvas id="gravityCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="gravityStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Отпустить грузы</button>
+                <span id="gravityStatus" style="color: #7dd3fc; font-size: 0.95rem;">Грузы висят на высоте. Нажмите для падения под действием силы тяжести...</span>
+            </div>
+        </div>
+    `,
+            "Прямо пропорциональная связь силы тяжести с массой": `
+        <div class="content-block">
+            <h3>Что значит «прямо пропорционально»?</h3>
+            <p>Из формулы силы тяжести ($F_{тяж} = m \cdot g$) видно, что сила тяжести и масса связаны напрямую. Это значит, что если масса тела увеличивается в несколько раз, то и сила тяжести, с которой Земля притягивает это тело, увеличивается ровно во столько же раз.</p>
+            <p style="margin-top: 8px;">Например, если взять груз массой 2 кг, то сила тяжести для него будет в два раза больше, чем для груза массой 1 кг. А для груза массой 10 кг — в десять раз больше.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>График зависимости силы тяжести от массы</h3>
+            <p>Если построить график, где по горизонтальной оси отложена масса ($m$), а по вертикальной — сила тяжести ($F_{тяж}$), то получится **прямая линия**, выходящая из начала координат.</p>
+            <p style="margin-top: 8px;">Наклон этой прямой как раз и задается коэффициентом $g$ (ускорением свободного падения). Чем круче поднимается линия, тем больше коэффициент.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Зависимость силы от массы</h3>
+            <p>Передвигай ползунок массы и наблюдай, как пропорционально растет сила тяжести и как меняется график:</p>
+            
+            <canvas id="proportionalityCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса тела ($m$): <span id="massValue">2</span> кг</label>
+                <input type="range" id="massSlider" min="1" max="10" step="1" value="2" style="accent-color: #8a2be2; cursor: pointer;">
+                <span id="propStatus" style="color: #ffffff; font-size: 0.95rem;">Сила тяжести: F = 20 Н (при g = 10 Н/кг)</span>
+            </div>
+        </div>
+    `,
+            "Гравитационная постоянная g": `
+        <div class="content-block">
+            <h3>Что такое коэффициент g?</h3>
+            <p>В формуле силы тяжести ($F_{тяж} = m \cdot g$) буква <strong>$g$</strong> обозначает ускорение свободного падения. Эта величина показывает, с каким ускорением тело падает на Землю под действием притяжения, если на него не действуют другие силы (например, сопротивление воздуха).</p>
+            <p style="margin-top: 8px;">Вне зависимости от массы тела — будь то легкое перышко или тяжелая гиря — в вакууме они падают с одинаковым ускорением $g$. Однако сила тяжести для них будет разной, так как она зависит от массы.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Чему равна величина g?</h3>
+            <p>У поверхности Земли значение $g$ в среднем составляет примерно **$9.81 \text{ м/с}^2$** (или $\text{Н/кг}$). В школьных задачах для удобства расчетов его часто округляют до **$10 \text{ Н/кг}$**.</p>
+            <p style="margin-top: 8px;">Интересно, что $g$ не везде одинаково:</p>
+            <p>• На экваторе оно чуть меньше (~$9.78 \text{ м/с}^2$), так как Земля немного сплюснута у полюсов и сказывается вращение планеты.</p>
+            <p>• На полюсах оно чуть больше (~$9.83 \text{ м/с}^2$).</p>
+            <p>• На других планетах значение $g$ отличается: например, на Луне оно примерно в 6 раз меньше земного ($~1.62 \text{ м/с}^2$), а на Юпитере — почти в 2.5 раза больше.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение g на разных планетах</h3>
+            <p>Выбери небесное тело и посмотри, как изменится сила тяжести и поведение груза массой 5 кг:</p>
+            
+            <canvas id="planetGravityCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="planet-btn" data-g="9.8" data-name="Земля (g = 9.8 Н/кг)" style="background: #8a2be2; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Земля</button>
+                <button class="planet-btn" data-g="1.6" data-name="Луна (g = 1.6 Н/кг)" style="background: #3b82f6; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Луна</button>
+                <button class="planet-btn" data-g="24.8" data-name="Юпитер (g = 24.8 Н/кг)" style="background: #ef4444; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Юпитер</button>
+            </div>
+            <div style="margin-top: 10px;">
+                <span id="planetStatus" style="color: #7dd3fc; font-size: 0.95rem;">Выбрана Земля: Fтяж = 5 кг × 9.8 Н/кг = 49 Н</span>
+            </div>
+        </div>
+    `,
+            "Вес тела": `
+        <div class="content-block">
+            <h3>Что такое вес тела?</h3>
+            <p>В повседневной жизни мы часто путаем два понятия: <strong>массу</strong> и <strong>вес</strong>. Мы говорим «я вешу 50 килограммов», но физически килограммы — это масса, а вес измеряется совсем в других единицах.</p>
+            <p style="margin-top: 8px;"><strong>Вес тела (P)</strong> — это сила, с которой тело из-за притяжения к Земле давит на опору или подвес.</p>
+            <p style="margin-top: 8px;">Главные отличия веса от силы тяжести:</p>
+            <p>• <strong>Сила тяжести</strong> приложена к самому телу (к его массе) и тянет его к Земле.<br>
+            • <strong>Вес</strong> приложен к опоре или подвесу (например, к полу, чаше весов, веревке, на которой висит груз).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как рассчитать вес неподвижного тела?</h3>
+            <p>Если тело покоится или движется равномерно и прямолинейно вместе с опорой, то модуль его веса равен по модулю силе тяжести:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>P = m · g</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • P — вес тела (измеряется в ньютонах, Н).<br>
+            • m — масса тела (кг).<br>
+            • g — ускорение свободного падения (~9.8 Н/кг).</p>
+            <p style="margin-top: 8px;">⚠️ <strong>Важно:</strong> В отличие от массы, которая всегда постоянна, вес тела может меняться или даже исчезать (состояние невесомости), если опора начинает двигаться с ускорением (например, в лифте).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Давление на опору (Вес)</h3>
+            <p>Нажми <strong>«Поставить груз на весы»</strong> и посмотри, как тело давит на опору, создавая вес:</p>
+            
+            <canvas id="bodyWeightCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="bodyWeightStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Поставить груз на весы</button>
+                <span id="bodyWeightStatus" style="color: #7dd3fc; font-size: 0.95rem;">Груз в воздухе. Опора пока не испытывает давления...</span>
+            </div>
+        </div>
+    `,
+            "Невесомость": `
+        <div class="content-block">
+            <h3>Что такое невесомость?</h3>
+            <p>Мы привыкли чувствовать свой вес, потому что земля под нашими ногами создает опору, которая удерживает нас. Но что произойдет, если эту опору убрать? Наступит состояние <strong>невесомости</strong>.</p>
+            <p style="margin-top: 8px;"><strong>Невесомость</strong> — это состояние, при котором тело не давит на опору или подвес (то есть его вес равен нулю: $P = 0$).</p>
+            <p style="margin-top: 8px;">⚠️ <strong>Важное заблуждение:</strong> В невесомости <strong>сила тяжести не исчезает</strong>! Земля продолжат притягивать и космонавтов, и космическую станцию, и все предметы внутри. Но поскольку они падают с одинаковым ускорением вместе, опора под ними исчезает, и они перестают давить друг на друга.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Когда возникает невесомость?</h3>
+            <p>1. <strong>В свободном падении</strong> — если бросить предмет или отпустить лифт (в идеальных условиях без сопротивления воздуха).</p>
+            <p>2. <strong>На орбите Земли</strong> — космические корабли и МКС (Международная космическая станция) находятся в состоянии постоянного «падения» вокруг Земли по орбите (двигаются по кругу с первой космической скоростью), поэтому внутри станции царит постоянная невесомость.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Состояние невесомости в падающем лифте</h3>
+            <p>Нажми <strong>«Перерезать трос лифта»</strong> и посмотри, как при свободном падении предмет внутри лифта и сами весы теряют вес ($P = 0$):</p>
+            
+            <canvas id="weightlessnessCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <button id="weightlessnessStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; width: fit-content;">Перерезать трос лифта</button>
+                <span id="weightlessnessStatus" style="color: #7dd3fc; font-size: 0.95rem;">Лифт неподвижен. Весы показывают обычный вес груза (50 Н).</span>
+            </div>
+        </div>
+    `,
+            "Разница между силой тяжести и весом": `
+        <div class="content-block">
+            <h3>Главные отличия физических понятий</h3>
+            <p>В повседневной жизни слова «сила тяжести» и «вес» часто путают или считают синонимами. Однако в физике это совершенно разные величины, которые отличаются по своей природе, точкам приложения и даже единицам измерения (хотя численно для неподвижных тел они часто равны).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Сравнение в таблице</h3>
+            <p>• <strong>Природа:</strong> Сила тяжести — это сила всемирного тяготения (притяжение к Земле). Вес — это сила упругости, с которой тело давит на опору.</p>
+            <p>• <strong>Точка приложения:</strong> Сила тяжести приложена к самому телу (к каждой его точке, сосредоточена в центре масс). Вес приложен к опоре или подвесу (к полу, столу, пружине).</p>
+            <p>• <strong>Зависимость от движения:</strong> Сила тяжести зависит только от массы тела и планеты ($F_{тяж} = m \cdot g$). Вес может меняться в зависимости от ускорения опоры (например, в лифте или ракете) и даже становиться равным нулю (невесомость).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Где приложены силы?</h3>
+            <p>Нажми <strong>«Показать силы»</strong> и посмотри, куда направлена сила тяжести (действует на само тело) и куда направлен вес (действует на опору):</p>
+            
+            <canvas id="diffCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button id="diffStartBtn" style="background: #8a2be2; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600;">Показать силы</button>
+                <button id="diffResetBtn" style="background: #ef4444; color: #fff; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 600; display: none;">С начала</button>
+                <span id="diffStatus" style="color: #7dd3fc; font-size: 0.95rem;">Груз стоит на опоре. Нажмите кнопку для анализа сил.</span>
+            </div>
+        </div>
+    `,
+            "Сила упругости": `
+        <div class="content-block">
+            <h3>Что такое сила упругости?</h3>
+            <p>Когда мы сжимаем пружину, растягиваем резинку или садимся на диван, тела деформируются (изменяют свою форму или размер). При этом возникает сила, которая стремится вернуть тело в исходное состояние.</p>
+            <p style="margin-top: 8px;"><strong>Сила упругости</strong> — это сила, которая возникает в теле в результате его деформации и направлена в сторону, противоположную смещению частиц тела при деформации.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Закон Гука</h3>
+            <p>В 1660 году английский ученый Роберт Гук установил связь между силой упругости и величиной деформации пружины. Позже этот закон назвали его именем.</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>упр</sub> = k · x</strong></p>
+            <p style="margin-top: 8px;">Что означают буквы:<br>
+            • **F<sub>упр</sub>** — модуль силы упругости (измеряется в ньютонах, Н).<br>
+            • **k** — жесткость пружины (измеряется в Н/м). Она зависит от материала, толщины и размеров пружины.<br>
+            • **x** — удлинение или сжатие пружины (в метрах, м).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Растяжение пружины</h3>
+            <p>Передвигай ползунок удлинения и наблюдай, как по Закону Гука увеличивается сила упругости в растянутой пружине:</p>
+            
+            <canvas id="elasticCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Удлинение ($x$): <span id="elasticDist">0.05</span> м</label>
+                <input type="range" id="elasticSlider" min="0.01" max="0.15" step="0.01" value="0.05" style="accent-color: #8a2be2; cursor: pointer;">
+                <span id="elasticStatus" style="color: #ffffff; font-size: 0.95rem;">Сила упругости: Fупр = 25 Н (при жесткости k = 500 Н/м)</span>
+            </div>
+        </div>
+    `,
+            "Деформация (растяжение, сжатие)": `
+        <div class="content-block">
+            <h3>Что такое деформация?</h3>
+            <p>Когда на тело действуют силы, оно может изменить свою форму и размеры. Это явление называется <strong>деформацией</strong>. Если после прекращения действия сил тело полностью восстанавливает свою форму, деформацию называют <strong>упругой</strong>.</p>
+            <p style="margin-top: 8px;">Два основных вида простейшей деформации — это <strong>растяжение</strong> (когда силы вытягивают тело, увеличивая его длину) и <strong>сжатие</strong> (когда силы давят на тело, уменьшая его длину).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Абсолютное удлинение и жесткость</h3>
+            <p>При растяжении или сжатии стержня или пружины ключевое значение имеет изменение длины:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>Δl = |l - l₀|</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • l₀ — начальная длина тела.<br>
+            • l — конечная длина после деформации.<br>
+            • Δl — абсолютное удлинение (или сжатие).</p>
+            <p style="margin-top: 8px;">Жесткость такого тела ($k$) зависит от материала, площади его поперечного сечения и начальной длины: $k = \\frac{E \\cdot S}{l_0}$ (где $E$ — модуль Юнга материала).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сжатие и растяжение стержня</h3>
+            <p>Передвигай ползунок и наблюдай, как стержень деформируется (растягивается или сжимается), и как меняются силы упругости внутри него:</p>
+            
+            <canvas id="deformationCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Деформация (Δl): <span id="defValue">0</span> см</label>
+                <input type="range" id="defSlider" min="-5" max="5" step="1" value="0" style="accent-color: #8a2be2; cursor: pointer;">
+                <span id="defStatus" style="color: #ffffff; font-size: 0.95rem;">Стержень в исходном состоянии (без деформации).</span>
+            </div>
+        </div>
+    `,
+            "Закон Гука": `
+        <div class="content-block">
+            <h3>Что такое Закон Гука?</h3>
+            <p>В 1660 году английский ученый Роберт Гук опытным путем установил связь между силой упругости и деформацией тела. Этот закон лежит в основе работы пружин, динамометров и многих других устройств.</p>
+            <p style="margin-top: 8px;"><strong>Закон Гука:</strong> При упругой деформации растяжения или сжатия сила упругости, возникающая в теле, прямо пропорциональна его абсолютном удлинению (деформации).</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>упр</sub> = k · x</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **F<sub>упр</sub>** — сила упругости (Н).<br>
+            • **k** — жесткость пружины (Н/м). Зависит от материала, толщины и формы пружины.<br>
+            • **x** (или $\Delta l$) — абсолютное удлинение или сжатие (м).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Физический смысл знака минус (в векторном виде)</h3>
+            <p>Векторно закон Гука записывают как $\vec{F}_{упр} = -k \vec{x}$. Знак «минус» означает, что сила упругости всегда направлена **противоположно** смещению частиц тела при деформации (пружина всегда стремится вернуться в исходное состояние).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Закон Гука в действии</h3>
+            <p>Меняй жесткость пружины или ее удлинение с помощью ползунков и наблюдай, как изменяется сила упругости ($F_{упр}$):</p>
+            
+            <canvas id="hookeCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Жесткость ($k$): <span id="hookeKValue">200</span> Н/м</label>
+                <input type="range" id="hookeKSlider" min="50" max="500" step="50" value="200" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Удлинение ($x$): <span id="hookeXValue">0.10</span> м</label>
+                <input type="range" id="hookeXSlider" min="0.02" max="0.20" step="0.02" value="0.10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="hookeStatus" style="color: #ffffff; font-size: 0.95rem;">Сила упругости: Fупр = 200 Н/м × 0.10 м = 20 Н</span>
+            </div>
+        </div>
+    `,
+            "Сила трения покоя": `
+        <div class="content-block">
+            <h3>Что такое сила трения покоя?</h3>
+            <p>Когда мы пытаемся сдвинуть тяжелый шкаф с места, но он не двигается, это значит, что мы еще не преодолели <strong>силу трения покоя</strong>.</p>
+            <p style="margin-top: 8px;">Эта сила возникает между соприкасающимися поверхностями тел при попытке сдвинуть одно тело относительно другого, но когда движения еще нет.</p>
+            <p style="margin-top: 8px;">Главная особенность силы трения покоя заключается в том, что она <strong>самоподстраивается</strong>: она в точности равна внешней силе, с которой мы тянем или толкаем предмет, уравновешивая ее (поэтому тело стоит на месте).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Максимальная сила трения покоя</h3>
+            <p>Сила трения покоя не может расти бесконечно. У нее есть предел — <strong>максимальная сила трения покоя</strong> ($F_{тр.max}$), после превышения которого тело срывается с места и начинает двигаться.</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>тр.max</sub> = μ · N</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **μ** (мю) — коэффициент трения (зависит от материалов поверхностей, например, дерево по льду или резина по асфальту).<br>
+            • **N** — сила нормального давления опоры (для горизонтальной поверхности равна силе тяжести $m \cdot g$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Попытка сдвинуть груз</h3>
+            <p>Увеличивай внешнюю силу тяги и наблюдай, как сила трения покоя растет вместе с ней, пока тело не сдвинется с места:</p>
+            
+            <canvas id="frictionCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила тяги ($F_{тяги}$): <span id="pullValue">15</span> Н (Макс. трение покоя = 30 Н)</label>
+                <input type="range" id="pullSlider" min="0" max="50" step="5" value="15" style="accent-color: #8a2be2; cursor: pointer;">
+                <span id="frictionStatus" style="color: #ffffff; font-size: 0.95rem;">Тело покоится. Сила трения покоя равна силе тяги (15 Н).</span>
+            </div>
+        </div>
+    `,
+            "Сила трения скольжения": `
+        <div class="content-block">
+            <h3>Что такое сила трения скольжения?</h3>
+            <p>Когда мы преодолеваем максимальную силу трения покоя и тело начинает двигаться по поверхности, возникает <strong>сила трения скольжения</strong>.</p>
+            <p style="margin-top: 8px;">Эта сила препятствует относительнму движению соприкасающихся тел и всегда направлена в сторону, противоположную движению тела.</p>
+            <p style="margin-top: 8px;">Интересный факт: на практике сила трения скольжения обычно чуть меньше максимальной силы трения покоя — именно поэтому сдвинуть тяжелый предмет с места труднее, чем продолжать его тащить.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула силы трения скольжения</h3>
+            <p>Модуль силы трения скольжения рассчитывается по закону Амонтона — Кулона:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>тр.ск</sub> = μ · N</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **μ** (мю) — коэффициент трения скольжения. Он зависит от материалов соприкасающихся поверхностей (например, сталь по льду имеет очень маленький коэффициент, а резина по сухому асфальту — большой) и от степени их обработки.<br>
+            • **N** — сила нормального давления опоры (сила, с которой тело давит на поверхность. На горизонтальном ровном полу она равна силе тяжести: $N = m \cdot g$).</p>
+            <p style="margin-top: 8px;">⚠️ <strong>Важно:</strong> Сила трения скольжения <em>не зависит</em> от площади соприкосающихся поверхностей (если кирпич положить на широкую грань или на узкую, сила трения будет одинаковой).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Скольжение тела по поверхности</h3>
+            <p>Меняй коэффициент трения ($μ$) или массу тела и наблюдай, как меняется сила трения скольжения:</p>
+            
+            <canvas id="slidingCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Коэффициент трения ($\mu$): <span id="muValue">0.3</span></label>
+                <input type="range" id="muSlider" min="0.1" max="0.8" step="0.1" value="0.3" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="slidingStatus" style="color: #ffffff; font-size: 0.95rem;">Сила трения скольжения: Fтр = 0.3 × 50 Н = 15 Н</span>
+            </div>
+        </div>
+    `,
+            "Сила трения качения": `
+        <div class="content-block">
+            <h3>Что такое сила трения качения?</h3>
+            <p>Когда колесо, шар или цилиндр катится по поверхности (например, автомобильная шина по асфальту или мяч по траве), возникает <strong>сила трения качения</strong>.</p>
+            <p style="margin-top: 8px;">Интересный факт: трение качения возникает потому, что и само колесо, и опорная поверхность под ним деформируются (сминаются) в месте контакта. Из-за этого перед катящимся телом постоянно образуется небольшой «бугорок» деформации, который приходится преодолевать.</p>
+            <p style="margin-top: 8px;">💡 <strong>Главное правило физики:</strong> Сила трения качения при тех же нагрузках всегда в несколько раз (а иногда и в десятки раз) <strong>меньше</strong> силы трения скольжения. Именно поэтому человечество изобрело колесо!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула силы трения качения</h3>
+            <p>Модуль силы трения качения рассчитывается по формуле:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>тр.кач</sub> = $\frac{R}{d}$ · N</strong> (или упрощенно: <strong>μ<sub>кач</sub> · N / R</strong>)</p>
+            <p style="margin-top: 8px;">В школьном курсе физики часто используют упрощенную форму аналогичную трению скольжения:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #facc15; margin: 5px 0;"><strong>F<sub>тр.кач</sub> = μ<sub>кач</sub> · N</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **μ<sub>кач</sub>** — коэффициент трения качения (имеет размерность длины, в метрах, и зависит от материалов).<br>
+            • **N** — сила нормального давления опоры ($N = m \cdot g$).<br>
+            • **R** — радиус катящегося тела (чем больше радиус колеса, тем меньше трение качения!).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение качения и скольжения</h3>
+            <p>Передвигай ползунок массы тела и наблюдай, как колесо катится, преодолевая значительно меньшее сопротивление, чем при скольжении:</p>
+            
+            <canvas id="rollingCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса тела ($m$): <span id="rollMassVal">10</span> кг</label>
+                <input type="range" id="rollMassSlider" min="2" max="20" step="2" value="10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="rollingStatus" style="color: #ffffff; font-size: 0.95rem;">Сила трения качения: Fкач = 4 Н (против Fскольжения = 30 Н)</span>
+            </div>
+        </div>
+    `,
+            "Зависимость силы трения от нормального давления": `
+        <div class="content-block">
+            <h3>Как сила давления влияет на трение?</h3>
+            <p>Вы наверняка замечали: если положить на санки одного человека, их везти легко, но если сядут трое, тянуть становится гораздо тяжелее. Это связано с прямой зависимостью силы трения от силы нормального давления опоры ($N$).</p>
+            <p style="margin-top: 8px;">Чем сильнее тело прижимается к поверхности (чем больше его вес или внешняя сила, прижимающая его перпендикулярно вниз), тем сильнее соприкасаются микронеровности поверхностей, и тем больше требуется усилий, чтобы их преодолеть.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главная закономерность</h3>
+            <p>Сила трения (как покоя, так и скольжения) прямо пропорциональна силе нормального давления опоры ($N$):</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>тр</sub> = μ · N</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • Если поверхность горизонтальная и на тело не действуют другие вертикальные силы, то нормальное давление равно силе тяжести: <strong>N = m · g</strong>.<br>
+            • Из формулы видно, что график зависимости силы трения ($F_{тр}$) от силы давления ($N$) — это прямая линия, выходящая из начала координат, где угол наклона зависит от коэффициента трения $\mu$.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Нагружаем поверхность</h3>
+            <p>Добавляй грузы на тележку (увеличивай массу и силу нормального давления $N$) и следи, как линейно растет сила трения:</p>
+            
+            <canvas id="pressureCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса груза ($m$): <span id="pressMassVal">5</span> кг (Сила давления $N$: <span id="pressNVal">50</span> Н)</label>
+                <input type="range" id="pressMassSlider" min="1" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="pressureStatus" style="color: #ffffff; font-size: 0.95rem;">При μ = 0.3 и N = 50 Н, сила трения равна: Fтр = 15 Н</span>
+            </div>
+        </div>
+    `,
+            "Зависимость силы трения от качества поверхностей": `
+        <div class="content-block">
+            <h3>Как шероховатость влияет на трение?</h3>
+            <p>Если посмотреть на абсолютно гладкую на вид металлическую пластину под микроскопом, мы увидим горы и впадины — микронеровности. Когда две поверхности соприкасаются, эти неровности цепляются друг за друга, создавая сопротивление движению.</p>
+            <p style="margin-top: 8px;">Качество обработки поверхностей (их гладкость или шероховатость) напрямую определяет величину <strong>коэффициента трения ($\mu$)</strong>. Чем грубее и шероховатее поверхности, тем сильнее они цепляются, и тем больше сила трения.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Коэффициент трения ($\mu$)</h3>
+            <p>В формуле силы трения ($F_{тр} = \mu \cdot N$) за качество поверхностей отвечает именно греческая буква **$\mu$** (мю):</p>
+            <p style="margin-top: 8px;">• **Шлифованный металл по металлу:** $\mu \approx 0.15$<br>
+            • **Дерево по дереву:** $\mu \approx 0.40$<br>
+            • **Резина по сухому асфальту:** $\mu \approx 0.70 - 0.90$</p>
+            <p style="margin-top: 8px;">⚠️ <em>Интересный нюанс:</em> Если сделать поверхности идеально гладкими (отполировать до атомного уровня), сила трения... резко возрастет! Из-за сближения молекул начнется сильное межмолекулярное притяжение (эффект схватывания).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Выбор материалов</h3>
+            <p>Меняй тип поверхностей (коэффициент трения $\mu$) с помощью ползунка и наблюдай, как меняется сопротивление и поведение бруска:</p>
+            
+            <canvas id="qualityCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Коэффициент трения ($\mu$): <span id="qualityMuVal">0.4</span> (<span id="qualityMaterialName">Дерево по дереву</span>)</label>
+                <input type="range" id="qualitySlider" min="0.1" max="0.8" step="0.1" value="0.4" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="qualityStatus" style="color: #ffffff; font-size: 0.95rem;">При N = 50 Н и μ = 0.4, сила трения равна: Fтр = 20 Н</span>
+            </div>
+        </div>
+    `,
+            "Сложение сил": `
+        <div class="content-block">
+            <h3>Что такое сложение сил?</h3>
+            <p>На практике на любое тело часто действует не одна, а сразу несколько сил (например, на движущийся автомобиль действуют сила тяжести, сила реакции опоры, сила тяги двигателя и сила трения).</p>
+            <p style="margin-top: 8px;">Чтобы узнать общий результат действия всех сил, их нужно сложить. Заменяющая несколько сил одна сила называется <strong>равнодействующей силой</strong> ($\vec{R}$ или $\vec{F}_{общ}$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Правила сложения сил (векторов)</h3>
+            <p>Силы — это векторные величины (у них есть и числовое значение, и направление), поэтому они складываются по правилам векторной алгебры:</p>
+            <p style="margin-top: 8px;">• <strong>Силы направлены в одну сторону:</strong> Их модули складываются, а равнодействующая направлена туда же:<br>
+            <code style="color: #7dd3fc;">F<sub>общ</sub> = F₁ + F₂</code></p>
+            <p style="margin-top: 8px;">• <strong>Силы направлены в противоположные стороны:</strong> Из большей силы вычитается меньшая, а равнодействующая направлена в сторону большей силы:<br>
+            <code style="color: #7dd3fc;">F<sub>общ</sub> = |F₁ - F₂|</code></p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Равнодействующая двух сил</h3>
+            <p>Меняй направление и величину второй силы с помощью ползунков и наблюдай, как меняется результирующая сила ($\vec{F}_{общ}$) и куда сместится объект:</p>
+            
+            <canvas id="forcesAdditionCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила 1 ($F_1$, вправо): <span id="f1Val">20</span> Н</label>
+                <input type="range" id="f1Slider" min="0" max="40" step="5" value="20" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила 2 ($F_2$, влево): <span id="f2Val">10</span> Н</label>
+                <input type="range" id="f2Slider" min="0" max="40" step="5" value="10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="forcesStatus" style="color: #ffffff; font-size: 0.95rem;">Равнодействующая сила: Fобщ = 20 Н - 10 Н = 10 Н (направлена вправо)</span>
+            </div>
+        </div>
+    `,
+            "Равнодействующая сил, направленных по одной прямой": `
+        <div class="content-block">
+            <h3>Что такое равнодействующая сил?</h3>
+            <p>На практике на тела почти всегда действует несколько сил одновременно. Чтобы понять, как будет двигаться тело, все эти силы можно заменить одной равнодействующей.</p>
+            <p style="margin-top: 8px;"><strong>Равнодействующая сила</strong> — это сила, которая производит на тело такое же действие, как несколько одновременно действующих сил. Она равна векторной сумме всех сил, приложенных к телу: $\vec{R} = \vec{F}_1 + \vec{F}_2 + \dots$</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Правила нахождения равнодействующей по одной прямой</h3>
+            <p>Поскольку силы направлены вдоль одной прямой, сложение векторов сводится к простому сложению или вычитанию их числовых значений (модулей):</p>
+            <p style="margin-top: 8px;">• <strong>Силы сонаправлены (в одну сторону):</strong> Их модули складываются, а равнодействующая направлена туда же.<br>
+            <code style="color: #7dd3fc;">F<sub>общ</sub> = F₁ + F₂</code></p>
+            <p style="margin-top: 8px;">• <strong>Силы направлены в противоположные стороны:</strong> Из большей силы вычитается меньшая, а равнодействующая направлена в сторону большей силы.<br>
+            <code style="color: #7dd3fc;">F<sub>общ</sub> = |F₁ - F₂|</code></p>
+            <p style="margin-top: 8px;">• <em>Если силы равны по модулю и направлены в противоположные стороны</em>, их равнодействующая равна нулю ($F_{общ} = 0$). Силы полностью скомпенсированы!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Борьба сил на одной прямой</h3>
+            <p>Меняй направление (переключай тумблер) и величину сил, действующих на тело вдоль одной прямой, и наблюдай за равнодействующей:</p>
+            
+            <canvas id="straightLineCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила 1 ($F_1$, вправо): <span id="slF1Val">25</span> Н</label>
+                <input type="range" id="slF1Slider" min="0" max="40" step="5" value="25" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила 2 ($F_2$): <span id="slF2Val">15</span> Н</label>
+                <input type="range" id="slF2Slider" min="0" max="40" step="5" value="15" style="accent-color: #8a2be2; cursor: pointer;">
+
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="slOppositeCheck" style="accent-color: #8a2be2; width: 18px; height: 18px; cursor: pointer;">
+                    <label for="slOppositeCheck" style="color: #ffffff; font-size: 0.95rem; cursor: pointer;">Направить $F_2$ в противоположную сторону (влево)</label>
+                </div>
+                
+                <span id="slStatus" style="color: #ffffff; font-size: 0.95rem;">Силы направлены в разные стороны: Fобщ = 25 Н - 15 Н = 10 Н (вправо)</span>
+            </div>
+        </div>
+    `,
+            "Давление твердых тел": `
+        <div class="content-block">
+            <h3>Что такое давление?</h3>
+            <p>Действие силы на тело зависит не только от ее модуля и направления, но и от **площади** поверхности, на которую эта сила действует. Например, один и тот же человек может идти по глубокому снегу проваливаясь (в обычной обуви) или спокойно идти по насту (на лыжах), хотя его вес (сила тяжести) не изменился.</p>
+            <p style="margin-top: 8px;"><strong>Давление</strong> — это физическая величина, равная отношению силы, действующей перпендикулярно поверхности, к площади этой поверхности.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула и единицы измерения</h3>
+            <p>Расчетная формула давления:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>p = $\frac{F}{S}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **p** — давление (измеряется в паскалях, **Па**).<br>
+            • **F** — сила давления (сила, перпендикулярная опоре, в ньютонах, **Н**).<br>
+            • **S** — площадь поверхности, на которую оказывается давление (в м²).</p>
+            <p style="margin-top: 8px;">💡 <em>Физический смысл:</em> 1 Па — это давление, которое производит сила в 1 Н, действующая на перпендикулярную поверхность площадью 1 м².</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сила и Площадь</h3>
+            <p>Меняй массу тела (силу давления) и площадь опоры, чтобы увидеть, как меняется итоговое давление на поверхность:</p>
+            
+            <canvas id="pressureSolidCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса бруска ($m$): <span id="psMassVal">10</span> кг (Сила $F = 100$ Н)</label>
+                <input type="range" id="psMassSlider" min="2" max="20" step="2" value="10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Площадь опоры ($S$): <span id="psAreaVal">0.5</span> м²</label>
+                <input type="range" id="psAreaSlider" min="0.2" max="1.0" step="0.1" value="0.5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="psStatus" style="color: #ffffff; font-size: 0.95rem;">Давление: p = 100 Н / 0.5 м² = 200 Па</span>
+            </div>
+        </div>
+    `,
+            "Способы увеличения давления": `
+        <div class="content-block">
+            <h3>Как можно увеличить давление?</h3>
+            <p>Исходя из формулы давления твердых тел (<code style="color: #7dd3fc;">p = F / S</code>), существует два основных способа увеличить давление, которое тело производит на поверхность:</p>
+            <p style="margin-top: 8px;">1. <strong>Увеличить силу ($F$):</strong> Прижать тело к поверхности с большей силой (увеличить вес или приложить дополнительное усилие). Чем больше сила прижима, тем больше давление.</p>
+            <p style="margin-top: 8px;">2. <strong>Уменьшить площадь опоры ($S$):</strong> Сделать поверхность соприкосновения меньше. Именно поэтому нож делают острым (маленькая площадь лезвия позволяет легко резать предметы), а кнопки и гвозди имеют острое острие.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Примеры из жизни и природы</h3>
+            <p>• <strong>Инструменты:</strong> Лезвия ножей, ножниц, иголки и шипы имеют очень маленькую площадь кончика, благодаря чему даже небольшое усилие человека создает колоссальное давление, достаточное для прокола или разреза.</p>
+            <p style="margin-top: 8px;">• <strong>Живая природа:</strong> Клыки, когти и жала хищников очень острые — это позволяет им эффективно охотиться за счет создания высокого давления при укусе или ударе.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сила и Площадь в действии</h3>
+            <p>Увеличивай силу нажатия или уменьшай площадь опоры (затачивай «инструмент»), чтобы увидеть, как резко возрастает давление:</p>
+            
+            <canvas id="increasePressureCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила давления ($F$): <span id="ipForceVal">50</span> Н</label>
+                <input type="range" id="ipForceSlider" min="10" max="100" step="10" value="50" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Площадь опоры ($S$, острие): <span id="ipAreaVal">0.5</span> см²</label>
+                <input type="range" id="ipAreaSlider" min="0.1" max="1.0" step="0.1" value="0.5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="ipStatus" style="color: #ffffff; font-size: 0.95rem;">Давление: p = 50 Н / 0.00005 м² = 1 000 000 Па (Высокое давление!)</span>
+            </div>
+        </div>
+    `,
+            "Способы уменьшения давления": `
+        <div class="content-block">
+            <h3>Как можно уменьшить давление?</h3>
+            <p>Исходя из формулы давления твердых тел (<code style="color: #7dd3fc;">p = F / S</code>), чтобы уменьшить давление, производимое телом на опору, можно поступить двумя путями:</p>
+            <p style="margin-top: 8px;">1. <strong>Уменьшить силу ($F$):</strong> Снизить вес тела или уменьшить внешнее усилие, с которым оно давит на поверхность.</p>
+            <p style="margin-top: 8px;">2. <strong>Увеличить площадь опоры ($S$):</strong> Распределить ту же самую силу по большей площади. Именно поэтому тракторы, танки и вездеходы делают на широких гусеницах, а грузовики оснащают сдвоенными колесами — это позволяет им не увязать в мягком грунте или снегу.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Примеры из жизни и природы</h3>
+            <p>• <strong>Транспорт и спецтехника:</strong> Широкие шины низкого давления у болотоходов и гусеницы у спецтехники увеличивают площадь соприкосновения в разы, снижая давление на почву.</p>
+            <p style="margin-top: 8px;">• <strong>Строительство:</strong> Под фундаменты тяжелых зданий и многоэтажных домов подкладывают широкие железобетонные плиты, чтобы здание не проседало в грунт.</p>
+            <p style="margin-top: 8px;">• <strong>Природа:</strong> Широкие лапы верблюдов позволяют им легко ходить по сыпучему песку пустыни, а широкие копыта северных оленей — не проваливаться в глубокий снег.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Увеличиваем площадь опоры</h3>
+            <p>Увеличивай площадь опоры (например, «надевая лыжи» или «широкие гусеницы») и наблюдай, как падает давление на поверхность:</p>
+            
+            <canvas id="decreasePressureCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила давления ($F$): <span id="dpForceVal">500</span> Н (Вес трактора)</label>
+                <input type="range" id="dpForceSlider" min="200" max="1000" step="100" value="500" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Площадь опоры ($S$): <span id="dpAreaVal">0.5</span> м²</label>
+                <input type="range" id="dpAreaSlider" min="0.1" max="1.0" step="0.1" value="0.5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="dpStatus" style="color: #ffffff; font-size: 0.95rem;">Давление: p = 500 Н / 0.5 м² = 1 000 Па (Низкое давление!)</span>
+            </div>
+        </div>
+    `,
+            "Давление в жидкостях и газах": `
+        <div class="content-block">
+            <h3>Почему жидкости и газы создают давление?</h3>
+            <p>В отличие от твердых тел, которые передают силу только в направлении ее действия, жидкости и газы обладают текучестью. Из-за хаотичного теплового движения молекул они заполняют весь предоставленный объем.</p>
+            <p style="margin-top: 8px;">• <strong>В газах:</strong> Молекулы находятся на больших расстояниях друг от друга, быстро движутся и постоянно ударяются о стенки сосуда. Именно эти бесчисленные удары создают давление газа.</p>
+            <p style="margin-top: 8px;">• <strong>В жидкостях:</strong> Молекулы упакованы теснее, но тоже движутся. Главная особенность жидкостей — на них действует сила тяжести, поэтому нижние слои сжимаются верхними, создавая гидростатическое давление.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главный закон: Закон Паскаля</h3>
+            <p>В 1653 году французский ученый Блез Паскаль экспериментально установил важнейшее свойство:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>Давление, производимое на жидкость или газ, передается в любую точку без изменений во всех направлениях.</strong></p>
+            <p style="margin-top: 8px;">Это происходит потому, что молекулы жидкости и газа подвижны и свободно передают толчки соседним молекулам. На этом законе основаны гидравлические прессы, тормозные системы автомобилей и подъемные краны!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Давление газа в сосуде</h3>
+            <p>Меняй температуру или объем сосуда с газом и наблюдай, как меняется частота ударов молекул и общее давление:</p>
+            
+            <canvas id="fluidPressureCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Температура газа ($T$): <span id="fpTempVal">300</span> К</label>
+                <input type="range" id="fpTempSlider" min="100" max="500" step="50" value="300" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="fpStatus" style="color: #ffffff; font-size: 0.95rem;">Молекулы движутся со средней скоростью, создавая умеренное давление на стенки сосуда.</span>
+            </div>
+        </div>
+    `,
+            "Закон Паскаля (передача давления во все стороны)": `
+        <div class="content-block">
+            <h3>В чем суть закона Паскаля?</h3>
+            <p>В 1653 году французский ученый Блез Паскаль сформулировал фундаментальный закон гидростатики, объясняющий, как жидкости и газы передают внешнее воздействие.</p>
+            <p style="margin-top: 8px;"><strong>Закон Паскаля:</strong> Давление, производимое на жидкость или газ, передается в любую точку без изменений во всех направлениях.</p>
+            <p style="margin-top: 8px;">💡 <em>Почему это происходит?</em> В отличие от твердых тел, молекулы жидкостей и газов подвижны и могут свободно перемещаться друг относительно друга. Когда вы давите на поршень в одном месте сосуда, этот «толчок» передается от слоя к слою по всему объему вещества.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Опыт с шаром Паскаля (Шар с отверстиями)</h3>
+            <p>Если взять полый шар с множеством маленьких отверстий и вставить в него поршень, то при надавливании на поршень вода начнет вырываться из **всех** отверстий с одинаковой силой и на одинаковое расстояние. Это доказывает, что давление передается во все стороны одинаково!</p>
+            <p style="margin-top: 8px;">• <strong>Где это применяется:</strong> На законе Паскаля основана работа гидравлических машин (тормозные системы автомобилей, гидравлические прессы, подъемники и экскаваторы).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Шар Паскаля</h3>
+            <p>Нажимай на поршень сверху (увеличивай силу нажатия) и наблюдай, как одинаковое давление передается во все стороны, заставляя воду фонтанировать из всех отверстий сферы:</p>
+            
+            <canvas id="pascalLawCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила нажатия на поршень ($F$): <span id="plForceVal">20</span> Н</label>
+                <input type="range" id="plForceSlider" min="5" max="50" step="5" value="20" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="plStatus" style="color: #ffffff; font-size: 0.95rem;">Давление передается во все стороны: струи воды бьют из всех отверстий с одинаковой силой.</span>
+            </div>
+        </div>
+    `,
+            "Гидростатическое давление": `
+        <div class="content-block">
+            <h3>Что такое гидростатическое давление?</h3>
+            <p>Из-за действия силы тяжести каждый слой жидкости имеет свой вес и давит на слои, находящиеся ниже. В результате возникает внутреннее давление неподвижной жидкости, которое называется **гидростатическим**.</p>
+            <p style="margin-top: 8px;">Чем глубже мы погружаемся в жидкость, тем больше слой воды над нами, а значит — тем выше давление. Именно поэтому на большой глубине в океане могут плавать только специальные батискафы с очень прочными корпусами.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула гидростатического давления</h3>
+            <p>Расчетная формула давления столба жидкости:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>p = $\rho \cdot g \cdot h$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **p** — гидростатическое давление (в паскалях, **Па**).<br>
+            • **$\rho$ (ро)** — плотность жидкости (в кг/м³). Например, плотность воды $\approx 1000$ кг/м³.<br>
+            • **g** — ускорение свободного падения ($\approx 9.8$ или $10$ Н/кг).<br>
+            • **h** — высота столба жидкости (глубина погружения, в метрах).</p>
+            <p style="margin-top: 8px;">💡 <em>Важно:</em> Гидростатическое давление **не зависит** от формы сосуда или общего объема жидкости — оно зависит исключительно от плотности жидкости и глубины ($h$)!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Давление на глубине</h3>
+            <p>Меняй плотность жидкости и глубину погружения подводной лодки, чтобы увидеть, как меняется гидростатическое давление:</p>
+            
+            <canvas id="hydrostaticCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Глубина погружения ($h$): <span id="hsDepthVal">5</span> м</label>
+                <input type="range" id="hsDepthSlider" min="1" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Плотность жидкости ($\rho$): <span id="hsDensityVal">1000</span> кг/м³ (Вода)</label>
+                <input type="range" id="hsDensitySlider" min="800" max="1400" step="100" value="1000" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="hsStatus" style="color: #ffffff; font-size: 0.95rem;">Гидростатическое давление: p = 1000 кг/м³ · 10 Н/кг · 5 м = 50 000 Па</span>
+            </div>
+        </div>
+    `,
+            "Сообщающиеся сосуды": `
+        <div class="content-block">
+            <h3>Что такое сообщающиеся сосуды?</h3>
+            <p><strong>Сообщающиеся сосуды</strong> — это любые сосуды, соединенные между собой каналом или трубкой, по которой может перетекать жидкость. Самый простой пример — чайник (его носик и основная часть) или обычная лейка.</p>
+            <p style="margin-top: 8px;">Главный закон сообщающихся сосудов: <em>в открытых сообщающихся сосудах однородная жидкость всегда устанавливается на одном уровне</em>, независимо от формы и сечения самих сосудов.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Почему уровень жидкости одинаков?</h3>
+            <p>Это объясняется законом Паскаля и гидростатическим давлением. Если бы в одном из сосудов уровень был выше, то давление столба жидкости там оказалось бы больше. Жидкость начала бы перетекать из сосуда с большим давлением в сосуд с меньшим, пока уровни не сравняются ($p_1 = p_2$).</p>
+            <p style="margin-top: 8px;">💡 <em>А если жидкости разные?</em> Если в сообщающиеся сосуды налить две несмешивающиеся жидкости разной плотности (например, воду и масло), то высоты их столбов над уровнем соприкосновения будут **обратно пропорциональны** их плотностям: <br>
+            <code style="color: #7dd3fc;">h₁ / h₂ = ρ₂ / ρ₁</code></p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сообщающиеся сосуды</h3>
+            <p>Меняй наклон или форму трубок, добавляй разную жидкость и наблюдай, как уровни воды всегда стремятся выровняться:</p>
+            
+            <canvas id="communicatingVesselsCanvas" width="600" height="200" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Уровень воды в левом сосуде: <span id="cvLevelVal">100</span> мм</label>
+                <input type="range" id="cvLevelSlider" min="50" max="150" step="5" value="100" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="cvStatus" style="color: #ffffff; font-size: 0.95rem;">Уровни жидкости в обоих коленах одинаковы, так как давление на одном уровне сбалансировано.</span>
+            </div>
+        </div>
+    `,
+            "Гидравлический пресс": `
+        <div class="content-block">
+            <h3>Что такое гидравлический пресс?</h3>
+            <p><strong>Гидравлический пресс</strong> — это машина, которая позволяет получить огромную выигрывающую силу с помощью закона Паскаля и несжимаемости жидкостей. Она используется для прессования металлов, изготовления деталей, штамповки и подъема тяжестей.</p>
+            <p style="margin-top: 8px;">Пресс состоит из двух соединенных между собой цилиндров разного диаметра, заполненных маслом или водой, в которых ходят поршни.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как работает гидравлическая машина?</h3>
+            <p>Согласно закону Паскаля, давление под малым поршнем передается без изменений на большой поршень: <br>
+            <code style="color: #7dd3fc;">p₁ = p₂</code>  ➔  <code style="color: #7dd3fc;">F₁ / S₁ = F₂ / S₂</code></p>
+            <p style="margin-top: 8px;">Отсюда формула выигрыша в силе:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>F₂ / F₁ = S₂ / S₁</strong></p>
+            <p style="margin-top: 8px;">💡 <em>Суть проста:</em> Во сколько раз площадь большого поршня ($S_2$) больше площади малого ($S_1$), во столько же раз мы получаем **выигрыш в силе** ($F_2$ больше $F_1$). Прикладывая небольшую силу к малому поршню, мы создаем гигантское усилие на большом!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Гидравлический пресс</h3>
+            <p>Меняй площадь большого поршня и силу нажатия на малый, чтобы увидеть, какой колоссальный выигрыш в силе дает гидравлическая машина:</p>
+            
+            <canvas id="hydraulicPressCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила на малом поршне ($F_1$): <span id="hpForceVal">20</span> Н</label>
+                <input type="range" id="hpForceSlider" min="10" max="50" step="5" value="20" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Площадь большого поршня ($S_2$ в раз больше $S_1$): <span id="hpAreaVal">5</span> раз</label>
+                <input type="range" id="hpAreaSlider" min="2" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="hpStatus" style="color: #ffffff; font-size: 0.95rem;">Выигрыш в силе: F₂ = 20 Н · 5 = 100 Н (Большой поршень давит с силой 100 Н!)</span>
+            </div>
+        </div>
+    `,
+            "Атмосферное давление": `
+        <div class="content-block">
+            <h3>Что такое атмосферное давление?</h3>
+            <p>Земля окружена воздушной оболочкой — атмосферой. Хотя воздух кажется невесомым, он обладает массой: вся эта многокилометровая толща воздуха из-за силы тяжести притягивается к Земле и давит на ее поверхность и на все тела, находящиеся на ней.</p>
+            <p style="margin-top: 8px;"><strong>Атмосферное давление</strong> — это давление, с которым атмосфера Земли давит на земную поверхность и на все находящиеся на ней предметы.</p>
+            <p style="margin-top: 8px;">💡 <em>Почему мы его не чувствуем?</em> Человеческий организм и животные приспособлены к атмосферному давлению, так как внутреннее давление жидкостей в нашем теле полностью уравновешивает внешнее воздушное давление.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как было измерено атмосферное давление?</h3>
+            <p>В 1643 году итальянский ученый Эванджелиста Торричелли впервые измерил атмосферное давление с помощью опыта с трубкой, заполненной ртутью. Он выяснил, что нормальное атмосферное давление на уровне моря уравновешивает столб ртути высотой **760 мм** (или примерно **101 325 Па**).</p>
+            <p style="margin-top: 8px;">• <strong>Зависимость от высоты:</strong> Чем выше мы поднимаемся над уровнем моря (в горы или на самолете), тем меньше слой воздуха над нами, а значит — тем **ниже** атмосферное давление.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Атмосферное давление и высота</h3>
+            <p>Поднимай альпиниста в гору (увеличивай высоту) и наблюдай, как разрежается воздух и падает атмосферное давление:</p>
+            
+            <canvas id="atmosphericPressureCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Высота над уровнем моря ($H$): <span id="apHeightVal">0</span> км</label>
+                <input type="range" id="apHeightSlider" min="0" max="5" step="0.5" value="0" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="apStatus" style="color: #ffffff; font-size: 0.95rem;">Высота: 0 км | Давление: 760 мм рт. ст. (Нормальное атмосферное давление на уровне моря)</span>
+            </div>
+        </div>
+    `,
+            "Опыт Торричелли": `
+        <div class="content-block">
+            <h3>Что такое опыт Торричелли?</h3>
+            <p>В 1643 году итальянский физик Эванджелиста Торричелли (ученик Галилея) впервые доказал существование атмосферного давления и измерил его величину с помощью изобретенного им первого барометра.</p>
+            <p style="margin-top: 8px;"><strong>Суть опыта:</strong> Торричелли взял длинную стеклянную трубку (около 1 метра), запаянную с одного конца, доверху заполнил ее ртутью. Затем, плотно закрыв отверстие пальцем, перевернул ее и опустил в сосуд с ртутью.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Результат и объяснение опыта</h3>
+            <p>Часть ртути вылилась обратно в сосуд, но в трубке остался столб ртути высотой примерно **760 мм**. Над этим столбом в трубке образовалось пространство без воздуха (так называемая <em>торричеллиева пустота</em>).</p>
+            <p style="margin-top: 8px;">• <strong>Почему ртуть не вылилась полностью?</strong> На открытую поверхность ртути в сосуде давит атмосфера. Это внешнее атмосферное давление уравновешивает вес столба ртути в трубке: <br>
+            <code style="color: #7dd3fc;">p<sub>атм</sub> = p<sub>гидр</sub> = ρ · g · h</code></p>
+            <p style="margin-top: 8px;">Так появилась единица измерения давления — **мм рт. ст.** (миллиметр ртутного столба).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Трубка Торричелли</h3>
+            <p>Изменяй внешнее атмосферное давление и наблюдай, как поднимается или опускается уровень ртути в трубке Торричелли:</p>
+            
+            <canvas id="torricelliCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Атмосферное давление ($p_{атм}$): <span id="tcPressureVal">760</span> мм рт. ст.</label>
+                <input type="range" id="tcPressureSlider" min="600" max="850" step="10" value="760" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="tcStatus" style="color: #ffffff; font-size: 0.95rem;">Нормальное атмосферное давление: высота ртутного столба равна 760 мм.</span>
+            </div>
+        </div>
+    `,
+            "Барометр-анероид": `
+        <div class="content-block">
+            <h3>Что такое барометр-анероид?</h3>
+            <p>Жидкостные барометры (как в опыте Торричелли) точны, но неудобны в путешествиях из-за использования тяжелой и токсичной ртути. Поэтому был изобретен компактный безжидкостный прибор для измерения атмосферного давления — <strong>барометр-анероид</strong> (от греч. <em>aнероид</em> — «бесжидкостный»).</p>
+            <p style="margin-top: 8px;">Главная деталь прибора — плоская металлическая коробочка с гофрированными (рифлеными) стенками, из которой полностью откачан воздух.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Как работает барометр-анероид?</h3>
+            <p>• При <strong>повышении атмосферного давления</strong> воздух сильнее сжимает коробочку, ее крышка опускается.<br>
+            • При <strong>понижении давления</strong> пружина распрямляет коробочку, и ее крышка приподнимается.</p>
+            <p style="margin-top: 8px;">Система рычажков соединяет эту коробочку со стрелкой, которая движется по шкале, пронумерованной в миллиметрах ртутного столба (мм рт. ст.) или гектопаскалях (гПа). Барометры незаменимы в метеорологии и при прогнозировании погоды (падение давления часто предвещает дождь или бурю).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Барометр-анероид в действии</h3>
+            <p>Меняй внешнее атмосферное давление и наблюдай, как деформируется металлическая коробочка и смещается стрелка прибора:</p>
+            
+            <canvas id="aneroidBarometerCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Атмосферное давление ($p$): <span id="abPressureVal">760</span> мм рт. ст.</label>
+                <input type="range" id="abPressureSlider" min="700" max="820" step="5" value="760" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="abStatus" style="color: #ffffff; font-size: 0.95rem;">Нормальное давление (760 мм рт. ст.): коробочка находится в исходном положении, стрелка указывает на норму.</span>
+            </div>
+        </div>
+    `,
+            "Закон Архимеда": `
+        <div class="content-block">
+            <h3>Почему тела не тонут? (Архимедова сила)</h3>
+            <p>Если погрузить любое тело в воду или газ, мы заметим, что оно как будто теряет в весе — его намного легче удерживать под водой, чем в воздухе. Это происходит потому, что со стороны жидкости на погруженное тело всегда действует выталкивающая сила.</p>
+            <p style="margin-top: 8px;"><strong>Архимедова сила</strong> — это сила, с которой жидкость (или газ) выталкивает погруженное в нее тело наружу. Она всегда направлена вертикально вверх!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формулировка и формула Закона Архимеда</h3>
+            <p>Великий древнегреческий ученый Архимед экспериментально установил закон:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>На всякое тело, погруженное в жидкость (или газ), действует выталкивающая сила, равная весу жидкости в объеме погруженной части тела.</strong></p>
+            <p style="margin-top: 8px;">Расчетная формула Архимедовой силы:</p>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>F<sub>арх</sub> = $\rho_{ж} \cdot g \cdot V_{тел}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$\rho_{ж}$** — плотность жидкости (кг/м³).<br>
+            • **$g$** — ускорение свободного падения ($\approx 10$ Н/кг).<br>
+            • **$V_{тел}$** — объем погруженной части тела (м³).</p>
+            <p style="margin-top: 8px;">💡 <em>Важно:</em> Архимедова сила **не зависит** от массы тела, глубины погружения или формы — она зависит только от объема погруженной части тела и плотности жидкости!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Закон Архимеда</h3>
+            <p>Меняй объем тела или плотность окружающей жидкости и наблюдай, как меняется выталкивающая сила Архимеда:</p>
+            
+            <canvas id="archimedesCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Объем погруженного тела ($V$): <span id="arcVolumeVal">0.05</span> м³</label>
+                <input type="range" id="arcVolumeSlider" min="0.01" max="0.1" step="0.01" value="0.05" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Плотность жидкости ($\rho$): <span id="arcDensityVal">1000</span> кг/м³ (Вода)</label>
+                <input type="range" id="arcDensitySlider" min="800" max="1600" step="100" value="1000" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="arcStatus" style="color: #ffffff; font-size: 0.95rem;">Архимедова сила: F_арх = 1000 кг/м³ · 10 Н/кг · 0.05 м³ = 500 Н</span>
+            </div>
+        </div>
+    `,
+            "Выталкивающая сила": `
+        <div class="content-block">
+            <h3>Что такое выталкивающая сила?</h3>
+            <p>Вы наверняка замечали, что в воде тяжелые предметы (например, большой камень или даже собственный друг) кажутся намного легче, а мяч, погруженный под воду, с силой выпрыгивает обратно на поверхность. Это происходит из-за действия специальной силы.</p>
+            <p style="margin-top: 8px;"><strong>Выталкивающая сила</strong> (или сила Архимеда) — это сила, с которой жидкость или газ выталкивает погруженное в них тело. Она всегда направлена вертикально **вверх** — противоположно силе тяжести.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>От чего зависит выталкивающая сила?</h3>
+            <p>Природа этой силы кроется в разности давлений: нижняя часть погруженного тела находится на большей глубине, чем верхняя, поэтому давление снизу оказывается больше, чем сверху. Из-за этого разности давлений и возникает подъемная сила.</p>
+            <p style="margin-top: 8px;">Величина выталкивающей силы рассчитывается по закону Архимеда:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>$F_{выт} = \rho_{ж} \cdot g \cdot V_{тел}$</strong></p>
+            <p style="margin-top: 8px;">• **$\rho_{ж}$** — плотность жидкости.<br>
+            • **$g$** — ускорение свободного падения ($\approx 10$ Н/кг).<br>
+            • **$V_{тел}$** — объем погруженной части тела.</p>
+            <p style="margin-top: 8px;">💡 <em>Интересный факт:</em> Выталкивающая сила **не зависит** от массы тела или глубины его погружения — важен только объем части тела, которая находится под водой (или газом)!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Действие выталкивающей силы</h3>
+            <p>Меняй глубину погружения тела в воду и следи за тем, как меняется выталкивающая сила:</p>
+            
+            <canvas id="buoyantForceCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Погружение тела ($h$): <span id="bfDepthVal">50</span>%</label>
+                <input type="range" id="bfDepthSlider" min="0" max="100" step="10" value="50" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="bfStatus" style="color: #ffffff; font-size: 0.95rem;">Тело погружено наполовину. Выталкивающая сила действует пропорционально погруженному объему.</span>
+            </div>
+        </div>
+    `,
+            "Условия плавания тел": `
+        <div class="content-block">
+            <h3>От чего зависит поведение тел в жидкости?</h3>
+            <p>Когда тело попадает в жидкость или газ, на него всегда действуют две противоположно направленные силы:<br>
+            1. <strong>Сила тяжести ($F_{тяж} = m \cdot g$)</strong> — тянет тело вниз.<br>
+            2. <strong>Архимедова (выталкивающая) сила ($F_{арх} = \rho_{ж} \cdot g \cdot V_{тел}$)</strong> — выталкивает тело вверх.</p>
+            <p style="margin-top: 8px;">В зависимости от того, какая из этих сил больше, тело может тонуть, всплывать или плавать внутри жидкости.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Три главных условия плавания тел</h3>
+            <p>Сравнение плотности тела ($\rho_{тел}$) и плотности жидкости ($\rho_{ж}$) позволяет определить характер поведения объекта:</p>
+            <p style="margin-top: 8px;">• **Если $F_{тяж} > F_{арх}$ ($\rho_{тел} > \rho_{ж}$):** тело **тонет** на дно (например, железный гвоздь в воде).</p>
+            <p style="margin-top: 6px;">• **Если $F_{тяж} = F_{арх}$ ($\rho_{тел} = \rho_{ж}$):** тело **плавает внутри** жидкости на любой глубине (например, рыба или подводная лодка в равновесии).</p>
+            <p style="margin-top: 6px;">• **Если $F_{тяж} < F_{арх}$ ($\rho_{тел} < \rho_{ж}$):** тело **всплывает** на поверхность и плавает частично погруженным (например, дерево или айсберг в воде).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Условия плавания тел</h3>
+            <p>Меняй плотность тела и наблюдай, как соотношение сил меняет его положение в воде — от погружения на дно до плавания на поверхности:</p>
+            
+            <canvas id="floatingConditionsCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Плотность тела ($\rho_{тел}$): <span id="fcDensityVal">1000</span> кг/м³</label>
+                <input type="range" id="fcDensitySlider" min="400" max="1600" step="100" value="1000" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="fcStatus" style="color: #ffffff; font-size: 0.95rem;">Плотность тела равна плотности воды ($\rho = 1000$ кг/м³): тело плавает внутри жидкости в равновесии.</span>
+            </div>
+        </div>
+    `,
+            "Сравнение плотностей при плавании тел": `
+        <div class="content-block">
+            <h3>Как плотность влияет на плавание тел?</h3>
+            <p>Когда тело плавает на поверхности жидкости (частично погруженное), между ним и жидкостью устанавливается строгое соотношение. Оказывается, глубина погружения тела напрямую зависит от того, во сколько раз его плотность меньше плотности жидкости.</p>
+            <p style="margin-top: 8px;">Основной закон частичного погружения:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>Доля погруженной части = Отношение плотностей ($\frac{V_{подг}}{V_{тел}} = \frac{\rho_{тел}}{\rho_{ж}}$)</strong></p>
+        </div>
+
+        <div class="content-block">
+            <h3>Главные выводы для практики</h3>
+            <p>• <strong>Айсберги в океане:</strong> Плотность льда примерно $900$ кг/м³, а плотность морской воды — около $1030$ кг/м³. Из-за этого под водой скрыто примерно **90%** объема айсберга, а над водой видна лишь верхушка (~10%).</p>
+            <p style="margin-top: 6px;">• <strong>Судоходство:</strong> Корабли делают полыми (внутри них много воздуха), поэтому их средняя плотность значительно меньше плотности воды, что позволяет им удерживаться на плаву и перевозить тяжелые грузы.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Сравнение плотностей</h3>
+            <p>Меняй плотность плавающего тела и наблюдай, какая его часть уходит под воду и как меняется глубина погружения:</p>
+            
+            <canvas id="densityComparisonCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Плотность тела ($\rho_{тел}$): <span id="dcDensityVal">700</span> кг/м³ (при плотности воды 1000 кг/м³)</label>
+                <input type="range" id="dcDensitySlider" min="200" max="900" step="50" value="700" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="dcStatus" style="color: #ffffff; font-size: 0.95rem;">Тело погружено на 70% (так как $\rho_{тел} / \rho_{ж} = 700 / 1000 = 0.7$).</span>
+            </div>
+        </div>
+    `,
+            "Механическая работа": `
+        <div class="content-block">
+            <h3>Что такое механическая работа?</h3>
+            <p>В повседневной жизни словом «работа» мы называем любой труд — и физический, и умственный. Но в физике понятие <strong>механической работы</strong> строго ограничено: работа совершается только тогда, когда тело движется под действием приложенной к нему силы.</p>
+            <p style="margin-top: 8px;">Работа обозначается буквой **$A$** и рассчитывается как произведение силы, действующей на тело, на путь, который тело проходит по направлению этой силы.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула и единицы измерения</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$A = F \cdot s$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$A$** — механическая работа (в джоулях, **Дж**).<br>
+            • **$F$** — действующая сила (в ньютонах, **Н**).<br>
+            • **$s$** — путь, пройденный телом (в метрах, **м**).</p>
+            <p style="margin-top: 8px;">💡 <em>Когда работа равна нулю?</em> Если сила приложена, но тело стоит на месте ($s = 0$), или если тело движется по инерции без воздействия силы ($F = 0$), механическая работа **не совершается** ($A = 0$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Расчет механической работы</h3>
+            <p>Меняй силу, приложенную к тележке, и пройденный путь, чтобы увидеть, как совершается механическая работа:</p>
+            
+            <canvas id="mechanicalWorkCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила ($F$): <span id="mwForceVal">20</span> Н</label>
+                <input type="range" id="mwForceSlider" min="5" max="50" step="5" value="20" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Путь ($s$): <span id="mwPathVal">5</span> м</label>
+                <input type="range" id="mwPathSlider" min="1" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="mwStatus" style="color: #ffffff; font-size: 0.95rem;">Работа: A = 20 Н · 5 м = 100 Дж</span>
+            </div>
+        </div>
+    `,
+            "Условия выполнения работы": `
+        <div class="content-block">
+            <h3>Когда совершается механическая работа?</h3>
+            <p>В физике механическая работа ($A$) выполняется далеко не всегда, когда человек или механизм прикладывает усилия. Чтобы работа считалась выполненной, необходимо строгое соблюдение двух обязательных условий.</p>
+            <p style="margin-top: 8px;">Два главных условия выполнения работы:</p>
+            <p style="margin-top: 6px;">1. На тело должна действовать <strong>сила</strong> ($F > 0$).</p>
+            <p style="margin-top: 6px;">2. Тело должно двигаться и пройти определенный <strong>путь</strong> под действием этой силы ($s > 0$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Три случая: когда работа равна нулю ($A = 0$)</h3>
+            <p>• <strong>Сила есть, а пути нет ($s = 0$):</strong> Если вы изо всех сил толкаете тяжелую бетонную стену, вы устаете, но стена не сдвигается с места. Работа равна нулю, так как путь равен нулю ($A = F \cdot 0 = 0$).</p>
+            <p style="margin-top: 6px;">• <strong>Путь есть, а силы нет ($F = 0$):</strong> Если шайба скользит по гладкому льду по инерции (без воздействия силы трения или тяги), путь преодолевается, но работа силы тяги не совершается ($A = 0 \cdot s = 0$).</p>
+            <p style="margin-top: 6px;">• <strong>Сила перпендикулярна движению:</strong> Если груз несут равномерно на руках горизонтально, сила тяжести направлена вниз, а движение — вперед (угол 90 градусов). В этом случае сила не совершает работу по перемещению.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Условия выполнения работы</h3>
+            <p>Меняй наличие силы и движения, чтобы увидеть, в каких случаях физическая работа совершается, а в каких равна нулю:</p>
+            
+            <canvas id="workConditionsCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Приложенная сила ($F$): <span id="wcForceVal">20</span> Н</label>
+                <input type="range" id="wcForceSlider" min="0" max="40" step="20" value="20" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Пройденный путь ($s$): <span id="wcPathVal">5</span> м</label>
+                <input type="range" id="wcPathSlider" min="0" max="10" step="5" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="wcStatus" style="color: #ffffff; font-size: 0.95rem;">Работа совершается: есть и сила ($F = 20$ Н), и путь ($s = 5$ м). A = 100 Дж.</span>
+            </div>
+        </div>
+    `,
+            "Мощность: скорость выполнения работы": `
+        <div class="content-block">
+            <h3>Что такое мощность?</h3>
+            <p>Две разные машины могут выполнить абсолютно одинаковую механическую работу (например, поднять один и тот же груз на одну и ту же высоту). Однако одна сделает это за пару секунд, а другая — за целый час. Чтобы охарактеризовать быстроту выполнения работы, в физике используют понятие <strong>мощности</strong>.</p>
+            <p style="margin-top: 8px;"><strong>Мощность</strong> — это физическая величина, равная отношению выполненной работы к промежутку времени, за который она была совершена.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула и единицы измерения</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$N = \frac{A}{t}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$N$** — мощность (в ваттах, **Вт**).<br>
+            • **$A$** — механическая работа (в джоулях, **Дж**).<br>
+            • **$t$** — время выполнения работы (в секундах, **с**).</p>
+            <p style="margin-top: 8px;">💡 <em>Внесистемные единицы:</em> На практике часто используют киловатты ($\text{кВт} = 1000 \text{ Вт}$) и лошадиные силы ($\approx 735.5 \text{ Вт}$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Расчет мощности</h3>
+            <p>Меняй объем работы и время ее выполнения, чтобы увидеть, как меняется мощность механизма:</p>
+            
+            <canvas id="powerCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Работа ($A$): <span id="pwWorkVal">500</span> Дж</label>
+                <input type="range" id="pwWorkSlider" min="100" max="1000" step="100" value="500" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Время ($t$): <span id="pwTimeVal">5</span> с</label>
+                <input type="range" id="pwTimeSlider" min="1" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="pwStatus" style="color: #ffffff; font-size: 0.95rem;">Мощность: N = 500 Дж / 5 с = 100 Вт</span>
+            </div>
+        </div>
+    `,
+            "Момент силы": `
+        <div class="content-block">
+            <h3>Что такое момент силы?</h3>
+            <p>Когда мы открываем дверь, мы толкаем ее не у самых петель, а на максимальном расстоянии от них — так гораздо легче. Действие силы на вращающееся тело зависит не только от ее величины, но и от точки приложения.</p>
+            <p style="margin-top: 8px;"><strong>Момент силы (M)</strong> — это физическая величина, равная произведению модуля силы, действующей на тело, на ее плечо.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула и правило рычага</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>M = F \cdot d</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • M — момент силы (в ньютон-метрах, Н·м).<br>
+            • F — сила, приложенная к телу (в ньютонах, Н).<br>
+            • d — плечо силы — кратчайшее расстояние от оси вращения до линии действия силы (в метрах, м).</p>
+            <p style="margin-top: 8px;">💡 <em>Правило моментов для равновесия:</em> Тело, имеющее закрепленную ось вращения, находится в равновесии, если сумма моментов сил, вращающих его по часовой стрелке, равна сумме моментов сил, вращающих против часовой стрелки (M_1 = M_2).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Момент силы</h3>
+            <p>Меняй величину силы и длину плеча, чтобы увидеть, как меняется вращательный момент силы:</p>
+            
+            <canvas id="torqueCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Сила ($F$): <span id="tForceVal">20</span> Н</label>
+                <input type="range" id="tForceSlider" min="5" max="50" step="5" value="20" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Плечо силы ($d$): <span id="tArmVal">3</span> м</label>
+                <input type="range" id="tArmSlider" min="1" max="5" step="0.5" value="3" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="tStatus" style="color: #ffffff; font-size: 0.95rem;">Момент силы: M = 20 Н · 3 м = 60 Н·м</span>
+            </div>
+        </div>
+    `,
 
         };
         const params = new URLSearchParams(window.location.search);
@@ -623,6 +1845,202 @@
                     initDensityAnimation('densityCanvas', 'densityStartBtn', 'densityStatus');
                 }
             }
+            if (title === "Масса тела и ее измерение") {
+                if (typeof initMassMeasureShopAnimation === 'function') {
+                    initMassMeasureShopAnimation('massMeasureShopCanvas', 'massMeasureShopStartBtn', 'massMeasureShopStatus');
+                }
+            }
+            if (title === "Расчет объема по массе и плотности") {
+                if (typeof initCalcVolumeAnimation === 'function') {
+                    initCalcVolumeAnimation('calcVolumeCanvas', 'calcVolumeStartBtn', 'calcVolumeStatus');
+                }
+            }
+            if (title === "Сила: понятие и модуль") {
+                if (typeof initForceAnimation === 'function') {
+                    initForceAnimation('forceCanvas', 'forceStartBtn', 'forceStatus');
+                }
+            }
+            if (title === "Сила как векторная величина (точка приложения, направление)") {
+                if (typeof initVectorForceAnimation === 'function') {
+                    initVectorForceAnimation('vectorForceCanvas', 'vectorForceDownBtn', 'vectorForceUpBtn', 'vectorForceStatus');
+                }
+            }
+            if (title === "Сила тяжести") {
+                if (typeof initGravityAnimation === 'function') {
+                    initGravityAnimation('gravityCanvas', 'gravityStartBtn', 'gravityStatus');
+                }
+            }
+            if (title === "Прямо пропорциональная связь силы тяжести с массой") {
+                if (typeof initProportionalityAnimation === 'function') {
+                    initProportionalityAnimation('proportionalityCanvas', 'massSlider', 'massValue', 'propStatus');
+                }
+            }
+            if (title === "Гравитационная постоянная g") {
+                if (typeof initPlanetGravityAnimation === 'function') {
+                    initPlanetGravityAnimation('planetGravityCanvas', 'planetStatus');
+                }
+            }
+            if (title === "Вес тела") {
+                if (typeof initBodyWeightAnimation === 'function') {
+                    initBodyWeightAnimation('bodyWeightCanvas', 'bodyWeightStartBtn', 'bodyWeightStatus');
+                }
+            }
+            if (title === "Невесомость") {
+                if (typeof initWeightlessnessAnimation === 'function') {
+                    initWeightlessnessAnimation('weightlessnessCanvas', 'weightlessnessStartBtn', 'weightlessnessStatus');
+                }
+            }
+            if (title === "Разница между силой тяжести и весом") {
+                if (typeof initDiffAnimation === 'function') {
+                    initDiffAnimation('diffCanvas', 'diffStartBtn', 'diffResetBtn', 'diffStatus');
+                }
+            }
+            if (title === "Сила упругости") {
+                if (typeof initElasticAnimation === 'function') {
+                    initElasticAnimation('elasticCanvas', 'elasticSlider', 'elasticDist', 'elasticStatus');
+                }
+            }
+            if (title === "Деформация (растяжение, сжатие)") {
+                if (typeof initDeformationAnimation === 'function') {
+                    initDeformationAnimation('deformationCanvas', 'defSlider', 'defValue', 'defStatus');
+                }
+            }
+            if (title === "Закон Гука") {
+                if (typeof initHookeAnimation === 'function') {
+                    initHookeAnimation('hookeCanvas', 'hookeKSlider', 'hookeXSlider', 'hookeKValue', 'hookeXValue', 'hookeStatus');
+                }
+            }
+            if (title === "Сила трения покоя") {
+                if (typeof initFrictionAnimation === 'function') {
+                    initFrictionAnimation('frictionCanvas', 'pullSlider', 'pullValue', 'frictionStatus');
+                }
+            }
+            if (title === "Сила трения скольжения") {
+                if (typeof initSlidingAnimation === 'function') {
+                    initSlidingAnimation('slidingCanvas', 'muSlider', 'muValue', 'slidingStatus');
+                }
+            }
+            if (title === "Сила трения качения") {
+                if (typeof initRollingAnimation === 'function') {
+                    initRollingAnimation('rollingCanvas', 'rollMassSlider', 'rollMassVal', 'rollingStatus');
+                }
+            }
+            if (title === "Зависимость силы трения от нормального давления") {
+                if (typeof initPressureAnimation === 'function') {
+                    initPressureAnimation('pressureCanvas', 'pressMassSlider', 'pressMassVal', 'pressNVal', 'pressureStatus');
+                }
+            }
+            if (title === "Зависимость силы трения от качества поверхностей") {
+                if (typeof initQualityAnimation === 'function') {
+                    initQualityAnimation('qualityCanvas', 'qualitySlider', 'qualityMuVal', 'qualityMaterialName', 'qualityStatus');
+                }
+            }
+            if (title === "Сложение сил") {
+                if (typeof initForcesAdditionAnimation === 'function') {
+                    initForcesAdditionAnimation('forcesAdditionCanvas', 'f1Slider', 'f2Slider', 'f1Val', 'f2Val', 'forcesStatus');
+                }
+            }
+            if (title === "Равнодействующая сил, направленных по одной прямой") {
+                if (typeof initStraightLineForcesAnimation === 'function') {
+                    initStraightLineForcesAnimation('straightLineCanvas', 'slF1Slider', 'slF2Slider', 'slF1Val', 'slF2Val', 'slOppositeCheck', 'slStatus');
+                }
+            }
+            if (title === "Давление твердых тел") {
+                if (typeof initSolidPressureAnimation === 'function') {
+                    initSolidPressureAnimation('pressureSolidCanvas', 'psMassSlider', 'psAreaSlider', 'psMassVal', 'psAreaVal', 'psStatus');
+                }
+            }
+            if (title === "Способы увеличения давления") {
+                if (typeof initIncreasePressureAnimation === 'function') {
+                    initIncreasePressureAnimation('increasePressureCanvas', 'ipForceSlider', 'ipAreaSlider', 'ipForceVal', 'ipAreaVal', 'ipStatus');
+                }
+            }
+            if (title === "Способы уменьшения давления") {
+                if (typeof initDecreasePressureAnimation === 'function') {
+                    initDecreasePressureAnimation('decreasePressureCanvas', 'dpForceSlider', 'dpAreaSlider', 'dpForceVal', 'dpAreaVal', 'dpStatus');
+                }
+            }
+            if (title === "Давление в жидкостях и газах") {
+                if (typeof initFluidPressureAnimation === 'function') {
+                    initFluidPressureAnimation('fluidPressureCanvas', 'fpTempSlider', 'fpTempVal', 'fpStatus');
+                }
+            }
+            if (title === "Закон Паскаля (передача давления во все стороны)") {
+                if (typeof initPascalLawAnimation === 'function') {
+                    initPascalLawAnimation('pascalLawCanvas', 'plForceSlider', 'plForceVal', 'plStatus');
+                }
+            }
+            if (title === "Гидростатическое давление") {
+                if (typeof initHydrostaticAnimation === 'function') {
+                    initHydrostaticAnimation('hydrostaticCanvas', 'hsDepthSlider', 'hsDensitySlider', 'hsDepthVal', 'hsDensityVal', 'hsStatus');
+                }
+            }
+            if (title === "Сообщающиеся сосуды") {
+                if (typeof initCommunicatingVesselsAnimation === 'function') {
+                    initCommunicatingVesselsAnimation('communicatingVesselsCanvas', 'cvLevelSlider', 'cvLevelVal', 'cvStatus');
+                }
+            }
+            if (title === "Гидравлический пресс") {
+                if (typeof initHydraulicPressAnimation === 'function') {
+                    initHydraulicPressAnimation('hydraulicPressCanvas', 'hpForceSlider', 'hpAreaSlider', 'hpForceVal', 'hpAreaVal', 'hpStatus');
+                }
+            }
+            if (title === "Атмосферное давление") {
+                if (typeof initAtmosphericPressureAnimation === 'function') {
+                    initAtmosphericPressureAnimation('atmosphericPressureCanvas', 'apHeightSlider', 'apHeightVal', 'apStatus');
+                }
+            }
+            if (title === "Опыт Торричелли") {
+                if (typeof initTorricelliAnimation === 'function') {
+                    initTorricelliAnimation('torricelliCanvas', 'tcPressureSlider', 'tcPressureVal', 'tcStatus');
+                }
+            }
+            if (title === "Барометр-анероид") {
+                if (typeof initAneroidBarometerAnimation === 'function') {
+                    initAneroidBarometerAnimation('aneroidBarometerCanvas', 'abPressureSlider', 'abPressureVal', 'abStatus');
+                }
+            }
+            if (title === "Закон Архимеда") {
+                if (typeof initArchimedesAnimation === 'function') {
+                    initArchimedesAnimation('archimedesCanvas', 'arcVolumeSlider', 'arcDensitySlider', 'arcVolumeVal', 'arcDensityVal', 'arcStatus');
+                }
+            }
+            if (title === "Выталкивающая сила") {
+                if (typeof initBuoyantForceAnimation === 'function') {
+                    initBuoyantForceAnimation('buoyantForceCanvas', 'bfDepthSlider', 'bfDepthVal', 'bfStatus');
+                }
+            }
+            if (title === "Условия плавания тел") {
+                if (typeof initFloatingConditionsAnimation === 'function') {
+                    initFloatingConditionsAnimation('floatingConditionsCanvas', 'fcDensitySlider', 'fcDensityVal', 'fcStatus');
+                }
+            }
+            if (title === "Сравнение плотностей при плавании тел") {
+                if (typeof initDensityComparisonAnimation === 'function') {
+                    initDensityComparisonAnimation('densityComparisonCanvas', 'dcDensitySlider', 'dcDensityVal', 'dcStatus');
+                }
+            }
+            if (title === "Механическая работа") {
+                if (typeof initMechanicalWorkAnimation === 'function') {
+                    initMechanicalWorkAnimation('mechanicalWorkCanvas', 'mwForceSlider', 'mwPathSlider', 'mwForceVal', 'mwPathVal', 'mwStatus');
+                }
+            }
+            if (title === "Условия выполнения работы") {
+                if (typeof initWorkConditionsAnimation === 'function') {
+                    initWorkConditionsAnimation('workConditionsCanvas', 'wcForceSlider', 'wcPathSlider', 'wcForceVal', 'wcPathVal', 'wcStatus');
+                }
+            }
+            if (title === "Мощность: скорость выполнения работы") {
+                if (typeof initPowerAnimation === 'function') {
+                    initPowerAnimation('powerCanvas', 'pwWorkSlider', 'pwTimeSlider', 'pwWorkVal', 'pwTimeVal', 'pwStatus');
+                }
+            }
+            if (title === "Момент силы") {
+                if (typeof initTorqueAnimation === 'function') {
+                    initTorqueAnimation('torqueCanvas', 'tForceSlider', 'tArmSlider', 'tForceVal', 'tArmVal', 'tStatus');
+                }
+            }
+
         } else {
             topicContent.innerHTML = `
                 <div class="content-block">
