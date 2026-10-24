@@ -5218,7 +5218,7 @@ function initPowerAnimation(canvasId, workSliderId, timeSliderId, workValId, tim
     // Начальная отрисовка
     draw(parseInt(workSlider.value), parseInt(timeSlider.value));
 }
-function initTorqueAnimation(canvasId, forceSliderId, armSliderId, forceValId, armValId, statusTextId) {
+window.initTorqueAnimation = function (canvasId, forceSliderId, armSliderId, forceValId, armValId, statusTextId) {
     const canvas = document.getElementById(canvasId);
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -5329,4 +5329,1221 @@ function initTorqueAnimation(canvasId, forceSliderId, armSliderId, forceValId, a
 
     // Начальная отрисовка
     draw(parseInt(forceSlider.value), parseFloat(armSlider.value));
+};
+window.initLeverArmAnimation = function (canvasId, sliderId, valId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const slider = document.getElementById(sliderId);
+    const valSpan = document.getElementById(valId);
+    const statusText = document.getElementById(statusTextId);
+
+    const pivotX = 120; // ось вращения
+    const beamY = 130;
+    const fixedForce = 20; // постоянная сила для наглядности (Н)
+
+    function draw(arm) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const torque = fixedForce * arm;
+        const scale = 60; // масштаб пикселей на метр
+        const currentArmPx = arm * scale;
+
+        // 1. Опора (треугольник)
+        ctx.fillStyle = "#00f2fe";
+        ctx.beginPath();
+        ctx.moveTo(pivotX, beamY);
+        ctx.lineTo(pivotX - 15, beamY + 30);
+        ctx.lineTo(pivotX + 15, beamY + 30);
+        ctx.closePath();
+        ctx.fill();
+
+        // 2. Рычаг (стержень)
+        ctx.strokeStyle = "#ff79c6";
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.moveTo(pivotX - 40, beamY);
+        ctx.lineTo(pivotX + 330, beamY);
+        ctx.stroke();
+
+        // Ось вращения (точка)
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(pivotX, beamY, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 3. Точка приложения силы
+        const forceX = pivotX + currentArmPx;
+
+        // Стрелка силы (вниз)
+        const arrowHeight = 60;
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(forceX, beamY);
+        ctx.lineTo(forceX, beamY + arrowHeight);
+        ctx.lineTo(forceX - 4, beamY + arrowHeight - 8);
+        ctx.moveTo(forceX, beamY + arrowHeight);
+        ctx.lineTo(forceX + 4, beamY + arrowHeight - 8);
+        ctx.stroke();
+
+        // Подпись силы
+        ctx.fillStyle = "#facc15";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText(`F = ${fixedForce} Н`, forceX + 10, beamY + arrowHeight / 2);
+
+        // 4. Обозначение плеча (отрезок от оси до линии силы с размером)
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.setLineDash([3, 3]);
+        ctx.beginPath();
+        ctx.moveTo(pivotX, beamY - 25);
+        ctx.lineTo(forceX, beamY - 25);
+        // Засечки для плеча
+        ctx.moveTo(pivotX, beamY - 30);
+        ctx.lineTo(pivotX, beamY - 20);
+        ctx.moveTo(forceX, beamY - 30);
+        ctx.lineTo(forceX, beamY - 20);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Текст плеча
+        ctx.fillStyle = "#00f2fe";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText(`Плечо d = ${arm} м`, pivotX + currentArmPx / 2 - 35, beamY - 35);
+    }
+
+    function update() {
+        const arm = parseFloat(slider.value);
+        const torque = fixedForce * arm;
+
+        if (valSpan) valSpan.textContent = arm;
+
+        if (statusText) {
+            statusText.textContent = `При плече d = ${arm} м и силе F = ${fixedForce} Н вращательный момент составляет M = ${torque} Н·м.`;
+        }
+
+        draw(arm);
+    }
+
+    if (slider) {
+        slider.addEventListener('input', update);
+    }
+
+    // Начальная отрисовка
+    draw(parseFloat(slider.value));
+};
+window.initLeverEquilibriumAnimation = function (canvasId, forceSliderId, armSliderId, forceValId, armValId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const forceSlider = document.getElementById(forceSliderId);
+    const armSlider = document.getElementById(armSliderId);
+    const forceValSpan = document.getElementById(forceValId);
+    const armValSpan = document.getElementById(armValId);
+    const statusText = document.getElementById(statusTextId);
+
+    const pivotX = canvas.width / 2;
+    const pivotY = 130;
+    
+    // Фиксированные параметры левой стороны
+    const F1 = 20; // Н
+    const d1 = 3;  // м
+    const M1 = F1 * d1; // 60 Н·м
+    const scale = 50; // пикселей на метр
+
+    function draw(F2, d2) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const M2 = F2 * d2;
+        
+        // Расчет угла наклона рычага в зависимости от разницы моментов (для наглядности качания)
+        const diff = M2 - M1;
+        const angle = Math.max(-0.25, Math.min(0.25, diff * 0.003));
+
+        // 1. Опора (треугольник)
+        ctx.fillStyle = "#00f2fe";
+        ctx.beginPath();
+        ctx.moveTo(pivotX, pivotY);
+        ctx.lineTo(pivotX - 15, pivotY + 35);
+        ctx.lineTo(pivotX + 15, pivotY + 35);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.save();
+        ctx.translate(pivotX, pivotY);
+        ctx.rotate(angle);
+
+        // 2. Стержень рычага
+        ctx.strokeStyle = "#ff79c6";
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.moveTo(-200, 0);
+        ctx.lineTo(200, 0);
+        ctx.stroke();
+
+        // Ось вращения (точка в центре)
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(0, 0, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 3. Левый груз (фиксированный)
+        const leftX = -d1 * scale;
+        ctx.fillStyle = "#facc15";
+        ctx.fillRect(leftX - 15, 0, 30, 30);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(leftX - 15, 0, 30, 30);
+        
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`F₁=${F1}Н`, leftX - 18, -10);
+
+        // 4. Правый груз (регулируемый)
+        const rightX = d2 * scale;
+        ctx.fillStyle = "#facc15";
+        ctx.fillRect(rightX - 15, 0, 30, 30);
+        ctx.strokeRect(rightX - 15, 0, 30, 30);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(`F₂=${F2}Н`, rightX - 18, -10);
+
+        ctx.restore();
+
+        // Индикатор равновесия поверх
+        ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText(`Левое плечо d₁ = ${d1} м`, 30, 30);
+        ctx.fillText(`Правое плечо d₂ = ${d2} м`, canvas.width - 170, 30);
+    }
+
+    function update() {
+        const F2 = parseInt(forceSlider.value);
+        const d2 = parseFloat(armSlider.value);
+        const M2 = F2 * d2;
+
+        if (forceValSpan) forceValSpan.textContent = F2;
+        if (armValSpan) armValSpan.textContent = d2;
+
+        if (statusText) {
+            if (M1 === M2) {
+                statusText.textContent = `Левый момент: ${F1}·${d1} = ${M1} Н·м | Правый момент: ${F2}·${d2} = ${M2} Н·м. Рычаг в идеальном равновесии! 🎉`;
+            } else if (M1 > M2) {
+                statusText.textContent = `Левый момент (${M1} Н·м) больше правого (${M2} Н·м). Рычаг перевешивает влево!`;
+            } else {
+                statusText.textContent = `Правый момент (${M2} Н·м) больше левого (${M1} Н·м). Рычаг перевешивает вправо!`;
+            }
+        }
+
+        draw(F2, d2);
+    }
+
+    if (forceSlider) forceSlider.addEventListener('input', update);
+    if (armSlider) armSlider.addEventListener('input', update);
+
+    // Начальная отрисовка
+    draw(parseInt(forceSlider.value), parseFloat(armSlider.value));
+};
+window.initFixedPulleyAnimation = function (canvasId, sliderId, valId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const slider = document.getElementById(sliderId);
+    const valSpan = document.getElementById(valId);
+    const statusText = document.getElementById(statusTextId);
+
+    const pulleyX = canvas.width / 2;
+    const pulleyY = 70;
+    const pulleyRadius = 25;
+
+    function draw(mass) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const weight = mass * 10; // Н (при g = 10 м/с²)
+
+        // 1. Потолок / балка
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(pulleyX - 60, 30);
+        ctx.lineTo(pulleyX + 60, 30);
+        ctx.stroke();
+
+        // Крепление блока к балке
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(pulleyX, 30);
+        ctx.lineTo(pulleyX, pulleyY - pulleyRadius);
+        ctx.stroke();
+
+        // 2. Колесо блока
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.beginPath();
+        ctx.arc(pulleyX, pulleyY, pulleyRadius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#ff79c6";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Ось блока (точка)
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(pulleyX, pulleyY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 3. Веревка
+        const leftX = pulleyX - pulleyRadius;
+        const rightX = pulleyX + pulleyRadius;
+        const loadY = 160;
+
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        // От груза вверх к левому краю шкива
+        ctx.moveTo(leftX, loadY);
+        ctx.lineTo(leftX, pulleyY);
+        // Огибает шкив
+        ctx.arc(pulleyX, pulleyY, pulleyRadius, Math.PI, 0, false);
+        // От правого края шкива вниз (рука тянет)
+        ctx.lineTo(rightX, pulleyY + 70);
+        ctx.stroke();
+
+        // 4. Груз слева
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(leftX - 18, loadY, 36, 30);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(leftX - 18, loadY, 36, 30);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`${mass} кг`, leftX - 12, loadY + 18);
+
+        // Стрелка веса груза (вниз)
+        ctx.strokeStyle = "#ff4757";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(leftX, loadY + 30);
+        ctx.lineTo(leftX, loadY + 55);
+        ctx.lineTo(leftX - 4, loadY + 48);
+        ctx.moveTo(leftX, loadY + 55);
+        ctx.lineTo(leftX + 4, loadY + 48);
+        ctx.stroke();
+
+        // 5. Сила тяги справа (вниз)
+        const handY = pulleyY + 70;
+        ctx.strokeStyle = "#2ed573";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(rightX, pulleyY);
+        ctx.lineTo(rightX, handY);
+        ctx.lineTo(rightX - 4, handY - 8);
+        ctx.moveTo(rightX, handY);
+        ctx.lineTo(rightX + 4, handY - 8);
+        ctx.stroke();
+
+        // Подпись силы тяги
+        ctx.fillStyle = "#2ed573";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`Сила F = ${weight} Н (вниз)`, rightX + 10, pulleyY + 40);
+    }
+
+    function update() {
+        const mass = parseInt(slider.value);
+        const weight = mass * 10;
+
+        if (valSpan) valSpan.textContent = mass;
+
+        if (statusText) {
+            statusText.textContent = `Масса груза ${mass} кг (вес ${weight} Н). Неподвижный блок не дает выигрыша в силе ($F = ${weight}$ Н), но меняет направление: мы тянем веревку вниз.`;
+        }
+
+        draw(mass);
+    }
+
+    if (slider) {
+        slider.addEventListener('input', update);
+    }
+
+    draw(parseInt(slider.value));
+};
+window.initMovablePulleyAnimation = function (canvasId, sliderId, valId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const slider = document.getElementById(sliderId);
+    const valSpan = document.getElementById(valId);
+    const statusText = document.getElementById(statusTextId);
+
+    const ceilingY = 30;
+    const pulleyRadius = 22;
+
+    function draw(mass) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const weight = mass * 10; // Вес груза в Н (при g = 10 м/с²)
+        const requiredForce = weight / 2; // Сила человека в Н
+
+        // 1. Потолок / балка
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(150, ceilingY);
+        ctx.lineTo(450, ceilingY);
+        ctx.stroke();
+
+        // 2. Веревка закреплена одним концом к потолку слева (например, на X = 200)
+        const fixedAnchorX = 200;
+        const pulleyX = 320; // Центр подвижного блока смещен вправо
+        const pulleyY = 120; // Подвижный блок висит ниже
+
+        // 3. Рисуем веревку:
+        // От левой точки потолка вниз к левой стороне блока, огибает блок, уходит вверх направо к руке
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        // Левая ветвь (от потолка к блоку)
+        ctx.moveTo(fixedAnchorX, ceilingY);
+        ctx.lineTo(fixedAnchorX, pulleyY);
+        // Огибает подвижный шкив
+        ctx.arc(pulleyX, pulleyY, pulleyRadius, Math.PI, 0, false);
+        // Правая ветвь (от блока вверх к руке / силе)
+        ctx.lineTo(pulleyX + pulleyRadius, ceilingY);
+        ctx.stroke();
+
+        // Точка крепления веревки к потолку
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(fixedAnchorX, ceilingY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 4. Шкив подвижного блока
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.beginPath();
+        ctx.arc(pulleyX, pulleyY, pulleyRadius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#ff79c6";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Ось подвижного блока (точка)
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(pulleyX, pulleyY, 4, 0, Math.PI * 2);
+        ctx.fill();
+
+        // 5. Груз под блоком
+        const loadX = pulleyX - 18;
+        const loadY = pulleyY + pulleyRadius + 10;
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(loadX, loadY, 36, 35);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(loadX, loadY, 36, 35);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`${mass} кг`, loadX + 6, loadY + 22);
+
+        // Стрелка веса груза (вниз)
+        ctx.strokeStyle = "#ff4757";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(pulleyX, loadY + 35);
+        ctx.lineTo(pulleyX, loadY + 70);
+        ctx.lineTo(pulleyX - 4, loadY + 62);
+        ctx.moveTo(pulleyX, loadY + 35);
+        ctx.lineTo(pulleyX + 4, loadY + 62);
+        ctx.stroke();
+
+        ctx.fillStyle = "#ff4757";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`Вес P = ${weight} Н`, pulleyX + 8, loadY + 55);
+
+        // 6. Сила тяги человека (вверх/вдоль правой ветви)
+        const handX = pulleyX + pulleyRadius;
+        ctx.strokeStyle = "#2ed573";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(handX, ceilingY + 50);
+        ctx.lineTo(handX, ceilingY + 15);
+        ctx.lineTo(handX - 4, ceilingY + 22);
+        ctx.moveTo(handX, ceilingY + 50);
+        ctx.lineTo(handX + 4, ceilingY + 22);
+        ctx.stroke();
+
+        ctx.fillStyle = "#2ed573";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`F = ${requiredForce} Н`, handX + 10, ceilingY + 35);
+    }
+
+    function update() {
+        const mass = parseInt(slider.value);
+        const weight = mass * 10;
+        const requiredForce = weight / 2;
+
+        if (valSpan) valSpan.textContent = mass;
+
+        if (statusText) {
+            statusText.textContent = `Груз массой ${mass} кг имеет вес ${weight} Н. Благодаря подвижному блоку прикладываемая сила равна всего F = ${requiredForce} Н (выигрыш в силе в 2 раза).`;
+        }
+
+        draw(mass);
+    }
+
+    if (slider) {
+        slider.addEventListener('input', update);
+    }
+
+    draw(parseInt(slider.value));
+};
+window.initInclinedPlaneAnimation = function (canvasId, massSliderId, lengthSliderId, massValId, lengthValId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const massSlider = document.getElementById(massSliderId);
+    const lengthSlider = document.getElementById(lengthSliderId);
+    const massValSpan = document.getElementById(massValId);
+    const lengthValSpan = document.getElementById(lengthValId);
+    const statusText = document.getElementById(statusTextId);
+
+    const fixedHeight = 120; // фиксированная высота подъема в пикселях (соответствует 2 метрам)
+    const startX = 80;
+    const groundY = 190;
+
+    function draw(mass, lengthMeters) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const weight = mass * 10; // Вес в Н
+        const realHeightM = 2; // Высота h = 2 м
+        const force = weight * (realHeightM / lengthMeters); // Требуемая сила
+
+        // Масштабирование длины плоскости в пиксели
+        // 3 метра -> 220px, 8 метров -> 480px
+        const planePixelLength = 150 + lengthMeters * 45;
+
+        const topX = startX + planePixelLength;
+        const topY = groundY - fixedHeight;
+
+        // 1. Опорная земля и треугольник наклонной плоскости
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        // Земля горизонтальная
+        ctx.moveTo(40, groundY);
+        ctx.lineTo(canvas.width - 40, groundY);
+        ctx.stroke();
+
+        // Наклонная плоскость (гипотенуза)
+        ctx.strokeStyle = "#ff79c6";
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.moveTo(startX, groundY);
+        ctx.lineTo(topX, topY);
+        // Вертикальная стенка (высота h)
+        ctx.lineTo(topX, groundY);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fillStyle = "rgba(255, 121, 198, 0.05)";
+        ctx.fill();
+
+        // Подписи высоты и длины
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`h = ${realHeightM} м`, topX + 10, groundY - fixedHeight / 2);
+        ctx.fillText(`l = ${lengthMeters} м`, startX + planePixelLength / 2 - 20, groundY + 20);
+
+        // 2. Блок / тележка на плоскости (расположим примерно посередине)
+        const progress = 0.5;
+        const boxX = startX + (topX - startX) * progress;
+        const boxY = groundY - (groundY - topY) * progress;
+
+        ctx.save();
+        ctx.translate(boxX, boxY);
+        // Угол наклона плоскости
+        const angle = Math.atan2(topY - groundY, topX - startX);
+        ctx.rotate(angle);
+
+        // Сам груз
+        ctx.fillStyle = "#facc15";
+        ctx.fillRect(-18, -24, 36, 24);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(-18, -24, 36, 24);
+
+        ctx.fillStyle = "#1e1b4b";
+        ctx.font = "10px 'Outfit', sans-serif";
+        ctx.fillText(`${mass}кг`, -12, -9);
+
+        ctx.restore();
+
+        // 3. Вектор силы тяги (вдоль плоскости вверх)
+        ctx.strokeStyle = "#2ed573";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(boxX, boxY);
+        // Направление вектора силы вверх вдоль наклона
+        const dx = Math.cos(angle);
+        const dy = Math.sin(angle);
+        const arrowLen = 50;
+        ctx.lineTo(boxX - dx * arrowLen, boxY - dy * arrowLen);
+        ctx.stroke();
+
+        // Текст силы
+        ctx.fillStyle = "#2ed573";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`F = ${Math.round(force)} Н`, boxX - 30, boxY - 20);
+    }
+
+    function update() {
+        const mass = parseInt(massSlider.value);
+        const lengthM = parseInt(lengthSlider.value);
+        const weight = mass * 10;
+        const realHeightM = 2;
+        const force = (weight * realHeightM / lengthM).toFixed(1);
+        const advantage = (lengthM / realHeightM).toFixed(1);
+
+        if (massValSpan) massValSpan.textContent = mass;
+        if (lengthValSpan) lengthValSpan.textContent = lengthM;
+
+        if (statusText) {
+            statusText.textContent = `Для подъема груза весом ${weight} Н по плоскости длиной ${lengthM} м нужна сила F = ${force} Н. Выигрыш в силе составляет в ${advantage} раза.`;
+        }
+
+        draw(mass, lengthM);
+    }
+
+    if (massSlider) massSlider.addEventListener('input', update);
+    if (lengthSlider) lengthSlider.addEventListener('input', update);
+
+    draw(parseInt(massSlider.value), parseInt(lengthSlider.value));
+};
+window.initGoldenRuleAnimation = function (canvasId, sliderId, valId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const slider = document.getElementById(sliderId);
+    const valSpan = document.getElementById(valId);
+    const statusText = document.getElementById(statusTextId);
+
+    const fixedWork = 100; // Постоянная работа 100 Дж (например, Вес P = 100 Н, высота h = 1 м)
+    const baseForce = 100; // Н
+    const basePath = 1;    // м
+
+    function draw(advantage) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const currentForce = baseForce / advantage;
+        const currentPath = basePath * advantage;
+
+        // Линия горизонта / опоры
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, 160);
+        ctx.lineTo(canvas.width - 40, 160);
+        ctx.stroke();
+
+        // Визуализация двух шкалок: Сила и Путь
+        // 1. Шкала силы (чем больше выигрыш, тем меньше столбик силы)
+        const barStartX = 80;
+        const maxBarHeight = 100;
+        
+        // Сила
+        const forceBarHeight = (currentForce / 100) * maxBarHeight;
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(barStartX, 160 - forceBarHeight, 50, forceBarHeight);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(barStartX, 160 - forceBarHeight, 50, forceBarHeight);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`Сила F`, barStartX + 8, 175);
+        ctx.fillText(`${currentForce} Н`, barStartX + 5, 160 - forceBarHeight - 8);
+
+        // 2. Шкала пути (чем больше выигрыш, тем длиннее столбик пути)
+        const pathStartX = 240;
+        const pathBarHeight = currentPath * 30; // масштабируем метры в пиксели
+        
+        ctx.fillStyle = "#facc15";
+        ctx.fillRect(pathStartX, 160 - pathBarHeight, 50, pathBarHeight);
+        ctx.strokeRect(pathStartX, 160 - pathBarHeight, 50, pathBarHeight);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(`Путь s`, pathStartX + 10, 175);
+        ctx.fillText(`${currentPath} м`, pathStartX + 10, 160 - pathBarHeight - 8);
+
+        // 3. Информационный блок справа: Произведение (Работа)
+        ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.fillRect(380, 50, 180, 100);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.strokeRect(380, 50, 180, 100);
+
+        ctx.fillStyle = "#00f2fe";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText("Закон сохранения работы:", 395, 75);
+        
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`A = F · s`, 395, 100);
+        ctx.fillText(`A = ${currentForce} Н · ${currentPath} м`, 395, 120);
+        ctx.fillStyle = "#2ed573";
+        ctx.fillText(`A = ${fixedWork} Дж (константа)`, 395, 140);
+    }
+
+    function update() {
+        const advantage = parseInt(slider.value);
+        const currentForce = baseForce / advantage;
+        const currentPath = basePath * advantage;
+
+        if (valSpan) valSpan.textContent = advantage;
+
+        if (statusText) {
+            statusText.textContent = `Выигрыш в силе в ${advantage} раза: сила уменьшилась до ${currentForce} Н, но путь увеличился до ${currentPath} м. Работа осталась равной ${fixedWork} Дж!`;
+        }
+
+        draw(advantage);
+    }
+
+    if (slider) {
+        slider.addEventListener('input', update);
+    }
+
+    draw(parseInt(slider.value));
+};
+window.initEfficiencyAnimation = function (canvasId, usefulSliderId, totalSliderId, usefulValId, totalValId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const usefulSlider = document.getElementById(usefulSliderId);
+    const totalSlider = document.getElementById(totalSliderId);
+    const usefulValSpan = document.getElementById(usefulValId);
+    const totalValSpan = document.getElementById(totalValId);
+    const statusText = document.getElementById(statusTextId);
+
+    function draw(useful, total) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Защита: затраченная работа не может быть меньше полезной
+        if (total < useful) total = useful;
+
+        const efficiency = Math.round((useful / total) * 100);
+        const losses = total - useful;
+
+        const startX = 50;
+        const barMaxWidth = 320;
+        const maxScaleWork = 150; // максимальное значение шкалы в джоулях
+
+        // 1. Затраченная работа (общий объем энергии)
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`Затраченная работа (A_затр = ${total} Дж)`, startX, 45);
+
+        const totalWidth = (total / maxScaleWork) * barMaxWidth;
+        ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
+        ctx.fillRect(startX, 55, totalWidth, 22);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(startX, 55, barMaxWidth, 22); // контур максимума
+
+        // 2. Распределение затраченной работы (Полезная + Потери)
+        ctx.fillText(`Распределение энергии:`, startX, 105);
+
+        const usefulWidth = (useful / maxScaleWork) * barMaxWidth;
+        const lossWidth = (losses / maxScaleWork) * barMaxWidth;
+        const lossStartX = startX + usefulWidth;
+
+        // Полезная работа (зеленый)
+        ctx.fillStyle = "#2ed573";
+        ctx.fillRect(startX, 115, usefulWidth, 22);
+        ctx.strokeRect(startX, 115, barMaxWidth, 22); // контур
+
+        // Потери / трение (красный)
+        if (losses > 0) {
+            ctx.fillStyle = "#ff4757";
+            ctx.fillRect(lossStartX, 115, lossWidth, 22);
+        }
+
+        // Подписи частей внутри или возле шкалы
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`Полезная: ${useful} Дж`, startX, 158);
+        ctx.fillText(`Потери: ${losses} Дж`, startX + 160, 158);
+
+        // Итоговый КПД крупно справа
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.fillRect(400, 45, 175, 95);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.strokeRect(400, 45, 175, 95);
+
+        ctx.fillStyle = "#00f2fe";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText("Коэффициент КПД:", 415, 70);
+
+        ctx.fillStyle = "#facc15";
+        ctx.font = "20px 'Outfit', sans-serif";
+        ctx.fillText(`η = ${efficiency}%`, 415, 105);
+    }
+
+    function update() {
+        let useful = parseInt(usefulSlider.value);
+        let total = parseInt(totalSlider.value);
+
+        // Автокоррекция если полезная ползунком превысила затраченную
+        if (useful > total) {
+            total = useful;
+            totalSlider.value = total;
+        }
+
+        const efficiency = Math.round((useful / total) * 100);
+        const losses = total - useful;
+
+        if (usefulValSpan) usefulValSpan.textContent = useful;
+        if (totalValSpan) totalValSpan.textContent = total;
+
+        if (statusText) {
+            statusText.textContent = `КПД: (${useful} Дж / ${total} Дж) · 100% = ${efficiency}%. Потери энергии на трение составляют ${losses} Дж.`;
+        }
+
+        draw(useful, total);
+    }
+
+    if (usefulSlider) usefulSlider.addEventListener('input', update);
+    if (totalSlider) totalSlider.addEventListener('input', update);
+
+    draw(parseInt(usefulSlider.value), parseInt(totalSlider.value));
+};
+window.initKineticEnergyAnimation = function (canvasId, massSliderId, velocitySliderId, massValId, velocityValId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const massSlider = document.getElementById(massSliderId);
+    const velocitySlider = document.getElementById(velocitySliderId);
+    const massValSpan = document.getElementById(massValId);
+    const velocityValSpan = document.getElementById(velocityValId);
+    const statusText = document.getElementById(statusTextId);
+
+    function draw(mass, velocity) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const energy = 0.5 * mass * velocity * velocity;
+
+        // Линия дороги
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, 140);
+        ctx.lineTo(canvas.width - 40, 140);
+        ctx.stroke();
+
+        // 1. Рисуем объект (машинку/блок)
+        // Размер объекта визуально зависит от массы
+        const boxWidth = 30 + mass * 3;
+        const boxHeight = 25;
+        const boxX = 60;
+        const boxY = 140 - boxHeight;
+
+        ctx.fillStyle = "#facc15";
+        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+        // Колеса
+        ctx.fillStyle = "#ff79c6";
+        ctx.beginPath();
+        ctx.arc(boxX + 10, 140, 6, 0, Math.PI * 2);
+        ctx.arc(boxX + boxWidth - 10, 140, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Текст на объекте
+        ctx.fillStyle = "#1e1b4b";
+        ctx.font = "10px 'Outfit', sans-serif";
+        ctx.fillText(`${mass} кг`, boxX + 4, boxY + 16);
+
+        // 2. Вектор скорости (стрелка вправо)
+        const arrowLen = velocity * 10;
+        ctx.strokeStyle = "#2ed573";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(boxX + boxWidth, boxY + boxHeight / 2);
+        ctx.lineTo(boxX + boxWidth + arrowLen, boxY + boxHeight / 2);
+        // Наконечник стрелки
+        ctx.lineTo(boxX + boxWidth + arrowLen - 6, boxY + boxHeight / 2 - 4);
+        ctx.moveTo(boxX + boxWidth + arrowLen, boxY + boxHeight / 2);
+        ctx.lineTo(boxX + boxWidth + arrowLen - 6, boxY + boxHeight / 2 + 4);
+        ctx.stroke();
+
+        ctx.fillStyle = "#2ed573";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`v = ${velocity} м/с`, boxX + boxWidth + 10, boxY + 5);
+
+        // 3. Информационный блок энергии справа
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.fillRect(360, 30, 200, 95);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.strokeRect(360, 30, 200, 95);
+
+        ctx.fillStyle = "#00f2fe";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText("Кинетическая энергия:", 375, 55);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`E_k = (${mass} · ${velocity}²) / 2`, 375, 80);
+
+        ctx.fillStyle = "#facc15";
+        ctx.font = "16px 'Outfit', sans-serif";
+        ctx.fillText(`E_k = ${energy} Дж`, 375, 110);
+    }
+
+    function update() {
+        const mass = parseInt(massSlider.value);
+        const velocity = parseInt(velocitySlider.value);
+        const energy = 0.5 * mass * velocity * velocity;
+
+        if (massValSpan) massValSpan.textContent = mass;
+        if (velocityValSpan) velocityValSpan.textContent = velocity;
+
+        if (statusText) {
+            statusText.textContent = `Кинетическая энергия: E_k = (${mass} кг · (${velocity} м/с)²) / 2 = ${energy} Дж. При увеличении скорости вдвое энергия вырастает в 4 раза!`;
+        }
+
+        draw(mass, velocity);
+    }
+
+    if (massSlider) massSlider.addEventListener('input', update);
+    if (velocitySlider) velocitySlider.addEventListener('input', update);
+
+    draw(parseInt(massSlider.value), parseInt(velocitySlider.value));
+};
+window.initPotentialEnergyAnimation = function (canvasId, massSliderId, heightSliderId, massValId, heightValId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const massSlider = document.getElementById(massSliderId);
+    const heightSlider = document.getElementById(heightSliderId);
+    const massValSpan = document.getElementById(massValId);
+    const heightValSpan = document.getElementById(heightValId);
+    const statusText = document.getElementById(statusTextId);
+
+    const groundY = 190;
+    const startX = 100;
+
+    function draw(mass, height) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const energy = mass * 10 * height;
+
+        // 1. Земля (нулевой уровень)
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, groundY);
+        ctx.lineTo(canvas.width - 40, groundY);
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText("Нулевой уровень (h = 0 м)", 50, groundY + 18);
+
+        // 2. Линия высоты (шкала справа от груза)
+        // Масштаб: 1 метр = 13 пикселей
+        const pixelHeight = height * 13;
+        const boxY = groundY - pixelHeight - 30; // 30 — высота самого груза
+
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(startX + 60, groundY);
+        ctx.lineTo(startX + 60, boxY + 30);
+        ctx.stroke();
+        ctx.setLineDash([]); // сброс пунктира
+
+        // Метка высоты
+        ctx.fillStyle = "#facc15";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`h = ${height} м`, startX + 70, groundY - pixelHeight / 2);
+
+        // 3. Груз
+        const boxWidth = 36 + mass * 2;
+        const boxHeight = 30;
+        
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(startX, boxY, boxWidth, boxHeight);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(startX, boxY, boxWidth, boxHeight);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "10px 'Outfit', sans-serif";
+        ctx.fillText(`${mass} кг`, startX + 6, boxY + 18);
+
+        // 4. Информационный блок энергии справа
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.fillRect(360, 30, 200, 95);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.strokeRect(360, 30, 200, 95);
+
+        ctx.fillStyle = "#00f2fe";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText("Потенциальная энергия:", 375, 55);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`E_p = ${mass} · 10 · ${height}`, 375, 80);
+
+        ctx.fillStyle = "#2ed573";
+        ctx.font = "16px 'Outfit', sans-serif";
+        ctx.fillText(`E_p = ${energy} Дж`, 375, 110);
+    }
+
+    function update() {
+        const mass = parseInt(massSlider.value);
+        const height = parseInt(heightSlider.value);
+        const energy = mass * 10 * height;
+
+        if (massValSpan) massValSpan.textContent = mass;
+        if (heightValSpan) heightValSpan.textContent = height;
+
+        if (statusText) {
+            statusText.textContent = `Потенциальная энергия: E_p = ${mass} кг · 10 Н/кг · ${height} м = ${energy} Дж. При увеличении высоты вдвое энергия возрастает вдвое!`;
+        }
+
+        draw(mass, height);
+    }
+
+    if (massSlider) massSlider.addEventListener('input', update);
+    if (heightSlider) heightSlider.addEventListener('input', update);
+
+    draw(parseInt(massSlider.value), parseInt(heightSlider.value));
+};
+window.initSpringEnergyAnimation = function (canvasId, stiffSliderId, dispSliderId, stiffValId, dispValId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const stiffSlider = document.getElementById(stiffSliderId);
+    const dispSlider = document.getElementById(dispSliderId);
+    const stiffValSpan = document.getElementById(stiffValId);
+    const dispValSpan = document.getElementById(dispValId);
+    const statusText = document.getElementById(statusTextId);
+
+    const centerY = 120;
+    const wallX = 80;
+
+    function draw(k, x) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Расчет энергии: E = (k * x^2) / 2
+        const energy = 0.5 * k * x * x;
+
+        // 1. Рисуем стену (опору) вертикальную линию с штриховкой
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(wallX, 60);
+        ctx.lineTo(wallX, 180);
+        ctx.stroke();
+
+        // Штрихи опоры
+        ctx.lineWidth = 1.5;
+        for (let y = 65; y < 180; y += 15) {
+            ctx.beginPath();
+            ctx.moveTo(wallX, y);
+            ctx.lineTo(wallX - 10, y + 10);
+            ctx.stroke();
+        }
+
+        // 2. Длина пружины зависит от деформации x
+        // x от 0.1 до 1.0 м -> пиксельная длина от 100 до 220 пикселей
+        const springLength = 100 + x * 120;
+        const endX = wallX + springLength;
+
+        // Рисуем зигзаг пружины
+        ctx.strokeStyle = "#facc15";
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(wallX, centerY);
+
+        const coils = 8;
+        const segmentWidth = springLength / (coils * 2);
+        let currentX = wallX;
+
+        for (let i = 0; i < coils; i++) {
+            currentX += segmentWidth;
+            ctx.lineTo(currentX, centerY - 18);
+            currentX += segmentWidth;
+            ctx.lineTo(currentX, centerY + 18);
+        }
+        ctx.lineTo(endX, centerY);
+        ctx.stroke();
+
+        // 3. Груз на конце пружины
+        const boxWidth = 35;
+        const boxHeight = 40;
+        const boxX = endX;
+        const boxY = centerY - boxHeight / 2;
+
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "10px 'Outfit', sans-serif";
+        ctx.fillText(`x=${x}м`, boxX + 4, boxY + 24);
+
+        // 4. Информационный блок энергии справа
+        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.fillRect(360, 30, 200, 95);
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.3)";
+        ctx.strokeRect(360, 30, 200, 95);
+
+        ctx.fillStyle = "#00f2fe";
+        ctx.font = "12px 'Outfit', sans-serif";
+        ctx.fillText("Потенциальная энергия:", 375, 55);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "11px 'Outfit', sans-serif";
+        ctx.fillText(`E_p = (${k} · ${x}²) / 2`, 375, 80);
+
+        ctx.fillStyle = "#2ed573";
+        ctx.font = "16px 'Outfit', sans-serif";
+        ctx.fillText(`E_p = ${energy.toFixed(1)} Дж`, 375, 110);
+    }
+
+    function update() {
+        const k = parseInt(stiffSlider.value);
+        const x = parseFloat(dispSlider.value);
+        const energy = 0.5 * k * x * x;
+
+        if (stiffValSpan) stiffValSpan.textContent = k;
+        if (dispValSpan) dispValSpan.textContent = x.toFixed(1);
+
+        if (statusText) {
+            statusText.textContent = `Потенциальная энергия пружины: E_p = (${k} Н/м · (${x} м)²) / 2 = ${energy.toFixed(1)} Дж. Увеличение растяжения вдвое увеличивает энергию в 4 раза!`;
+        }
+
+        draw(k, x);
+    }
+
+    if (stiffSlider) stiffSlider.addEventListener('input', update);
+    if (dispSlider) dispSlider.addEventListener('input', update);
+
+    draw(parseInt(stiffSlider.value), parseFloat(dispSlider.value));
+};
+window.initEnergyTransformationAnimation = function (canvasId, sliderId, valId, statusTextId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    const slider = document.getElementById(sliderId);
+    const valSpan = document.getElementById(valId);
+    const statusText = document.getElementById(statusTextId);
+
+    const maxH = 10; // максимальная высота 10 м
+    const totalEnergy = 500; // Постоянная полная энергия 500 Дж (при m = 5 кг, g = 10, h_max = 10)
+    const mass = 5;
+    const groundY = 190;
+    const startX = 120;
+
+    function draw(height) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const ep = mass * 10 * height;
+        const ek = Math.max(0, totalEnergy - ep);
+
+        // 1. Опора / земля
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(40, groundY);
+        ctx.lineTo(canvas.width - 40, groundY);
+        ctx.stroke();
+
+        // 2. Визуализация объекта на высоте
+        // Масштаб высоты: 1 м = 13 пикселей
+        const pixelHeight = height * 13;
+        const boxY = groundY - pixelHeight - 25;
+
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(startX - 15, boxY, 30, 25);
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(startX - 15, boxY, 30, 25);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "10px 'Outfit', sans-serif";
+        ctx.fillText(`${height} м`, startX - 10, boxY + 16);
+
+        // 3. Графики (столбики) энергий справа
+        const barX1 = 300;
+        const barX2 = 380;
+        const barX3 = 460;
+        const maxBarH = 120;
+
+        // Потенциальная (Ep) - сиреневый
+        const epH = (ep / totalEnergy) * maxBarH;
+        ctx.fillStyle = "#ff79c6";
+        ctx.fillRect(barX1, groundY - epH, 40, epH);
+        ctx.strokeRect(barX1, groundY - maxBarH, 40, maxBarH);
+
+        // Кинетическая (Ek) - зеленый
+        const ekH = (ek / totalEnergy) * maxBarH;
+        ctx.fillStyle = "#2ed573";
+        ctx.fillRect(barX2, groundY - ekH, 40, ekH);
+        ctx.strokeRect(barX2, groundY - maxBarH, 40, maxBarH);
+
+        // Полная энергия (Ek + Ep) - желтый
+        const totalH = maxBarH;
+        ctx.fillStyle = "#facc15";
+        ctx.fillRect(barX3, groundY - totalH, 40, totalH);
+        ctx.strokeRect(barX3, groundY - maxBarH, 40, maxBarH);
+
+        // Подписи под столбиками
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "10px 'Outfit', sans-serif";
+        ctx.fillText("E_p", barX1 + 10, groundY + 15);
+        ctx.fillText("E_k", barX2 + 10, groundY + 15);
+        ctx.fillText("E_полн", barX3 + 5, groundY + 15);
+
+        // Цифровые значения над столбиками
+        ctx.fillText(`${ep} Дж`, barX1 - 2, groundY - epH - 8);
+        ctx.fillText(`${ek} Дж`, barX2 - 2, groundY - ekH - 8);
+        ctx.fillText(`${totalEnergy} Дж`, barX3 - 5, groundY - totalH - 8);
+    }
+
+    function update() {
+        const height = parseInt(slider.value);
+        const ep = mass * 10 * height;
+        const ek = totalEnergy - ep;
+
+        if (valSpan) valSpan.textContent = height;
+
+        if (statusText) {
+            statusText.textContent = `На высоте h = ${height} м: Потенциальная энергия E_p = ${ep} Дж, Кинетическая энергия E_k = ${ek} Дж. Их сумма неизменна: ${totalEnergy} Дж.`;
+        }
+
+        draw(height);
+    }
+
+    if (slider) {
+        slider.addEventListener('input', update);
+    }
+
+    draw(parseInt(slider.value));
 }

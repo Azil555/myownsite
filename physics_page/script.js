@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.target.closest('a, button, input, textarea, select, label')) return;
 
             const fromPage = window.location.pathname.split('/').pop() || 'index.html';
-            const url = `topic.html?id=${encodeURIComponent(topicId)}&title=${encodeURIComponent(title)}&group=${encodeURIComponent(group)}&from=${encodeURIComponent(fromPage)}`;
+            const topicPage = group.startsWith('8-') ? 'topic-grade8.html' : 'topic.html';
+            const url = `${topicPage}?id=${encodeURIComponent(topicId)}&title=${encodeURIComponent(title)}&group=${encodeURIComponent(group)}&from=${encodeURIComponent(fromPage)}`;
             window.location.href = url;
         });
     });
@@ -375,8 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/(^-|-$)/g, '');
     };
 
-    const getTopicPagePath = () => {
-        return 'topic.html';
+    const getTopicPagePath = (group) => {
+        return String(group || '').startsWith('8-') ? 'topic-grade8.html' : 'topic.html';
     };
 
     // Клик по конкретной маленькой теме (карточке подтемы) - открывает её в отдельном файле темы
@@ -390,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const topicKey = `${group}-${slugifyTopic(title)}`;
             const currentPage = window.location.pathname.split('/').pop() || 'index.html';
             const topicPage = getTopicPagePath(group, title);
-            const backTarget = currentPage === 'index.html' ? '../index.html' : `../${currentPage}`;
+            const backTarget = currentPage;
             
             window.location.href = `${topicPage}?id=${encodeURIComponent(topicKey)}&title=${encodeURIComponent(title)}&group=${encodeURIComponent(group)}&from=${encodeURIComponent(backTarget)}`;
         }

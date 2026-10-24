@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aniphys — Тема 8 класса</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="topics/animations_grade8.js"></script>
+    <script src="../.vscode/topics_grade8.js"></script>
+    <style>
+        body {
+            background: #0b0c10;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .topic-page-shell {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 2.5rem 1.25rem 3rem;
+        }
+
+        .topic-card {
+            background: linear-gradient(135deg, rgba(0, 160, 180, .16), rgba(255, 121, 198, .08));
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 24px;
+            padding: 2rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: #7dd3fc;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .topic-title {
+            font-size: 1.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            line-height: 1.8;
+            color: #e2e8f0;
+        }
+
+        .content-block {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 14px;
+            padding: 1.25rem 1.5rem;
+        }
+
+        .content-block h2 {
+            margin-top: 0;
+        }
+
+        .grade8-formula {
+            color: #7dd3fc;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .grade8-animation-card canvas {
+            max-width: 640px;
+        }
+
+        .grade8-slider-label {
+            display: block;
+            font-weight: 600;
+        }
+
+        #grade8AnimationStatus {
+            color: #7dd3fc;
+            margin-bottom: 0;
+        }
+
+        #grade8AnimationToggle {
+            background: #0e7490;
+            border: 0;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            padding: .6rem 1rem;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin: 1rem 0;
+            background: rgba(0, 0, 0, .4);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+        }
+
+        input[type="range"] {
+            display: block;
+            width: 100%;
+            margin: .35rem 0 1rem;
+            accent-color: #00c2d7;
+        }
+
+        .animation-container {
+            width: 100%;
+        }
+
+        .controls {
+            display: grid;
+            gap: .75rem;
+            max-width: 600px;
+        }
+
+        .controls label {
+            display: block;
+        }
+
+        .controls input[type="checkbox"] {
+            accent-color: #00c2d7;
+        }
+
+        #evaporationStatus {
+            max-width: 600px;
+            margin-top: .75rem;
+            color: #7dd3fc;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="topic-page-shell">
+        <section class="topic-card">
+            <a class="back-link" id="backLink" href="grade-8.html">← Назад к 8 классу</a>
+            <h1 class="topic-title" id="topicTitle">Тема 8 класса</h1>
+            <div class="topic-content" id="topicContent"></div>
+        </section>
+    </main>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const requestedTitle = params.get('title') || 'Тема 8 класса';
+        const title = requestedTitle.replace(/\s+/g, ' ').trim();
+        const topics = window.topicsGrade8 || window.topicsDatabase || {};
+        const topicKey = Object.keys(topics).find((key) => key.trim() === title);
+        const topic = topicKey ? topics[topicKey] : null;
+        document.title = `Aniphys — ${title}`;
+        document.getElementById('topicTitle').textContent = title;
+        const topicHtml = typeof topic === 'string' ? topic : topic && topic.html;
+        document.getElementById('topicContent').innerHTML = topicHtml || `<div class="content-block"><h2>${title}</h2><p>Материал по этой теме пока не добавлен.</p></div>`;
+        const backTarget = params.get('from') || 'grade-8.html';
+        document.getElementById('backLink').href = backTarget.includes('grade-8.html') ? 'grade-8.html' : backTarget;
+
+        const animationSettings = {
+            'Количество теплоты при сгорании топлива': {
+                kind: 'fuel', label: 'Масса сгоревшего топлива', min: 1, max: 10, value: 3, unit: 'кг'
+            },
+            'Электрический заряд': {
+                kind: 'charge', label: 'Количество зарядов', min: 1, max: 6, value: 3, unit: 'е'
+            },
+            'Электрическое поле': {
+                kind: 'field', label: 'Заряд источника поля', min: 1, max: 10, value: 5, unit: 'усл. ед.'
+            },
+            'Сила тока': {
+                kind: 'current', label: 'Сила тока', min: 0.2, max: 3, value: 1.5, unit: 'А'
+            },
+            'Электрическое напряжение': {
+                kind: 'voltage', label: 'Напряжение источника', min: 1, max: 12, value: 6, unit: 'В'
+            },
+            'Электрическое сопротивление': {
+                kind: 'resistance', label: 'Сопротивление проводника', min: 2, max: 20, value: 8, unit: 'Ом'
+            },
+            'Закон Ома для участка цепи': {
+                kind: 'ohm', label: 'Напряжение на резисторе', min: 1, max: 12, value: 6, unit: 'В'
+            },
+            'Последовательное соединение проводников': {
+                kind: 'series', label: 'Сопротивление второго резистора', min: 1, max: 10, value: 4, unit: 'Ом'
+            },
+            'Параллельное соединение проводников': {
+                kind: 'parallel', label: 'Сопротивление второй ветви', min: 2, max: 20, value: 6, unit: 'Ом'
+            },
+            'Работа электрического тока': {
+                kind: 'work', label: 'Напряжение', min: 1, max: 12, value: 6, unit: 'В'
+            },
+            'Мощность электрического тока': {
+                kind: 'power', label: 'Сила тока', min: 0.2, max: 3, value: 1.5, unit: 'А'
+            },
+            'Закон Джоуля-Ленца': {
+                kind: 'jouleLenz', label: 'Сила тока', min: 0.2, max: 3, value: 1.5, unit: 'А'
+            },
+            'Источники света': {
+                kind: 'lightSources', label: 'Яркость источника', min: 10, max: 100, value: 70, unit: '%'
+            },
+            'Закон прямолинейного распространения света': {
+                kind: 'straightLight', label: 'Размер препятствия', min: 20, max: 50, value: 35, unit: 'см'
+            },
+            'Закон отражения света': {
+                kind: 'reflection', label: 'Угол падения', min: 10, max: 80, value: 40, unit: '°'
+            },
+            'Плоское зеркало': {
+                kind: 'planeMirror', label: 'Расстояние до предмета', min: 1, max: 5, value: 2, unit: 'м'
+            },
+            'Закон преломления света': {
+                kind: 'refraction', label: 'Угол падения', min: 10, max: 70, value: 45, unit: '°'
+            },
+            'Собирающие линзы': {
+                kind: 'convergingLens', label: 'Расстояние до предмета', min: 1.2, max: 4.5, value: 2, unit: 'F'
+            },
+            'Рассеивающие линзы': {
+                kind: 'divergingLens', label: 'Расстояние до предмета', min: 1.2, max: 4.5, value: 2, unit: 'F'
+            },
+            'Фокусное расстояние и оптическая сила линзы': {
+                kind: 'lensPower', label: 'Фокусное расстояние', min: 0.1, max: 0.5, value: 0.25, unit: 'м'
+            },
+            'Построение изображений в линзах': {
+                kind: 'lensImages', label: 'Расстояние до предмета', min: 0.7, max: 3.5, value: 2, unit: 'F'
+            }
+        };
+
+        const animationInitializers = {
+            'Внутренняя энергия': () => window.initInternalEnergyAnimation(),
+            'Виды теплопередачи: теплопроводность': () => window.initConductivityAnimation(),
+            'Виды теплопередачи: конвекция': () => window.initConvectionAnimation(),
+            'Виды теплопередачи: излучение': () => window.initRadiationAnimation(),
+            'Количество теплоты': () => window.initHeatAnimation(),
+            'Удельная теплоемкость': () => window.initSpecificHeatAnimation(),
+            'Плавление и кристаллизация': () => window.initMeltingAnimation(),
+            'Испарение и конденсация': () => window.initEvaporationAnimation(),
+            'Кипение и температура кипения': () => window.initBoilingAnimation()
+        };
+
+        const animationMarkup = {
+            'Плавление и кристаллизация': `
+                <div class="content-block">
+                    <h3>Интерактивная модель: плавление и кристаллизация</h3>
+                    <p>Нагревайте или охлаждайте модель и наблюдайте за движением частиц.</p>
+                    <canvas id="meltingCanvas" width="600" height="280"></canvas>
+                    <button id="heatButton" type="button">Нагревать</button>
+                    <button id="coolButton" type="button">Охлаждать</button>
+                    <p id="meltingStatus" aria-live="polite"></p>
+                </div>`,
+            'Испарение и конденсация': `
+                <div class="content-block">
+                    <h3>Интерактивная модель: испарение</h3>
+                    <p>Меняйте температуру, площадь поверхности и условия над жидкостью.</p>
+                    <canvas id="evaporationCanvas" width="500" height="350"></canvas>
+                    <label>Температура: <output id="evapTempVal">20 °C</output>
+                        <input type="range" id="evapTempSlider" min="5" max="90" value="20">
+                    </label>
+                    <label>Ширина сосуда: <output id="evapWidthVal">260 px</output>
+                        <input type="range" id="evapWidthSlider" min="140" max="400" value="260">
+                    </label>
+                    <label><input type="checkbox" id="evapWindCheck"> Включить ветер</label>
+                    <label><input type="checkbox" id="evapLidCheck"> Закрыть крышку (конденсация)</label>
+                    <p id="evaporationStatus" aria-live="polite"></p>
+                </div>`,
+            'Кипение и температура кипения': `
+                <div class="content-block">
+                    <h3>Интерактивная модель: кипение</h3>
+                    <p>Изменяйте давление и нагревайте жидкость. Наблюдайте, как меняется температура кипения.</p>
+                    <canvas id="boilingCanvas" width="500" height="300"></canvas>
+                    <button id="boilHeatBtn" type="button">Нагревать (зажать)</button>
+                    <button id="boilCoolBtn" type="button">Охлаждать (зажать)</button>
+                    <label>Внешнее давление: <output id="boilPressureVal">1.0 атм</output>
+                        <input type="range" id="boilPressureSlider" min="0.3" max="3.0" step="0.1" value="1.0">
+                    </label>
+                    <p id="boilingStatus" aria-live="polite"></p>
+                </div>`
+        };
+
+        if (animationMarkup[title]) {
+            document.getElementById('topicContent').insertAdjacentHTML('beforeend', animationMarkup[title]);
+        }
+
+        if (animationSettings[title]) {
+            document.getElementById('topicContent').insertAdjacentHTML('beforeend', `
+                <div class="content-block grade8-animation-card">
+                    <h3>Интерактивная модель</h3>
+                    <p>Измените параметр и проследите, как меняется физическое явление.</p>
+                    <canvas id="grade8AnimationCanvas" width="640" height="270" aria-label="${title}: интерактивная модель"></canvas>
+                    <label class="grade8-slider-label" for="grade8AnimationSlider">
+                        ${animationSettings[title].label}: <output id="grade8AnimationValue">${animationSettings[title].value} ${animationSettings[title].unit}</output>
+                    </label>
+                    <input id="grade8AnimationSlider" type="range" min="${animationSettings[title].min}" max="${animationSettings[title].max}" step="${animationSettings[title].max <= 10 ? '0.1' : '1'}" value="${animationSettings[title].value}">
+                    <button id="grade8AnimationToggle" type="button">Пауза</button>
+                    <p id="grade8AnimationStatus" aria-live="polite"></p>
+                </div>`);
+            window.initGrade8TopicAnimation(title, animationSettings[title]);
+        } else if (animationInitializers[title]) {
+            animationInitializers[title]();
+        }
+    </script>
+</body>
+
+</html>

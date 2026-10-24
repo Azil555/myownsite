@@ -1,0 +1,42 @@
+<template id="evaporation-animation">
+    <div class="animation-container">
+        <canvas id="evaporationCanvas" width="500" height="350"></canvas>
+
+        <div class="controls">
+            <label>
+                Температура: <span id="evapTempVal">20 °C</span>
+                <input type="range" id="evapTempSlider" min="5" max="90" value="20">
+            </label>
+
+            <label>
+                Ширина сосуда: <span id="evapWidthVal">260 px</span>
+                <input type="range" id="evapWidthSlider" min="140" max="400" value="260">
+            </label>
+
+            <label>
+                <input type="checkbox" id="evapWindCheck"> Включить ветер
+            </label>
+
+            <label>
+                <input type="checkbox" id="evapLidCheck"> Закрыть крышку (Конденсация)
+            </label>
+        </div>
+
+        <div id="evaporationStatus"></div>
+    </div>
+</template>
+<div class="animation-card">
+    <canvas id="boilingCanvas" width="500" height="300"></canvas>
+
+    <div class="controls" style="margin-top: 10px;">
+        <button id="boilHeatBtn">Нагревать (Зажать)</button>
+        <button id="boilCoolBtn">Охлаждать (Зажать)</button>
+
+        <label style="margin-top: 10px; display: block;">
+            Внешнее давление: <span id="boilPressureVal">1.0 атм</span>
+            <input type="range" id="boilPressureSlider" min="0.3" max="3.0" step="0.1" value="1.0">
+        </label>
+    </div>
+
+    <div id="boilingStatus" style="margin-top: 10px; font-size: 0.9rem;"></div>
+</div>

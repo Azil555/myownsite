@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тема</title>
+    <title>Aniphys — Тема</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
@@ -1754,7 +1754,361 @@
             </div>
         </div>
     `,
+            "Плечо силы": `
+        <div class="content-block">
+            <h3>Что такое плечо силы?</h3>
+            <p>Когда вы открываете дверь, дверную ручку всегда стараются расположить как можно дальше от петли (оси вращения). Если попытаться толкнуть дверь прямо у петли, открыть ее будет невероятно тяжело. Почему так происходит? Все дело в <strong>плече силы</strong>.</p>
+            <p style="margin-top: 8px;"><strong>Плечо силы ($d$)</strong> — это кратчайшее расстояние от оси вращения до линии, вдоль которой действует приложенная сила.</p>
+        </div>
 
+        <div class="content-block">
+            <h3>Как определить плечо силы геомтрически?</h3>
+            <p>Чтобы найти плечо силы на чертеже, нужно:</p>
+            <p style="margin-top: 6px;">1. Промыслить прямую (линию действия силы), вдоль которой направлена приложенная сила.</p>
+            <p style="margin-top: 6px;">2. Опустить перпендикуляр из оси вращения (точки опоры) на эту прямую.</p>
+            <p style="margin-top: 6px;">3. Длина этого перпендикуляра и будет являться плечом силы ($d$).</p>
+            <p style="margin-top: 8px;">💡 <em>Золотое правило:</em> Чем больше плечо силы, тем меньшее усилие нужно приложить, чтобы вращать тело (именно поэтому рычаги и гаечные ключи делают длинными).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Плечо силы</h3>
+            <p>Меняй расстояние (плечо $d$) от точки приложения силы до оси вращения и наблюдай за изменениями:</p>
+            
+            <canvas id="leverArmCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Плечо силы ($d$): <span id="laArmVal">3</span> м</label>
+                <input type="range" id="laArmSlider" min="1" max="5" step="0.5" value="3" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="laStatus" style="color: #ffffff; font-size: 0.95rem;">При плече d = 3 м и силе F = 20 Н вращательный момент составляет 60 Н·м.</span>
+            </div>
+        </div>
+    `,
+            "Правило равновесия рычага": `
+        <div class="content-block">
+            <h3>В чем суть правила равновесия рычага?</h3>
+            <p>Еще великий древнегреческий ученый Архимед открыл золотое правило механики, описывающее работу рычага. Если на рычаг действуют две силы, которые стремятся повернуть его в противоположные стороны, то рычаг находится в равновесии тогда, когда моменты этих сил равны.</p>
+            <p style="margin-top: 8px;"><strong>Правило равновесия рычага:</strong> Рычаг находится в равновесии тогда, когда силы, действующие на него, обратно пропорциональны плечам этих сил.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула равновесия</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$F_1 \cdot d_1 = F_2 \cdot d_2$</strong> \quad или \quad <strong>$\frac{F_1}{F_2} = \frac{d_2}{d_1}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$F_1, F_2$** — силы, действующие на левое и правое плечо (в ньютонах, **Н**).<br>
+            • **$d_1, d_2$** — плечи этих сил (в метрах, **м**).</p>
+            <p style="margin-top: 8px;">💡 <em>Практический смысл:</em> Меньшей силой можно уравновесить большую силу, если приложить ее на большем плече. Именно поэтому тяжелые предметы легко поднимать с помощью длинного лома или качелей!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Равновесие рычага</h3>
+            <p>Слева задана фиксированная нагрузка ($F_1 = 20$ Н, плечо $d_1 = 3$ м). Меняй силу и плечо справа ($F_2$ и $d_2$), чтобы добиться идеального равновесия рычага:</p>
+            
+            <canvas id="leverEquilibriumCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Правая сила ($F_2$): <span id="leForceVal">30</span> Н</label>
+                <input type="range" id="leForceSlider" min="10" max="60" step="5" value="30" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Правое плечо ($d_2$): <span id="leArmVal">2</span> м</label>
+                <input type="range" id="leArmSlider" min="1" max="4" step="0.5" value="2" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="leStatus" style="color: #ffffff; font-size: 0.95rem;">Левый момент: 20·3 = 60 Н·м | Правый момент: 30·2 = 60 Н·м. Рычаг в равновесии!</span>
+            </div>
+        </div>
+    `,
+            "Неподвижный блок (изменение направления)": `
+        <div class="content-block">
+            <h3>Что такое неподвижный блок?</h3>
+            <p><strong>Неподвижный блок</strong> — это колесо с желобом, ось которого закреплена на неподвижной опоре. Через него перекинута веревка или трос: к одному концу крепится поднимаемый груз, а к другому прикладывается сила.</p>
+            <p style="margin-top: 8px;">Главная особенность неподвижного блока заключается в том, что он **не дает выигрыша в силе** (сколько весит груз, такую же силу нужно приложить, не считая трения). Зачем же он нужен? Он позволяет <strong>изменить направление действия силы</strong> на противоположное: вместо того чтобы поднимать тяжелый груз вверх над головой, мы можем тянуть веревку вниз, используя собственный вес!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Основные свойства неподвижного блока</h3>
+            <p style="margin-top: 6px;">• <strong>Нет выигрыша в силе:</strong> $F = mg$ (сила тяги равна весу груза).</p>
+            <p style="margin-top: 6px;">• <strong>Нет выигрыша в пути:</strong> Чтобы поднять груз на высоту $h$, веревку нужно вытянуть на такое же расстояние ($s = h$).</p>
+            <p style="margin-top: 6px;">• <strong>Удобство:</strong> Тянуть вниз гораздо проще, безопаснее и естественнее для человека.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Неподвижный блок</h3>
+            <p>Меняй массу груза и наблюдай, как блок меняет направление силы, сохраняя равенство силы и расстояний:</p>
+            
+            <canvas id="fixedPulleyCanvas" width="600" height="240" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса груза ($m$): <span id="fpMassVal">5</span> кг (Вес $F = 50$ Н)</label>
+                <input type="range" id="fpMassSlider" min="1" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="fpStatus" style="color: #ffffff; font-size: 0.95rem;">Неподвижный блок: выигрыша в силе нет (F = 50 Н), но направление силы изменено (тянем вниз).</span>
+            </div>
+        </div>
+    `,
+            "Подвижный блок (выигрыш в силе в 2 раза)": `
+        <div class="content-block">
+            <h3>Что такое подвижный блок?</h3>
+            <p><strong>Подвижный блок</strong> — это блок, ось которого перемещается вместе с поднимаемым или опускаемым грузом. Один конец веревки закреплен на неподвижной опоре, за второй конец тянет человек, а к оси самого блока подвешен груз.</p>
+            <p style="margin-top: 8px;">Главная особенность подвижного блока заключается в том, что он дает <strong>выигрыш в силе в 2 раза</strong>. Поскольку вес груза поддерживают две ветви веревки одновременно, каждая ветвь берет на себя лишь половину нагрузки.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Основные свойства подвижного блока</h3>
+            <p style="margin-top: 6px;">• <strong>Выигрыш в силе в 2 раза:</strong> $F = \frac{mg}{2}$ (сила, которую нужно приложить, вдвое меньше веса груза).</p>
+            <p style="margin-top: 6px;">• <strong>Проигрыш в расстоянии в 2 раза («Золотое правило механики»):</strong> Чтобы поднять груз на высоту $h$, свободный конец веревки нужно вытянуть на расстояние $s = 2h$.</p>
+            <p style="margin-top: 6px;">• <strong>Направление силы:</strong> Направление силы приложении не меняется (мы тянем вверх вслед за веревкой, если не комбинируем его с неподвижным блоком).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Подвижный блок</h3>
+            <p>Меняй массу груза и наблюдай, как подвижный блок делит необходимую для подъема силу пополам:</p>
+            
+            <canvas id="movablePulleyCanvas" width="600" height="240" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса груза ($m$): <span id="mpMassVal">10</span> кг (Вес $P = 100$ Н)</label>
+                <input type="range" id="mpMassSlider" min="2" max="20" step="2" value="10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="mpStatus" style="color: #ffffff; font-size: 0.95rem;">Подвижный блок: вес груза 100 Н, но требуемая сила F = 50 Н (выигрыш в силе в 2 раза).</span>
+            </div>
+        </div>
+    `,
+            "Наклонная плоскость": `
+        <div class="content-block">
+            <h3>Что такое наклонная плоскость?</h3>
+            <p><strong>Наклонная плоскость</strong> — это простая механическая машина в виде плоскости, расположенной под углом к горизонту. Она используется для подъема тяжелых предметов на высоту с меньшим усилием, чем при вертикальном подъеме (например, пандусы, горные дороги, лестницы или трапы).</p>
+            <p style="margin-top: 8px;">Главный смысл наклонной плоскости заключается в том, что она дает <strong>выигрыш в силе</strong>. Чем длиннее и положе плоскость, тем меньшую силу нужно приложить, чтобы затащить на нее груз.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Золотое правило механики для наклонной плоскости</h3>
+            <p>Поскольку работа по подъему груза на высоту по наклонной плоскости (без учета трения) равна работе по вертикальному подъему, выполняется равенство:</p>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>$F \cdot l = P \cdot h$</strong> \quad или \quad <strong>$F = P \cdot \frac{h}{l}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$F$** — сила тяги, прикладываемая вдоль плоскости (в ньютонах, **Н**).<br>
+            • **$P$ (или $mg$)** — вес поднимаемого груза (в ньютонах, **Н**).<br>
+            • **$h$** — высота подъема (в метрах, **м**).<br>
+            • **$l$** — длина наклонной плоскости (в метрах, **м**).</p>
+            <p style="margin-top: 8px;">💡 <em>Выигрыш в силе:</em> равен отношению длины наклонной плоскости к ее высоте ($\frac{l}{h}$). Проигрыш в расстоянии составляет ровно столько же (путь движения груза длиннее высоты).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Наклонная плоскость</h3>
+            <p>Меняй длину наклонной плоскости и массу груза, чтобы увидеть, как меняется необходимая для подъема сила:</p>
+            
+            <canvas id="inclinedPlaneCanvas" width="600" height="230" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса груза ($m$): <span id="ipMassVal">10</span> кг (Вес $P = 100$ Н)</label>
+                <input type="range" id="ipMassSlider" min="2" max="20" step="2" value="10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Длина плоскости ($l$): <span id="ipLengthVal">5</span> м (Высота $h = 2$ м)</label>
+                <input type="range" id="ipLengthSlider" min="3" max="8" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="ipStatus" style="color: #ffffff; font-size: 0.95rem;">Для подъема груза весом 100 Н нужна сила F = 40 Н (выигрыш в силе в 2.5 раза).</span>
+            </div>
+        </div>
+    `,
+            "Золотое правило механики": `
+        <div class="content-block">
+            <h3>В чем суть золотого правила механики?</h3>
+            <p>Все простые механизмы (рычаг, блок, наклонная плоскость, ворот и др.) служат для того, чтобы получить удобство или выигрыш в силе. Однако за все в природе приходится платить. Человек, использующий механизм, не совершает работу меньше — он лишь перераспределяет ее параметры.</p>
+            <p style="margin-top: 8px;"><strong>Золотое правило механики:</strong> Ни один из простых механизмов не дает выигрыша в работе. Во сколько раз мы выигрываем в силе, во столько же раз проигрываем в расстоянии.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула закона сохранения работы</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$F_1 \cdot s_1 = F_2 \cdot s_2$</strong> \quad или \quad <strong>$A_{полезная} = A_{затраченная}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$F_1, s_1$** — сила и путь при использовании механизма.<br>
+            • **$F_2, s_2$** — сила и путь при подъеме груза напрямую без механизма.<br>
+            • **$A$** — механическая работа (в джоулях, **Дж**).</p>
+            <p style="margin-top: 8px;">💡 <em>Главный вывод:</em> Выигрывая в силе (например, поднимая тяжелый груз в 2 или 4 раза меньшим усилием), мы вынуждены тянуть веревку или перемещать предмет на вдвое или вчетверо большую дистанцию. Суммарная работа остается неизменной (если пренебречь силой трения).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Золотое правило механики</h3>
+            <p>Меняй коэффициент выигрыша в силе и наблюдай, как при неизменной полезной работе (100 Дж) уменьшается необходимая сила, но пропорционально увеличивается путь:</p>
+            
+            <canvas id="goldenRuleCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Выигрыш в силе: <span id="grAdvantageVal">2</span> раза</label>
+                <input type="range" id="grAdvantageSlider" min="1" max="4" step="1" value="2" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="grStatus" style="color: #ffffff; font-size: 0.95rem;">Работа постоянна: A = 100 Дж. Сила F = 50 Н, Путь s = 2 м.</span>
+            </div>
+        </div>
+    `,
+            "Коэффициент полезного действия (КПД) механизмов": `
+        <div class="content-block">
+            <h3>Что такое КПД механизма?</h3>
+            <p>На практике ни один реальный механизм не является идеальным. Часть затраченной работы всегда расходуется не на перемещение полезного груза, а на преодоление сил трения в сочленениях подвижных частей, а также на поднятие элементов самого механизма.</p>
+            <p style="margin-top: 8px;">Поэтому всю совершенную работу разделяют на две части:</p>
+            <p style="margin-top: 6px;">• <strong>Полезная работа ($A_{пол}$)</strong> — это работа, ради которой создавался и используется механизм (например, поднятие полезного груза на высоту).</p>
+            <p style="margin-top: 6px;">• <strong>Затраченная (полная) работа ($A_{затр}$)</strong> — это вся работа, которую мы реально выполняем (она всегда больше полезной из-за неизбежных потерь).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула расчета КПД</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$\eta = \frac{A_{пол}}{A_{затр}} \cdot 100\%$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$\eta$** (греческая буква «эта») — коэффициент полезного действия (измеряется в процентах, **%**).<br>
+            • **$A_{пол}$** — полезная работа (в джоулях, **Дж**).<br>
+            • **$A_{затр}$** — затраченная работа (в джоулях, **Дж**).</p>
+            <p style="margin-top: 8px;">💡 <em>Важно знать:</em> КПД реальных механизмов всегда меньше 100% ($\eta < 100\%$) из-за сил трения. Создать вечный двигатель (механизм с КПД 100% и более) невозможно по закону сохранения энергии!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Расчет КПД</h3>
+            <p>Меняй полезную и затраченную работу, чтобы увидеть, как рассчитывается КПД механизма и какая доля энергии уходит на потери:</p>
+            
+            <canvas id="efficiencyCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Полезная работа ($A_{пол}$): <span id="effUsefulVal">60</span> Дж</label>
+                <input type="range" id="effUsefulSlider" min="20" max="100" step="10" value="60" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Затраченная работа ($A_{затр}$): <span id="effTotalVal">100</span> Дж</label>
+                <input type="range" id="effTotalSlider" min="60" max="150" step="10" value="100" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="effStatus" style="color: #ffffff; font-size: 0.95rem;">КПД: (60 Дж / 100 Дж) · 100% = 60%. Потери энергии на трение: 40 Дж.</span>
+            </div>
+        </div>
+    `,
+            "Кинетическая энергия (энергия движения)": `
+        <div class="content-block">
+            <h3>Что такое кинетическая энергия?</h3>
+            <p>Все движущиеся тела обладают способностью совершать работу за счет своего движения. Физическая величина, которая зависит от массы тела и скорости его движения, называется <strong>кинетической энергией</strong>.</p>
+            <p style="margin-top: 8px;">Примеры: летящий мяч, едущий автомобиль, падающая капля дождя или бегущий человек обладают кинетической энергией. Чем больше масса тела и чем выше его скорость, тем больше его кинетическая энергия и тем большую работу оно может совершить при торможении или столкновении.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула кинетической энергии</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$E_k = \frac{m \cdot v^2}{2}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$E_k$** — кинетическая энергия (измеряется в джоулях, **Дж**).<br>
+            • **$m$** — масса тела (в килограммах, **кг**).<br>
+            • **$v$** — скорость движения тела (в метрах в секунду, **м/с**).</p>
+            <p style="margin-top: 8px;">💡 <em>Обратите внимание:</em> Скорость в формуле возводится в квадрат! Это значит, что при увеличении скорости автомобиля в 2 раза его кинетическая энергия (и тормозной путь!) возрастает не в 2, а сразу в 4 раза ($\mathbf{2^2 = 4}$). Вот почему соблюдение скоростного режима так критично для безопасности!</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Зависимость энергии от скорости и массы</h3>
+            <p>Меняй массу и скорость объекта, чтобы наглядно увидеть, как квадратично растет его кинетическая энергия:</p>
+            
+            <canvas id="kineticEnergyCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса тела ($m$): <span id="keMassVal">2</span> кг</label>
+                <input type="range" id="keMassSlider" min="1" max="10" step="1" value="2" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Скорость ($v$): <span id="keVelocityVal">10</span> м/с</label>
+                <input type="range" id="keVelocitySlider" min="2" max="20" step="2" value="10" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="keStatus" style="color: #ffffff; font-size: 0.95rem;">Кинетическая энергия: E_k = (2 · 10²) / 2 = 100 Дж.</span>
+            </div>
+        </div>
+    `,
+            "Потенциальная энергия поднятого тела": `
+        <div class="content-block">
+            <h3>Что такое потенциальная энергия?</h3>
+            <p><strong>Потенциальная энергия</strong> — это энергия взаимодействия тел, которая определяется их взаимным расположением. Для тела, поднятого над землей, потенциальная энергия зависит от того, на какую высоту оно поднято.</p>
+            <p style="margin-top: 8px;">Примеры: вода за плотиной гидроэлектростанции, груз на строительном кране, яблоко, висящее на ветке. Все они обладают способностью совершать работу за счет своего положения под действием силы тяжести.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула потенциальной энергии</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$E_p = m \cdot g \cdot h$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$E_p$** — потенциальная энергия (в джоулях, **Дж**).<br>
+            • **$m$** — масса тела (в килограммах, **кг**).<br>
+            • **$g$** — ускорение свободного падения (приблизительно $10 \, \text{Н/кг}$).<br>
+            • **$h$** — высота тела над нулевым уровнем / землей (в метрах, **м**).</p>
+            <p style="margin-top: 8px;">💡 <em>Особенность:</em> Потенциальная энергия зависит от выбора нулевого уровня (обычно за ноль принимают поверхность земли или пола). Если поднять груз вдвое выше, его потенциальная энергия увеличится ровно в 2 раза.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Зависимость энергии от высоты и массы</h3>
+            <p>Меняй массу груза и высоту подъема, чтобы увидеть, как накапливается потенциальная энергия:</p>
+            
+            <canvas id="potentialEnergyCanvas" width="600" height="230" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Масса груза ($m$): <span id="peMassVal">5</span> кг</label>
+                <input type="range" id="peMassSlider" min="1" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Высота ($h$): <span id="peHeightVal">4</span> м</label>
+                <input type="range" id="peHeightSlider" min="1" max="10" step="1" value="4" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="peStatus" style="color: #ffffff; font-size: 0.95rem;">Потенциальная энергия: E_p = 5 кг · 10 Н/кг · 4 м = 200 Дж.</span>
+            </div>
+        </div>
+    `,
+            "Потенциальная энергия деформированной пружины": `
+        <div class="content-block">
+            <h3>Что такое потенциальная энергия упругодеформированного тела?</h3>
+            <p><strong>Потенциальная энергия деформированной пружины</strong> — это энергия, которой обладает тело в результате его деформации (растяжения или сжатия). Когда мы сжимаем или растягиваем пружину, мы совершаем работу, которая запасается в ней в виде упругой потенциальной энергии.</p>
+            <p style="margin-top: 8px;">Примеры: тетива натянутого лука, часовой механизм, амортизаторы автомобиля, детская игрушка на пружинке. Если отпустить пружину, она распрямится и за счет этой энергии совершит работу (например, толкнет шарик или вернется в исходное положение).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Формула потенциальной энергии пружины</h3>
+            <p style="text-align: center; font-size: 1.2rem; color: #7dd3fc; margin: 10px 0;"><strong>$E_p = \frac{k \cdot x^2}{2}$</strong></p>
+            <p style="margin-top: 8px;">Где:<br>
+            • **$E_p$** — потенциальная энергия пружины (измеряется в джоулях, **Дж**).<br>
+            • **$k$** — жесткость пружины (в ньютонах на метр, **Н/м**). Чем жестче пружина, тем больше ее сопротивление.<br>
+            • **$x$** — абсолютное удлинение или сжатие пружины — смещение от ненапряженного состояния (в метрах, **м**).</p>
+            <p style="margin-top: 8px;">💡 <em>Обратите внимание:</em> Деформация $x$ в формуле возводится в квадрат! Это значит, что если растянуть пружину в 2 раза сильнее, запасенная в ней энергия (и упругая сила) вырастет не в 2, а сразу в 4 раза ($\mathbf{2^2 = 4}$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Энергия сжатой или растянутой пружины</h3>
+            <p>Меняй жесткость пружины и величину ее деформации, чтобы увидеть, как квадратично накапливается упругая энергия:</p>
+            
+            <canvas id="springEnergyCanvas" width="600" height="220" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Жесткость пружины ($k$): <span id="seStiffVal">40</span> Н/м</label>
+                <input type="range" id="seStiffSlider" min="10" max="100" step="10" value="40" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Деформация ($x$): <span id="seDispVal">0.5</span> м</label>
+                <input type="range" id="seDispSlider" min="0.1" max="1.0" step="0.1" value="0.5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="seStatus" style="color: #ffffff; font-size: 0.95rem;">Потенциальная энергия: E_p = (40 · 0.5²) / 2 = 5 Дж.</span>
+            </div>
+        </div>
+    `,
+    "Переход энергии из одного вида в другой": `
+        <div class="content-block">
+            <h3>Превращения энергии в природе и технике</h3>
+            <p>Окружающий нас мир полон изменений, и все они связаны с тем, что энергия не исчезает бесследно и не появляется из ниоткуда — она лишь преобразуется из одного вида в другой. Этот фундаментальный закон лежит в основе всей физики.</p>
+            <p style="margin-top: 8px;">Яркий пример — свободное падение или движение тела на качелях/горке:<br>
+            • Когда тело находится на максимальной высоте, его скорость равна нулю, а **потенциальная энергия максимальна** ($E_p = \max$, $E_k = 0$).<br>
+            • При падении тело теряет высоту, но разгоняется: потенциальная энергия уменьшается, а **кинетическая энергия возрастает** ($E_p \\downarrow$, $E_k \\uparrow$).
+            • В самый нижний момент перед ударом или прохождением уровня земли скорость максимальна, высота минимальна — **кинетическая энергия становится максимальной** ($E_p = 0$, $E_k = \max$).</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Закон сохранения механической энергии</h3>
+            <p style="text-align: center; font-size: 1.1rem; color: #7dd3fc; margin: 10px 0;"><strong>$E_{полная} = E_p + E_k = \text{const}$</strong> (при отсутствии трения)</p>
+            <p style="margin-top: 8px;">Полная механическая энергия замкнутой системы тел остается неизменной: убыль одного вида энергии всегда строго равна приросту другого вида энергии.</p>
+        </div>
+
+        <div class="content-block">
+            <h3>Интерактивная модель: Превращение энергии (Маятник / Горка)</h3>
+            <p>Передвигай ползунок высоты мяча и наблюдай, как потенциальная энергия превращается в кинетическую и наоборот, а их сумма остается постоянной:</p>
+            
+            <canvas id="energyTransformationCanvas" width="600" height="230" style="background: rgba(0,0,0,0.4); border-radius: 12px; width: 100%; max-width: 600px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.1); display: block;"></canvas>
+            
+            <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 10px;">
+                <label style="color: #7dd3fc; font-size: 0.95rem;">Высота падения ($h$): <span id="etHeightVal">5</span> м (Макс. энергия = 500 Дж)</label>
+                <input type="range" id="etHeightSlider" min="0" max="10" step="1" value="5" style="accent-color: #8a2be2; cursor: pointer;">
+                
+                <span id="etStatus" style="color: #ffffff; font-size: 0.95rem;">На высоте 5 м: E_p = 250 Дж, E_k = 250 Дж. Сумма: 500 Дж.</span>
+            </div>
+        </div>
+    `,
         };
         const params = new URLSearchParams(window.location.search);
         const title = params.get('title') || 'Тема';
@@ -1773,13 +2127,11 @@
                     initMotionAnimation('motionCanvas', 'timeSlider', 'timeValue');
                 }
             }
-
             if (title === "Тело отсчета") {
                 if (typeof initCustomOriginAnimation === 'function') {
                     initCustomOriginAnimation('customOriginCanvas', 'coordInfo');
                 }
             }
-
             if (title === "Система отсчета") {
                 if (typeof initReferenceSystemAnimation === 'function') {
                     initReferenceSystemAnimation('referenceSystemCanvas', 'sysTimeSlider', 'sysTimeValue');
@@ -2038,6 +2390,61 @@
             if (title === "Момент силы") {
                 if (typeof initTorqueAnimation === 'function') {
                     initTorqueAnimation('torqueCanvas', 'tForceSlider', 'tArmSlider', 'tForceVal', 'tArmVal', 'tStatus');
+                }
+            }
+            if (title === "Плечо силы") {
+                if (typeof initLeverArmAnimation === 'function') {
+                    initLeverArmAnimation('leverArmCanvas', 'laArmSlider', 'laArmVal', 'laStatus');
+                }
+            }
+            if (title === "Правило равновесия рычага") {
+                if (typeof initLeverEquilibriumAnimation === 'function') {
+                    initLeverEquilibriumAnimation('leverEquilibriumCanvas', 'leForceSlider', 'leArmSlider', 'leForceVal', 'leArmVal', 'leStatus');
+                }
+            }
+            if (title === "Неподвижный блок (изменение направления)") {
+                if (typeof initFixedPulleyAnimation === 'function') {
+                    initFixedPulleyAnimation('fixedPulleyCanvas', 'fpMassSlider', 'fpMassVal', 'fpStatus');
+                }
+            }
+            if (title === "Подвижный блок (выигрыш в силе в 2 раза)") {
+                if (typeof initMovablePulleyAnimation === 'function') {
+                    initMovablePulleyAnimation('movablePulleyCanvas', 'mpMassSlider', 'mpMassVal', 'mpStatus');
+                }
+            }
+            if (title === "Наклонная плоскость") {
+                if (typeof initInclinedPlaneAnimation === 'function') {
+                    initInclinedPlaneAnimation('inclinedPlaneCanvas', 'ipMassSlider', 'ipLengthSlider', 'ipMassVal', 'ipLengthVal', 'ipStatus');
+                }
+            }
+            if (title === "Золотое правило механики") {
+                if (typeof initGoldenRuleAnimation === 'function') {
+                    initGoldenRuleAnimation('goldenRuleCanvas', 'grAdvantageSlider', 'grAdvantageVal', 'grStatus');
+                }
+            }
+            if (title === "Коэффициент полезного действия (КПД) механизмов") {
+                if (typeof initEfficiencyAnimation === 'function') {
+                    initEfficiencyAnimation('efficiencyCanvas', 'effUsefulSlider', 'effTotalSlider', 'effUsefulVal', 'effTotalVal', 'effStatus');
+                }
+            }
+            if (title === "Кинетическая энергия (энергия движения)") {
+                if (typeof initKineticEnergyAnimation === 'function') {
+                    initKineticEnergyAnimation('kineticEnergyCanvas', 'keMassSlider', 'keVelocitySlider', 'keMassVal', 'keVelocityVal', 'keStatus');
+                }
+            }
+            if (title === "Потенциальная энергия поднятого тела") {
+                if (typeof initPotentialEnergyAnimation === 'function') {
+                    initPotentialEnergyAnimation('potentialEnergyCanvas', 'peMassSlider', 'peHeightSlider', 'peMassVal', 'peHeightVal', 'peStatus');
+                }
+            }
+            if (title === "Потенциальная энергия деформированной пружины") {
+                if (typeof initSpringEnergyAnimation === 'function') {
+                    initSpringEnergyAnimation('springEnergyCanvas', 'seStiffSlider', 'seDispSlider', 'seStiffVal', 'seDispVal', 'seStatus');
+                }
+            }
+            if (title === "Переход энергии из одного вида в другой") {
+                if (typeof initEnergyTransformationAnimation === 'function') {
+                    initEnergyTransformationAnimation('energyTransformationCanvas', 'etHeightSlider', 'etHeightVal', 'etStatus');
                 }
             }
 
